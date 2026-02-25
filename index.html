@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WEB STUDIO JS PROJECT — オーダーメイドWebサイト制作</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --off-white: #F4F1EC;
+  --ink:       #161410;
+  --mid:       #5A5650;
+  --line:      #D8D2C8;
+  --rust:      #B84C2A;
+  --sage:      #4A6858;
+  --sky:       #3A6080;
+  --yamaguchi: #2A7A5A;  /* campaign green */
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: 'Zen Kaku Gothic New', 'Noto Sans KR', sans-serif;
+  background: var(--off-white);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+/* grid overlay */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(rgba(22,20,16,0.026) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(22,20,16,0.026) 1px, transparent 1px);
+  background-size: 80px 80px;
+  pointer-events: none; z-index: 9998;
+}
+
+/* ── LANG SWITCHER ── */
+.lang-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+  background: var(--ink);
+  display: flex; justify-content: flex-end; align-items: center;
+  padding: 0 3rem;
+  height: 36px;
+  gap: 0;
+}
+.lang-btn {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem; letter-spacing: 0.18em;
+  color: rgba(244,241,236,0.45);
+  background: none; border: none; cursor: pointer;
+  padding: 0 0.9rem; height: 100%;
+  transition: color 0.18s;
+  border-left: 1px solid rgba(244,241,236,0.1);
+  position: relative;
+}
+.lang-btn:first-child { border-left: none; }
+.lang-btn:hover { color: rgba(244,241,236,0.85); }
+.lang-btn.active {
+  color: var(--off-white);
+}
+.lang-btn.active::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0.9rem; right: 0.9rem;
+  height: 2px; background: var(--rust);
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 36px; left: 0; right: 0; z-index: 200;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.1rem 3rem;
+  border-bottom: 1px solid transparent;
+  background: rgba(244,241,236,0.94);
+  backdrop-filter: blur(16px);
+  transition: border-color 0.3s;
+}
+nav.scrolled { border-bottom-color: var(--line); }
+
+.nav-logo {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem; letter-spacing: 0.14em;
+  color: var(--ink); text-decoration: none;
+  display: flex; align-items: baseline; gap: 0.5rem;
+}
+.nav-logo-sup {
+  font-size: 0.52rem; letter-spacing: 0.2em;
+  color: var(--rust); border: 1px solid var(--rust);
+  padding: 0.1rem 0.4rem; display: inline-block;
+}
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.66rem; letter-spacing: 0.18em;
+  color: var(--mid); text-decoration: none; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--ink); }
+
+/* ── YAMAGUCHI CAMPAIGN BANNER ── */
+.campaign-banner {
+  margin-top: 36px; /* below lang-bar */
+  padding: 0 3rem;
+  background: var(--yamaguchi);
+  display: flex; align-items: center; justify-content: space-between;
+  min-height: 52px; gap: 1rem;
+  position: relative; z-index: 100;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+.cb-left {
+  display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+}
+.cb-flag {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.52rem; letter-spacing: 0.18em;
+  padding: 0.22rem 0.6rem; white-space: nowrap;
+}
+.cb-text {
+  font-size: 0.82rem; color: #fff; font-weight: 700;
+  line-height: 1.5;
+}
+.cb-text span { opacity: 0.8; font-weight: 300; font-size: 0.75rem; }
+.cb-price {
+  font-family: 'DM Mono', monospace;
+  font-size: 1.3rem; font-weight: 400;
+  color: #fff; letter-spacing: -0.02em; white-space: nowrap;
+}
+.cb-price small { font-size: 0.65rem; opacity: 0.75; }
+.cb-cta {
+  background: #fff; color: var(--yamaguchi);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem; letter-spacing: 0.14em;
+  padding: 0.55rem 1.2rem; text-decoration: none; font-weight: 700;
+  white-space: nowrap; transition: all 0.2s; flex-shrink: 0;
+}
+.cb-cta:hover { background: var(--off-white); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  padding: 11rem 3rem 5rem;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  position: relative;
+  border-bottom: 1px solid var(--line);
+}
+
+.hero-rule {
+  position: absolute; top: 6rem; right: 0;
+  width: 42%; height: calc(100% - 6rem);
+  border-left: 1px solid var(--line); pointer-events: none;
+}
+.hero-rule::before {
+  content: ''; position: absolute; top: 18%; left: -1px; right: 0;
+  height: 1px; background: var(--line);
+}
+.hero-rule::after {
+  content: ''; position: absolute; top: 60%; left: -1px; right: 0;
+  height: 1px; background: var(--line);
+}
+
+.hero-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem; letter-spacing: 0.28em; color: var(--mid);
+  margin-bottom: 3rem;
+  display: flex; align-items: center; gap: 1.2rem;
+  opacity: 0; animation: up 0.6s ease 0.2s forwards;
+}
+.hero-tag::before { content: ''; display: block; width: 32px; height: 1px; background: var(--rust); }
+.hero-tag span { color: var(--rust); }
+
+.hero-h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.4rem, 7vw, 6.5rem);
+  font-weight: 300; line-height: 1.05;
+  letter-spacing: -0.02em; max-width: 720px;
+  opacity: 0; animation: up 0.8s ease 0.35s forwards;
+}
+.hero-h1 em { font-style: italic; color: var(--rust); }
+
+.hero-h1-note {
+  display: block;
+  font-family: 'DM Mono', monospace;
+  font-size: clamp(0.6rem, 0.9vw, 0.72rem);
+  font-weight: 300; letter-spacing: 0.22em; color: var(--mid);
+  margin-top: 1.4rem;
+  opacity: 0; animation: up 0.7s ease 0.55s forwards;
+}
+
+.hero-aside {
+  position: absolute; right: 3rem; top: 50%;
+  transform: translateY(-50%);
+  width: 34%;
+  opacity: 0; animation: up 0.8s ease 0.65s forwards;
+}
+.hero-aside-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.56rem; letter-spacing: 0.28em; color: var(--mid); margin-bottom: 1.2rem;
+}
+.hero-services { display: flex; flex-direction: column; border-top: 1px solid var(--line); }
+.hero-svc {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 0.85rem 0; border-bottom: 1px solid var(--line); font-size: 0.8rem;
+}
+.hero-svc-name { font-weight: 700; }
+.hero-svc-price { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--rust); letter-spacing: 0.04em; }
+.hero-svc-note { font-size: 0.66rem; color: var(--mid); margin-top: 0.18rem; font-weight: 300; }
+
+/* Yamaguchi special row */
+.hero-svc.yamaguchi-svc {
+  background: rgba(42,122,90,0.06);
+  border-radius: 1px;
+  padding: 0.85rem 0.6rem;
+  margin: 0 -0.6rem;
+  border-bottom-color: rgba(42,122,90,0.2);
+}
+.hero-svc.yamaguchi-svc .hero-svc-price { color: var(--yamaguchi); }
+.yamaguchi-tag {
+  display: inline-flex;
+  background: var(--yamaguchi); color: #fff;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.48rem; letter-spacing: 0.12em;
+  padding: 0.14rem 0.4rem; margin-left: 0.4rem;
+  transform: translateY(-1px); vertical-align: middle;
+}
+
+.hero-badge-row { margin-top: 1.2rem; display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; }
+.h-badge {
+  display: inline-flex; background: var(--rust); color: #fff;
+  font-family: 'DM Mono', monospace; font-size: 0.56rem; letter-spacing: 0.12em; padding: 0.32rem 0.75rem;
+}
+.h-badge-ghost { background: transparent; color: var(--rust); border: 1px solid var(--rust); }
+.h-badge-green { background: var(--yamaguchi); }
+
+.hero-bottom {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  padding-top: 4rem;
+  opacity: 0; animation: up 0.7s ease 0.8s forwards;
+}
+.hero-copy { font-size: 0.86rem; line-height: 2.1; color: var(--mid); font-weight: 300; max-width: 380px; }
+.hero-cta {
+  display: inline-flex; align-items: center; gap: 0.8rem;
+  background: var(--ink); color: var(--off-white);
+  font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.18em;
+  padding: 1rem 2rem; text-decoration: none; transition: all 0.28s; flex-shrink: 0;
+}
+.hero-cta:hover { background: var(--rust); transform: translateY(-2px); }
+.hero-cta-arr { transition: transform 0.2s; }
+.hero-cta:hover .hero-cta-arr { transform: translateX(4px); }
+
+@keyframes up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ── MARQUEE ── */
+.marquee-wrap { overflow: hidden; padding: 0.8rem 0; background: var(--ink); }
+.marquee-track { display: flex; gap: 4rem; animation: ticker 28s linear infinite; white-space: nowrap; }
+.marquee-track span { font-family: 'DM Mono', monospace; font-size: 0.63rem; letter-spacing: 0.2em; color: rgba(244,241,236,0.5); flex-shrink: 0; }
+.marquee-track .dot { color: var(--rust); opacity: 1; }
+@keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ── SECTIONS ── */
+section { padding: 7rem 3rem; position: relative; }
+.s-label {
+  font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.38em; color: var(--mid);
+  margin-bottom: 3rem; display: flex; align-items: center; gap: 1rem;
+}
+.s-label::after { content: ''; flex: 1; height: 1px; background: var(--line); max-width: 60px; }
+.s-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; line-height: 1.15; margin-bottom: 1.5rem; }
+
+/* ── ABOUT ── */
+#about { border-bottom: 1px solid var(--line); }
+.about-grid { display: grid; grid-template-columns: 5fr 6fr; gap: 5rem; max-width: 1100px; margin: 0 auto; }
+.about-left p { font-size: 0.86rem; line-height: 2.1; color: var(--mid); font-weight: 300; margin-bottom: 1.2rem; }
+.about-left strong { color: var(--ink); font-weight: 700; }
+.feats { display: flex; flex-direction: column; }
+.feat-row { display: grid; grid-template-columns: 2.2rem 1fr; gap: 1.2rem; padding: 1.5rem 0; border-bottom: 1px solid var(--line); align-items: start; }
+.feat-row:first-child { border-top: 1px solid var(--line); }
+.feat-num { font-family: 'DM Mono', monospace; font-size: 0.55rem; letter-spacing: 0.1em; color: var(--mid); padding-top: 0.2rem; }
+.feat-row:nth-child(1) .feat-num { color: var(--rust); }
+.feat-row:nth-child(2) .feat-num { color: var(--sky); }
+.feat-row:nth-child(3) .feat-num { color: var(--sage); }
+.feat-row:nth-child(4) .feat-num { color: var(--rust); }
+.feat-row:nth-child(5) .feat-num { color: var(--sky); }
+.feat-title { font-size: 0.88rem; font-weight: 700; margin-bottom: 0.35rem; }
+.feat-body { font-size: 0.78rem; color: var(--mid); line-height: 1.85; }
+
+/* ── YAMAGUCHI CAMPAIGN SECTION ── */
+#campaign {
+  background: var(--yamaguchi);
+  color: #fff;
+  padding: 5rem 3rem;
+  position: relative; overflow: hidden;
+}
+#campaign::before {
+  content: '山口';
+  position: absolute; right: -2rem; top: -2rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(10rem, 25vw, 22rem); font-weight: 300;
+  color: rgba(255,255,255,0.05); line-height: 1;
+  pointer-events: none; user-select: none;
+}
+.campaign-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; position: relative; z-index: 1; }
+.campaign-left .s-label { color: rgba(255,255,255,0.5); }
+.campaign-left .s-label::after { background: rgba(255,255,255,0.2); }
+.campaign-left .s-title { color: #fff; }
+.campaign-tagline { font-size: 0.88rem; line-height: 2.1; color: rgba(255,255,255,0.78); font-weight: 300; margin-bottom: 2rem; }
+.campaign-tagline strong { color: #fff; font-weight: 700; }
+.campaign-cta {
+  display: inline-flex; align-items: center; gap: 0.8rem;
+  background: #fff; color: var(--yamaguchi);
+  font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.16em;
+  padding: 1rem 2rem; text-decoration: none; font-weight: 700; transition: all 0.25s;
+}
+.campaign-cta:hover { background: var(--off-white); transform: translateY(-2px); }
+
+.campaign-card {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 2.5rem;
+  backdrop-filter: blur(4px);
+}
+.cc-tag { font-family: 'DM Mono', monospace; font-size: 0.56rem; letter-spacing: 0.24em; color: rgba(255,255,255,0.6); margin-bottom: 0.8rem; }
+.cc-title { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
+.cc-price-row { display: flex; align-items: baseline; gap: 1rem; margin: 1.2rem 0; }
+.cc-old { font-family: 'DM Mono', monospace; font-size: 0.9rem; color: rgba(255,255,255,0.45); text-decoration: line-through; }
+.cc-new { font-family: 'DM Mono', monospace; font-size: 2.8rem; color: #fff; font-weight: 400; letter-spacing: -0.03em; line-height: 1; }
+.cc-new small { font-size: 1rem; }
+.cc-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1.5rem; }
+.cc-list li { font-size: 0.8rem; color: rgba(255,255,255,0.75); display: flex; gap: 0.5rem; }
+.cc-list li::before { content: '✓'; color: rgba(255,255,255,0.9); flex-shrink: 0; }
+.cc-note { margin-top: 1.2rem; font-family: 'DM Mono', monospace; font-size: 0.56rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.45); line-height: 1.6; }
+
+/* ── WORKS ── */
+#works { background: var(--ink); color: var(--off-white); border-bottom: 1px solid #2A2820; }
+#works .s-label { color: rgba(244,241,236,0.38); }
+#works .s-label::after { background: #2A2820; }
+#works .s-title { color: var(--off-white); }
+.works-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; max-width: 1200px; margin: 0 auto; background: #2A2820; }
+.wcard { position: relative; aspect-ratio: 4/3; overflow: hidden; cursor: pointer; background: var(--ink); }
+.wcard::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; z-index: 2; transition: height 0.3s; }
+.wcard:hover::before { height: 3px; }
+.wc1::before { background: var(--rust); } .wc2::before { background: var(--sky); } .wc3::before { background: var(--sage); }
+.wc4::before { background: #C8963C; } .wc5::before { background: #8B6BB0; } .wc6::before { background: #3A9088; }
+.wcard-inner { position: absolute; inset: 0; display: flex; align-items: flex-end; padding: 1.6rem; background: linear-gradient(to top, rgba(16,14,10,0.85) 0%, transparent 60%); }
+.wcard-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: 2.8rem; opacity: 0.12; transition: opacity 0.4s, transform 0.5s; }
+.wcard:hover .wcard-icon { opacity: 0.05; transform: translate(-50%,-50%) scale(1.08); }
+.wcard-info { transform: translateY(6px); transition: transform 0.3s; }
+.wcard:hover .wcard-info { transform: translateY(0); }
+.wcard-cat { font-family: 'DM Mono', monospace; font-size: 0.5rem; letter-spacing: 0.22em; color: var(--rust); margin-bottom: 0.3rem; }
+.wcard-name { font-size: 0.88rem; font-weight: 700; margin-bottom: 0.2rem; }
+.wcard-desc { font-size: 0.7rem; color: rgba(244,241,236,0.5); line-height: 1.5; opacity: 0; transition: opacity 0.3s; }
+.wcard:hover .wcard-desc { opacity: 1; }
+.works-note { text-align: center; margin-top: 2rem; font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.12em; color: rgba(244,241,236,0.2); }
+
+/* ── PRICE ── */
+#price { border-bottom: 1px solid var(--line); }
+.price-wrap { max-width: 1100px; margin: 0 auto; }
+.price-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--line); margin-top: 3rem; }
+.pcard { background: var(--off-white); padding: 2.4rem; position: relative; transition: background 0.25s; }
+.pcard:hover { background: #fff; }
+.pcard.featured { background: var(--ink); color: var(--off-white); }
+.pcard.featured:hover { background: #1E1C18; }
+.pcard::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
+.pcard:nth-child(1)::before { background: var(--rust); }
+.pcard:nth-child(2)::before { background: var(--sky); }
+.pcard:nth-child(3)::before { background: var(--sage); }
+.p-tag { font-family: 'DM Mono', monospace; font-size: 0.55rem; letter-spacing: 0.28em; color: var(--mid); margin-bottom: 0.6rem; }
+.pcard.featured .p-tag { color: rgba(244,241,236,0.4); }
+.p-limited { display: inline-block; margin-bottom: 0.8rem; background: var(--rust); color: #fff; font-family: 'DM Mono', monospace; font-size: 0.54rem; letter-spacing: 0.12em; padding: 0.2rem 0.65rem; }
+.p-name { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 300; margin-bottom: 1.3rem; }
+.p-old { font-size: 0.68rem; color: var(--mid); text-decoration: line-through; }
+.pcard.featured .p-old { color: rgba(244,241,236,0.35); }
+.p-num { font-family: 'DM Mono', monospace; font-size: 2.1rem; font-weight: 400; color: var(--rust); line-height: 1; margin-bottom: 1.8rem; letter-spacing: -0.02em; }
+.pcard.featured .p-num { color: #E8C87A; }
+.p-num span { font-size: 0.88rem; }
+.p-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 2rem; font-size: 0.78rem; color: var(--mid); line-height: 1.6; }
+.pcard.featured .p-list { color: rgba(244,241,236,0.6); }
+.p-list li { display: flex; gap: 0.5rem; }
+.p-list li::before { content: '—'; color: var(--rust); flex-shrink: 0; }
+.pcard.featured .p-list li::before { color: #E8C87A; }
+.p-btn { display: block; text-align: center; padding: 0.85rem; border: 1px solid var(--line); font-family: 'DM Mono', monospace; font-size: 0.66rem; letter-spacing: 0.16em; text-decoration: none; color: var(--ink); transition: all 0.22s; }
+.p-btn:hover { background: var(--ink); color: var(--off-white); border-color: var(--ink); }
+.pcard.featured .p-btn { border-color: rgba(244,241,236,0.25); color: var(--off-white); }
+.pcard.featured .p-btn:hover { background: #E8C87A; color: var(--ink); border-color: #E8C87A; }
+
+/* ── FLOW ── */
+#flow { background: var(--ink); color: var(--off-white); border-bottom: 1px solid #2A2820; }
+#flow .s-label { color: rgba(244,241,236,0.38); }
+#flow .s-label::after { background: #2A2820; }
+#flow .s-title { color: var(--off-white); }
+.flow-list { max-width: 700px; }
+.flow-item { display: grid; grid-template-columns: 5rem 1fr; gap: 2rem; padding: 2rem 0; border-bottom: 1px solid #2A2820; align-items: start; }
+.flow-item:first-child { border-top: 1px solid #2A2820; }
+.flow-num { font-family: 'DM Mono', monospace; font-size: 0.56rem; letter-spacing: 0.18em; color: rgba(244,241,236,0.3); padding-top: 0.2rem; }
+.flow-title { font-size: 0.93rem; font-weight: 700; margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; }
+.flow-pill { display: inline-flex; background: var(--rust); color: #fff; font-family: 'DM Mono', monospace; font-size: 0.48rem; letter-spacing: 0.1em; padding: 0.16rem 0.48rem; }
+.flow-body { font-size: 0.78rem; color: rgba(244,241,236,0.5); line-height: 1.85; }
+
+/* ── CONTACT ── */
+#contact { border-bottom: 1px solid var(--line); position: relative; overflow: hidden; }
+.contact-bg-text { position: absolute; bottom: -1rem; left: -0.5rem; font-family: 'Cormorant Garamond', serif; font-size: clamp(8rem, 20vw, 18rem); font-weight: 300; font-style: italic; color: transparent; -webkit-text-stroke: 1px var(--line); pointer-events: none; line-height: 1; white-space: nowrap; user-select: none; }
+.contact-inner { max-width: 580px; position: relative; z-index: 1; }
+.contact-sub { font-size: 0.86rem; line-height: 2.1; color: var(--mid); margin-bottom: 2.5rem; font-weight: 300; }
+.line-btn { display: inline-flex; align-items: center; gap: 0.85rem; background: #06C755; color: #fff; padding: 1.1rem 2.6rem; font-size: 0.9rem; font-weight: 700; text-decoration: none; border-radius: 2px; transition: all 0.28s; letter-spacing: 0.03em; }
+.line-btn:hover { background: #05B04C; transform: translateY(-2px); box-shadow: 0 10px 28px rgba(6,199,85,0.28); }
+.line-btn svg { width: 20px; height: 20px; fill: #fff; flex-shrink: 0; }
+.contact-note { margin-top: 1.2rem; font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.12em; color: var(--mid); }
+
+/* ── FOOTER ── */
+footer { padding: 1.6rem 3rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--line); font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.14em; color: var(--mid); }
+.footer-colors { display: flex; gap: 5px; }
+.footer-colors span { width: 7px; height: 7px; border-radius: 50%; }
+.fc1 { background: var(--rust); } .fc2 { background: var(--sky); } .fc3 { background: var(--yamaguchi); }
+
+/* ── FADE IN ── */
+.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ── i18n: hide all but active lang ── */
+[data-lang] { display: none; }
+[data-lang].lang-active { display: block; }
+/* inline elements */
+span[data-lang], a[data-lang] { display: none; }
+span[data-lang].lang-active, a[data-lang].lang-active { display: inline; }
+/* flex containers */
+.hero-tag[data-lang], .hero-tag { display: flex; }
+.hero-tag[data-lang]:not(.lang-active) { display: none; }
+
+
+/* ── PROFILE ── */
+#profile { border-bottom: 1px solid var(--line); }
+.profile-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 6rem;
+  max-width: 1100px; margin: 0 auto;
+  align-items: start;
+}
+.profile-left { position: sticky; top: 8rem; }
+.profile-avatar {
+  width: 190px; height: 190px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1C1810 60%, #2A2820);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 4.5rem;
+  margin-bottom: 1.6rem;
+  position: relative;
+  box-shadow: 0 8px 28px rgba(22,20,16,0.15);
+}
+.profile-avatar::after {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  border: 1.5px solid var(--line);
+}
+.profile-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.55rem; font-weight: 300;
+  line-height: 1.2; margin-bottom: 0.25rem;
+}
+.profile-name-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem; letter-spacing: 0.2em; color: var(--mid);
+  margin-bottom: 1.2rem;
+}
+.profile-tags { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 1.5rem; }
+.ptag {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.52rem; letter-spacing: 0.1em;
+  padding: 0.22rem 0.6rem;
+  border: 1px solid var(--line); color: var(--mid);
+}
+.ptag.rust  { border-color: var(--rust); color: var(--rust); }
+.ptag.green { border-color: var(--yamaguchi); color: var(--yamaguchi); }
+.ptag.sky   { border-color: var(--sky); color: var(--sky); }
+.ptag.sage  { border-color: var(--sage); color: var(--sage); }
+.profile-music {
+  margin-top: 1.4rem;
+  padding: 1.1rem 1.2rem;
+  border: 1px solid var(--line);
+  background: #fff;
+}
+.pm-label { font-family: 'DM Mono', monospace; font-size: 0.5rem; letter-spacing: 0.2em; color: var(--sky); margin-bottom: 0.35rem; }
+.pm-name { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-style: italic; font-weight: 300; margin-bottom: 0.3rem; }
+.pm-desc { font-size: 0.73rem; color: var(--mid); line-height: 1.7; }
+
+.profile-right { display: flex; flex-direction: column; }
+.pblock {
+  padding: 1.8rem 0;
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  gap: 1.4rem;
+  align-items: start;
+}
+.pblock:first-child { border-top: 1px solid var(--line); }
+.pblock-icon { font-size: 1.5rem; padding-top: 0.15rem; text-align: center; }
+.pblock-label { font-family: 'DM Mono', monospace; font-size: 0.52rem; letter-spacing: 0.22em; color: var(--mid); margin-bottom: 0.45rem; }
+.pblock-title { font-size: 0.93rem; font-weight: 700; margin-bottom: 0.5rem; line-height: 1.4; }
+.pblock-body { font-size: 0.81rem; color: var(--mid); line-height: 2; font-weight: 300; }
+.pblock-body strong { color: var(--ink); font-weight: 700; }
+.pblock-body .hi { color: var(--rust); font-weight: 700; }
+.pblock-body .hi-green { color: var(--yamaguchi); font-weight: 700; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  nav { padding: 1rem 1.5rem; top: 36px; }
+  section { padding: 5rem 1.5rem; }
+  .hero { padding: 9rem 1.5rem 4rem; }
+  .hero-rule, .hero-aside { display: none; }
+  .hero-h1 { font-size: clamp(2.6rem, 9vw, 4.2rem); }
+  .about-grid, .campaign-inner, .profile-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .profile-left { position: static; }
+  .works-grid { grid-template-columns: 1fr 1fr; }
+  .price-grid { grid-template-columns: 1fr; gap: 1px; }
+  .hero-bottom { flex-direction: column; align-items: flex-start; gap: 2rem; }
+  .campaign-banner { padding: 0.8rem 1.5rem; }
+  footer { flex-direction: column; gap: 0.8rem; text-align: center; }
+  .lang-bar { padding: 0 1.5rem; }
+}
+@media (max-width: 600px) {
+  .works-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .lang-btn { padding: 0 0.6rem; font-size: 0.54rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- LANG BAR -->
+<div class="lang-bar">
+  <button class="lang-btn active" data-target="ja">JA</button>
+  <button class="lang-btn" data-target="en">EN</button>
+  <button class="lang-btn" data-target="ko">한국어</button>
+  <button class="lang-btn" data-target="es">ES</button>
+</div>
+
+<!-- CAMPAIGN BANNER -->
+<div class="campaign-banner">
+  <div class="cb-left">
+    <span class="cb-flag" data-lang="ja" data-lang-class>🌿 山口県応援キャンペーン</span>
+    <span class="cb-flag" data-lang="en" data-lang-class>🌿 Yamaguchi Local Campaign</span>
+    <span class="cb-flag" data-lang="ko" data-lang-class>🌿 야마구치 응원 캠페인</span>
+    <span class="cb-flag" data-lang="es" data-lang-class>🌿 Campaña Local Yamaguchi</span>
+    <div class="cb-text">
+      <span data-lang="ja" data-lang-class>山口県内の方は、HPを<strong>¥20,000</strong>で制作します</span>
+      <span data-lang="en" data-lang-class>Based in Yamaguchi? Your website for <strong>¥20,000</strong></span>
+      <span data-lang="ko" data-lang-class>야마구치 거주자에게는 <strong>¥20,000</strong>으로 제작</span>
+      <span data-lang="es" data-lang-class>¿Vives en Yamaguchi? Tu web por <strong>¥20,000</strong></span>
+      <br>
+      <span data-lang="ja" data-lang-class><span>（予約・決済システム付きは¥30,000）— 地域応援限定価格</span></span>
+      <span data-lang="en" data-lang-class><span>(With booking/payment system: ¥30,000) — Local support pricing</span></span>
+      <span data-lang="ko" data-lang-class><span>(예약·결제 시스템 포함 ¥30,000) — 지역 응원 한정 가격</span></span>
+      <span data-lang="es" data-lang-class><span>(Con sistema de reservas/pagos: ¥30,000) — Precio de apoyo local</span></span>
+    </div>
+  </div>
+  <a href="#campaign" class="cb-cta">
+    <span data-lang="ja" data-lang-class>詳細を見る →</span>
+    <span data-lang="en" data-lang-class>Learn more →</span>
+    <span data-lang="ko" data-lang-class>자세히 보기 →</span>
+    <span data-lang="es" data-lang-class>Ver más →</span>
+  </a>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" href="#">WEB STUDIO JS PROJECT <span class="nav-logo-sup">YAMAGUCHI</span></a>
+  <ul class="nav-links">
+    <li><a href="#profile">PROFILE</a></li>
+    <li><a href="#works">WORKS</a></li>
+    <li><a href="#price">PRICE</a></li>
+    <li><a href="#campaign">
+      <span data-lang="ja" data-lang-class>山口応援</span>
+      <span data-lang="en" data-lang-class>LOCAL</span>
+      <span data-lang="ko" data-lang-class>지역응원</span>
+      <span data-lang="es" data-lang-class>LOCAL</span>
+    </a></li>
+    <li><a href="#flow">FLOW</a></li>
+    <li><a href="#contact">CONTACT</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-rule"></div>
+
+  <div>
+    <p class="hero-tag">
+      WEB CREATOR <span>/ YAMAGUCHI</span>
+    </p>
+
+    <!-- JA -->
+    <h1 class="hero-h1" data-lang="ja">
+      あなたの想いを、<br>
+      <em>ひとつひとつ</em><br>
+      カタチにする。
+      <span class="hero-h1-note">完全オーダーメイド — テンプレートなし、ヒアリングから設計</span>
+    </h1>
+    <!-- EN -->
+    <h1 class="hero-h1" data-lang="en">
+      Websites built<br>
+      <em>one at a time,</em><br>
+      for people who care.
+      <span class="hero-h1-note">Fully bespoke — no templates, designed from your brief</span>
+    </h1>
+    <!-- KO -->
+    <h1 class="hero-h1" data-lang="ko">
+      당신만을 위한<br>
+      <em>맞춤형 웹사이트,</em><br>
+      하나하나 정성껏.
+      <span class="hero-h1-note">완전 오더메이드 — 템플릿 없이, 히어링부터 설계</span>
+    </h1>
+    <!-- ES -->
+    <h1 class="hero-h1" data-lang="es">
+      Sitios web creados<br>
+      <em>uno a uno,</em><br>
+      con cuidado y propósito.
+      <span class="hero-h1-note">Totalmente a medida — sin plantillas, diseñado desde tu briefing</span>
+    </h1>
+  </div>
+
+  <!-- Right panel -->
+  <div class="hero-aside">
+    <p class="hero-aside-label">SERVICES</p>
+    <div class="hero-services">
+      <div class="hero-svc">
+        <div>
+          <div class="hero-svc-name">
+            <span data-lang="ja" data-lang-class>個人HP / 企業HP</span>
+            <span data-lang="en" data-lang-class>Personal / Business site</span>
+            <span data-lang="ko" data-lang-class>개인 / 기업 홈페이지</span>
+            <span data-lang="es" data-lang-class>Web personal / empresarial</span>
+          </div>
+          <div class="hero-svc-note">
+            <span data-lang="ja" data-lang-class>アーティスト・個人事業主・中小企業</span>
+            <span data-lang="en" data-lang-class>Artists, freelancers, small businesses</span>
+            <span data-lang="ko" data-lang-class>아티스트, 개인사업주, 중소기업</span>
+            <span data-lang="es" data-lang-class>Artistas, autónomos, pymes</span>
+          </div>
+        </div>
+        <div class="hero-svc-price">¥20,000〜</div>
+      </div>
+      <div class="hero-svc">
+        <div>
+          <div class="hero-svc-name">
+            <span data-lang="ja" data-lang-class>予約・決済システム付き</span>
+            <span data-lang="en" data-lang-class>Booking + Payment system</span>
+            <span data-lang="ko" data-lang-class>예약·결제 시스템 포함</span>
+            <span data-lang="es" data-lang-class>Con reservas y pagos</span>
+          </div>
+          <div class="hero-svc-note">
+            <span data-lang="ja" data-lang-class>サロン・教室・カウンセリングに</span>
+            <span data-lang="en" data-lang-class>Salons, studios, counseling</span>
+            <span data-lang="ko" data-lang-class>살롱, 교실, 카운슬링에</span>
+            <span data-lang="es" data-lang-class>Salones, estudios, consultoría</span>
+          </div>
+        </div>
+        <div class="hero-svc-price">¥30,000〜</div>
+      </div>
+      <div class="hero-svc yamaguchi-svc">
+        <div>
+          <div class="hero-svc-name">
+            <span data-lang="ja" data-lang-class>山口県応援価格 <span class="yamaguchi-tag">限定</span></span>
+            <span data-lang="en" data-lang-class>Yamaguchi Local Price <span class="yamaguchi-tag">LIMITED</span></span>
+            <span data-lang="ko" data-lang-class>야마구치 응원 가격 <span class="yamaguchi-tag">한정</span></span>
+            <span data-lang="es" data-lang-class>Precio Yamaguchi <span class="yamaguchi-tag">LIMITADO</span></span>
+          </div>
+          <div class="hero-svc-note" style="color:var(--yamaguchi);">
+            <span data-lang="ja" data-lang-class>山口県内の方のみ適用</span>
+            <span data-lang="en" data-lang-class>Yamaguchi residents only</span>
+            <span data-lang="ko" data-lang-class>야마구치현 거주자만 적용</span>
+            <span data-lang="es" data-lang-class>Solo residentes de Yamaguchi</span>
+          </div>
+        </div>
+        <div class="hero-svc-price" style="color:var(--yamaguchi);">¥20,000〜</div>
+      </div>
+    </div>
+    <div class="hero-badge-row">
+      <span class="h-badge">
+        <span data-lang="ja" data-lang-class>期間限定</span>
+        <span data-lang="en" data-lang-class>Limited time</span>
+        <span data-lang="ko" data-lang-class>기간 한정</span>
+        <span data-lang="es" data-lang-class>Tiempo limitado</span>
+      </span>
+      <span class="h-badge h-badge-ghost">
+        <span data-lang="ja" data-lang-class>最短1〜2日</span>
+        <span data-lang="en" data-lang-class>1–2 day delivery</span>
+        <span data-lang="ko" data-lang-class>최단 1〜2일 납품</span>
+        <span data-lang="es" data-lang-class>1–2 días entrega</span>
+      </span>
+    </div>
+  </div>
+
+  <div class="hero-bottom">
+    <p class="hero-copy">
+      <span data-lang="ja" data-lang-class>個人事業主・アーティスト・中小企業のための、<br>あなただけの一点もの制作。<br>ヒアリングから丁寧に、早く・安く・確実に。</span>
+      <span data-lang="en" data-lang-class>Bespoke websites for freelancers, artists,<br>and small businesses.<br>Fast, affordable, and built around you.</span>
+      <span data-lang="ko" data-lang-class>개인사업주·아티스트·중소기업을 위한<br>세상에 하나뿐인 홈페이지 제작.<br>히어링부터 정성껏, 빠르고·저렴하게·확실하게.</span>
+      <span data-lang="es" data-lang-class>Sitios web únicos para autónomos, artistas<br>y pequeñas empresas.<br>Rápido, asequible y hecho para ti.</span>
+    </p>
+    <a href="#contact" class="hero-cta">
+      <span data-lang="ja" data-lang-class>無料相談はこちら</span>
+      <span data-lang="en" data-lang-class>Free consultation</span>
+      <span data-lang="ko" data-lang-class>무료 상담하기</span>
+      <span data-lang="es" data-lang-class>Consulta gratis</span>
+      <span class="hero-cta-arr">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>個人HP</span><span class="dot"> · </span><span>Artist Page</span><span class="dot"> · </span><span>예약 시스템</span><span class="dot"> · </span><span>Reservas online</span><span class="dot"> · </span><span>決済連携</span><span class="dot"> · </span><span>Booking System</span><span class="dot"> · </span><span>최단 1〜2일</span><span class="dot"> · </span><span>山口県応援</span><span class="dot"> · </span><span>Yamaguchi Local</span><span class="dot"> · </span>
+    <span>個人HP</span><span class="dot"> · </span><span>Artist Page</span><span class="dot"> · </span><span>예약 시스템</span><span class="dot"> · </span><span>Reservas online</span><span class="dot"> · </span><span>決済連携</span><span class="dot"> · </span><span>Booking System</span><span class="dot"> · </span><span>最短1〜2日</span><span class="dot"> · </span><span>山口県応援</span><span class="dot"> · </span><span>Yamaguchi Local</span><span class="dot"> · </span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid fade-in">
+    <div class="about-left">
+      <p class="s-label">ABOUT</p>
+      <h2 class="s-title">
+        <span data-lang="ja" data-lang-class>早く、安く、<br>でも妥協しない。</span>
+        <span data-lang="en" data-lang-class>Fast, affordable,<br>no compromises.</span>
+        <span data-lang="ko" data-lang-class>빠르고, 저렴하게,<br>하지만 타협하지 않는다.</span>
+        <span data-lang="es" data-lang-class>Rápido, asequible,<br>sin compromisos.</span>
+      </h2>
+      <p>
+        <span data-lang="ja" data-lang-class>「なぜそのHPが必要か」「誰に何を伝えるか」——まずそこから一緒に考えます。<strong>テンプレートなし。あなただけの設計。</strong></span>
+        <span data-lang="en" data-lang-class>"Why do you need a website?" "Who are you speaking to?"—we start there together. <strong>No templates. Built entirely around you.</strong></span>
+        <span data-lang="ko" data-lang-class>"왜 홈페이지가 필요한가?" "누구에게 무엇을 전달하는가?"——함께 생각합니다. <strong>템플릿 없음. 당신만을 위한 설계.</strong></span>
+        <span data-lang="es" data-lang-class>"¿Por qué necesitas una web?" "¿A quién le hablas?"—empezamos juntos desde ahí. <strong>Sin plantillas. Diseñado solo para ti.</strong></span>
+      </p>
+      <p>
+        <span data-lang="ja" data-lang-class>最新のAIツールと高速フレームワークを駆使することで制作コストを大幅に削減。その分をクオリティとスピードに全振りします。</span>
+        <span data-lang="en" data-lang-class>By leveraging cutting-edge AI tools and fast frameworks, production costs drop dramatically—meaning better quality and faster delivery for you.</span>
+        <span data-lang="ko" data-lang-class>최신 AI 도구와 고속 프레임워크를 활용해 제작 비용을 대폭 절감. 그만큼 퀄리티와 스피드에 집중합니다.</span>
+        <span data-lang="es" data-lang-class>Usando herramientas de IA y frameworks modernos, reducimos costes drásticamente—más calidad y entrega más rápida para ti.</span>
+      </p>
+    </div>
+    <div class="feats">
+      <div class="feat-row"><span class="feat-num">01</span><div>
+        <div class="feat-title"><span data-lang="ja" data-lang-class>最短1〜2日納品</span><span data-lang="en" data-lang-class>1–2 day delivery</span><span data-lang="ko" data-lang-class>최단 1〜2일 납품</span><span data-lang="es" data-lang-class>Entrega en 1–2 días</span></div>
+        <div class="feat-body"><span data-lang="ja" data-lang-class>ヒアリング後、お急ぎなら最短1〜2日での即納に対応。</span><span data-lang="en" data-lang-class>After the brief, urgent projects can be delivered in as little as 1–2 days.</span><span data-lang="ko" data-lang-class>히어링 후 급한 경우 최단 1〜2일 내 납품 가능.</span><span data-lang="es" data-lang-class>Después del briefing, proyectos urgentes en 1–2 días.</span></div>
+      </div></div>
+      <div class="feat-row"><span class="feat-num">02</span><div>
+        <div class="feat-title"><span data-lang="ja" data-lang-class>オンライン / LINEでの相談可</span><span data-lang="en" data-lang-class>Online / LINE consultation available</span><span data-lang="ko" data-lang-class>온라인 / LINE 상담 가능</span><span data-lang="es" data-lang-class>Consulta online / por LINE disponible</span></div>
+        <div class="feat-body"><span data-lang="ja" data-lang-class>オンラインビデオ通話・LINEどちらでも対応。遠方の方もお気軽にご相談ください。</span><span data-lang="en" data-lang-class>Video call or LINE—whichever works for you. Remote clients welcome.</span><span data-lang="ko" data-lang-class>화상통화 또는 LINE, 편한 방법으로 상담. 원격 고객 환영.</span><span data-lang="es" data-lang-class>Videollamada o LINE, lo que prefieras. Clientes remotos bienvenidos.</span></div>
+      </div></div>
+      <div class="feat-row"><span class="feat-num">03</span><div>
+        <div class="feat-title"><span data-lang="ja" data-lang-class>予約・決済システムも込みも可</span><span data-lang="en" data-lang-class>Booking &amp; payment system available</span><span data-lang="ko" data-lang-class>예약·결제 시스템 포함도 가능</span><span data-lang="es" data-lang-class>Sistema de reservas y pagos disponible</span></div>
+        <div class="feat-body"><span data-lang="ja" data-lang-class>Stripe / Square 決済、カレンダー予約、Googleカレンダー連携など。</span><span data-lang="en" data-lang-class>Stripe / Square payments, calendar booking, Google Calendar sync.</span><span data-lang="ko" data-lang-class>Stripe / Square 결제, 캘린더 예약, Google 캘린더 연동.</span><span data-lang="es" data-lang-class>Pagos Stripe / Square, reservas por calendario, sincronización Google.</span></div>
+      </div></div>
+      <div class="feat-row"><span class="feat-num">04</span><div>
+        <div class="feat-title"><span data-lang="ja" data-lang-class>スマホ対応 &amp; SEO対策</span><span data-lang="en" data-lang-class>Mobile-ready &amp; SEO</span><span data-lang="ko" data-lang-class>모바일 대응 &amp; SEO</span><span data-lang="es" data-lang-class>Móvil y SEO</span></div>
+        <div class="feat-body"><span data-lang="ja" data-lang-class>全ページスマホ最適化済み。SEO基本設定・Googleアナリティクス設置もセットで対応。</span><span data-lang="en" data-lang-class>All pages mobile-optimized. Basic SEO &amp; Google Analytics included.</span><span data-lang="ko" data-lang-class>전 페이지 모바일 최적화. SEO 기본 설정·Google Analytics 설치 포함.</span><span data-lang="es" data-lang-class>Todas las páginas optimizadas para móvil. SEO básico y Google Analytics incluidos.</span></div>
+      </div></div>
+      <div class="feat-row"><span class="feat-num">05</span><div>
+        <div class="feat-title"><span data-lang="ja" data-lang-class>納品後のサポートも安心</span><span data-lang="en" data-lang-class>Post-delivery support</span><span data-lang="ko" data-lang-class>납품 후 지원도 안심</span><span data-lang="es" data-lang-class>Soporte post-entrega</span></div>
+        <div class="feat-body"><span data-lang="ja" data-lang-class>更新方法を丁寧にレクチャー。「自分で運用できる」HPをお渡しします。</span><span data-lang="en" data-lang-class>Full walkthrough of how to update your site—so you own it completely.</span><span data-lang="ko" data-lang-class>업데이트 방법을 친절히 안내. '직접 운영할 수 있는' 홈페이지를 전달합니다.</span><span data-lang="es" data-lang-class>Te explicamos cómo actualizar tu web—para que la domines tú mismo.</span></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- YAMAGUCHI CAMPAIGN -->
+<section id="campaign">
+  <div class="campaign-inner">
+    <div class="campaign-left">
+      <p class="s-label">
+        <span data-lang="ja" data-lang-class>山口県応援キャンペーン</span>
+        <span data-lang="en" data-lang-class>Yamaguchi Local Campaign</span>
+        <span data-lang="ko" data-lang-class>야마구치 응원 캠페인</span>
+        <span data-lang="es" data-lang-class>Campaña Local Yamaguchi</span>
+      </p>
+      <h2 class="s-title">
+        <span data-lang="ja" data-lang-class>山口県内の方へ、<br>地域応援価格で<br>お作りします。</span>
+        <span data-lang="en" data-lang-class>Supporting local<br>businesses in<br>Yamaguchi.</span>
+        <span data-lang="ko" data-lang-class>야마구치현 분들께,<br>지역 응원 가격으로<br>제작합니다.</span>
+        <span data-lang="es" data-lang-class>Apoyando negocios<br>locales en<br>Yamaguchi.</span>
+      </h2>
+      <p class="campaign-tagline">
+        <span data-lang="ja" data-lang-class>地元・山口県の個人事業主やアーティスト、小さなお店を応援したい。<br>そんな想いから、<strong>山口県内の方限定で特別価格</strong>をご用意しました。<br>県外の方も気軽にご相談ください。</span>
+        <span data-lang="en" data-lang-class>I want to support local freelancers, artists, and small shops in Yamaguchi.<br>That's why I offer a <strong>special rate exclusively for Yamaguchi residents.</strong><br>Outside Yamaguchi? Feel free to reach out too.</span>
+        <span data-lang="ko" data-lang-class>고향 야마구치현의 개인사업주·아티스트·소규모 가게를 응원하고 싶습니다.<br>그런 마음으로 <strong>야마구치현 거주자 한정 특별 가격</strong>을 준비했습니다.<br>현 외 분들도 편하게 상담해 주세요.</span>
+        <span data-lang="es" data-lang-class>Quiero apoyar a los autónomos, artistas y pequeños negocios locales de Yamaguchi.<br>Por eso ofrezco una <strong>tarifa especial exclusiva para residentes de Yamaguchi.</strong><br>¿Fuera de Yamaguchi? Escríbeme también.</span>
+      </p>
+      <a href="#contact" class="campaign-cta">
+        <span data-lang="ja" data-lang-class>LINEで相談する →</span>
+        <span data-lang="en" data-lang-class>Chat on LINE →</span>
+        <span data-lang="ko" data-lang-class>LINE으로 상담하기 →</span>
+        <span data-lang="es" data-lang-class>Chatear en LINE →</span>
+      </a>
+    </div>
+    <div class="campaign-card">
+      <p class="cc-tag">YAMAGUCHI SPECIAL PRICE</p>
+      <p class="cc-title">
+        <span data-lang="ja" data-lang-class>🌿 山口県応援キャンペーン</span>
+        <span data-lang="en" data-lang-class>🌿 Yamaguchi Local Campaign</span>
+        <span data-lang="ko" data-lang-class>🌿 야마구치 응원 캠페인</span>
+        <span data-lang="es" data-lang-class>🌿 Campaña Local Yamaguchi</span>
+      </p>
+      <div class="cc-price-row">
+        <span class="cc-old">¥50,000〜</span>
+        <span class="cc-new">¥20,000<small>〜</small></span>
+      </div>
+      <ul class="cc-list">
+        <li><span data-lang="ja" data-lang-class>個人HP・企業HP（〜5ページ）</span><span data-lang="en" data-lang-class>Personal / business site (up to 5 pages)</span><span data-lang="ko" data-lang-class>개인·기업 홈페이지 (최대 5페이지)</span><span data-lang="es" data-lang-class>Web personal / empresarial (hasta 5 páginas)</span></li>
+        <li><span data-lang="ja" data-lang-class>予約・決済システム付きは¥30,000〜</span><span data-lang="en" data-lang-class>With booking/payment system from ¥30,000</span><span data-lang="ko" data-lang-class>예약·결제 시스템 포함 ¥30,000〜</span><span data-lang="es" data-lang-class>Con sistema de reservas/pagos desde ¥30,000</span></li>
+        <li><span data-lang="ja" data-lang-class>スマホ対応・SEO・アナリティクス込み</span><span data-lang="en" data-lang-class>Mobile, SEO &amp; Analytics included</span><span data-lang="ko" data-lang-class>모바일·SEO·Analytics 포함</span><span data-lang="es" data-lang-class>Móvil, SEO y Analytics incluidos</span></li>
+        <li><span data-lang="ja" data-lang-class>納品後レクチャー &amp; LINEサポート</span><span data-lang="en" data-lang-class>Post-delivery walkthrough &amp; LINE support</span><span data-lang="ko" data-lang-class>납품 후 안내 &amp; LINE 지원</span><span data-lang="es" data-lang-class>Guía post-entrega &amp; soporte LINE</span></li>
+      </ul>
+      <p class="cc-note">
+        <span data-lang="ja" data-lang-class>※ 山口県内に在住・在勤・在学の方が対象です。<br>※ 期間限定のキャンペーン価格です。</span>
+        <span data-lang="en" data-lang-class>※ Available to those living, working or studying in Yamaguchi.<br>※ Limited-time campaign pricing.</span>
+        <span data-lang="ko" data-lang-class>※ 야마구치현 거주·재직·재학 중인 분이 대상입니다.<br>※ 기간 한정 캠페인 가격입니다.</span>
+        <span data-lang="es" data-lang-class>※ Disponible para residentes, trabajadores o estudiantes en Yamaguchi.<br>※ Precio de campaña por tiempo limitado.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- PROFILE -->
+<section id="profile">
+  <div class="profile-grid fade-in">
+
+    <!-- LEFT: sticky card -->
+    <div class="profile-left">
+      <div class="profile-avatar">👤</div>
+      <h2 class="profile-name">
+        <span data-lang="ja" data-lang-class>Webクリエイター</span>
+        <span data-lang="en" data-lang-class>Web Creator</span>
+        <span data-lang="ko" data-lang-class>웹 크리에이터</span>
+        <span data-lang="es" data-lang-class>Creadora Web</span>
+      </h2>
+      <p class="profile-name-sub">WEB STUDIO JS PROJECT</p>
+      <div class="profile-tags">
+        <span class="ptag rust">SE / Data Analyst</span>
+        <span class="ptag sky">医療系IT</span>
+        <span class="ptag green">山口県在住</span>
+        <span class="ptag sage">東京通信大学</span>
+      </div>
+      <div class="profile-music">
+        <p class="pm-label">MUSIC ARTIST</p>
+        <p class="pm-name">Unica Anne</p>
+        <p class="pm-desc">
+          <span data-lang="ja" data-lang-class>表現者としての視点を、Web制作に活かしています。</span>
+          <span data-lang="en" data-lang-class>Bringing an artist's perspective to every web project.</span>
+          <span data-lang="ko" data-lang-class>표현자로서의 시각을 웹 제작에 살립니다.</span>
+          <span data-lang="es" data-lang-class>Perspectiva artística aplicada a cada proyecto web.</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- RIGHT: story -->
+    <div class="profile-right">
+      <p class="s-label">PROFILE</p>
+
+      <div class="pblock">
+        <div class="pblock-icon">💻</div>
+        <div>
+          <p class="pblock-label">CAREER</p>
+          <p class="pblock-title">
+            <span data-lang="ja" data-lang-class>SE → Webマーケティング × データアナリスト</span>
+            <span data-lang="en" data-lang-class>SE → Web Marketing × Data Analyst</span>
+            <span data-lang="ko" data-lang-class>SE → 웹마케팅 × 데이터 애널리스트</span>
+            <span data-lang="es" data-lang-class>SE → Marketing Web × Analista de Datos</span>
+          </p>
+          <p class="pblock-body">
+            <span data-lang="ja" data-lang-class>システムエンジニアとしてキャリアをスタートし、現在は<strong>大手医療系IT企業のWebマーケティング領域</strong>にてデータアナリストとして業務に携わっています。<br>技術とデータの両面から、<span class="hi">成果につながるWeb設計</span>を強みとしています。</span>
+            <span data-lang="en" data-lang-class>Started as a systems engineer and now work as a <strong>data analyst in web marketing at a major medical IT company.</strong><br>My strength is <span class="hi">outcome-driven web design</span> at the intersection of technology and data.</span>
+            <span data-lang="ko" data-lang-class>시스템 엔지니어로 커리어를 시작해, 현재는 <strong>대형 의료계 IT 기업의 웹마케팅 분야</strong>에서 데이터 애널리스트로 근무 중입니다.<br>기술과 데이터 양면에서 <span class="hi">성과로 이어지는 웹 설계</span>가 강점입니다.</span>
+            <span data-lang="es" data-lang-class>Empecé como ingeniera de sistemas y ahora trabajo como <strong>analista de datos en marketing web en una gran empresa IT médica.</strong><br>Mi punto fuerte es el <span class="hi">diseño web orientado a resultados</span>, desde la tecnología y los datos.</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="pblock">
+        <div class="pblock-icon">🎓</div>
+        <div>
+          <p class="pblock-label">EDUCATION</p>
+          <p class="pblock-title">
+            <span data-lang="ja" data-lang-class>東京通信大学 情報マネジメント学部 在籍</span>
+            <span data-lang="en" data-lang-class>Tokyo University of Information Sciences — Information Management</span>
+            <span data-lang="ko" data-lang-class>도쿄통신대학교 정보경영학부 재학 중</span>
+            <span data-lang="es" data-lang-class>Universidad de Información de Tokio — Gestión de la Información</span>
+          </p>
+          <p class="pblock-body">
+            <span data-lang="ja" data-lang-class>実務と並行して、最新のIT・データ活用を継続的に学んでいます。<strong>学びを止めない</strong>ことが、最新技術でのHP制作につながっています。</span>
+            <span data-lang="en" data-lang-class>Studying the latest IT and data applications alongside my day job. <strong>Never stopping learning</strong> is what keeps my work on the cutting edge.</span>
+            <span data-lang="ko" data-lang-class>실무와 병행하며 최신 IT·데이터 활용을 지속적으로 공부하고 있습니다. <strong>배움을 멈추지 않는 것</strong>이 최신 기술로 홈페이지를 제작하는 원동력입니다.</span>
+            <span data-lang="es" data-lang-class>Estudio las últimas tecnologías IT y datos mientras trabajo. <strong>No dejar de aprender</strong> es lo que mantiene mi trabajo en la vanguardia.</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="pblock">
+        <div class="pblock-icon">🌿</div>
+        <div>
+          <p class="pblock-label">WHY YAMAGUCHI</p>
+          <p class="pblock-title">
+            <span data-lang="ja" data-lang-class>2025年10月、家族で地元・山口県へ移住。</span>
+            <span data-lang="en" data-lang-class>Moved back to Yamaguchi with family, October 2025.</span>
+            <span data-lang="ko" data-lang-class>2025년 10월, 가족과 함께 고향 야마구치현으로 이주.</span>
+            <span data-lang="es" data-lang-class>Regresé a Yamaguchi con mi familia en octubre de 2025.</span>
+          </p>
+          <p class="pblock-body">
+            <span data-lang="ja" data-lang-class>県外・海外での生活を経て、改めて地域の魅力と人の温かさに触れました。<br>「<span class="hi-green">挑戦する個人や小さな事業者がもっと表現できる地域にしたい</span>」——その想いから、本サービスを立ち上げました。</span>
+            <span data-lang="en" data-lang-class>After living away from home—overseas included—I rediscovered the warmth and vitality of this region.<br>"<span class="hi-green">I want Yamaguchi to be a place where individuals and small businesses can express themselves more.</span>" That's why I started this.</span>
+            <span data-lang="ko" data-lang-class>현 외 생활과 해외 생활을 거치며, 지역의 매력과 사람들의 따뜻함을 새삼 느꼈습니다.<br>"<span class="hi-green">도전하는 개인과 소규모 사업자가 더욱 표현할 수 있는 지역으로 만들고 싶다</span>"—그 마음으로 이 서비스를 시작했습니다.</span>
+            <span data-lang="es" data-lang-class>Tras vivir fuera—incluido el extranjero—redescubrí el encanto y la calidez de esta región.<br>"<span class="hi-green">Quiero que Yamaguchi sea un lugar donde los individuos y pequeños negocios puedan expresarse más.</span>" Por eso creé este servicio.</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="pblock">
+        <div class="pblock-icon">🎵</div>
+        <div>
+          <p class="pblock-label">MUSIC × WEB</p>
+          <p class="pblock-title">
+            <span data-lang="ja" data-lang-class>アーティスト名「Unica Anne」として音楽活動も。</span>
+            <span data-lang="en" data-lang-class>Also active as music artist "Unica Anne".</span>
+            <span data-lang="ko" data-lang-class>아티스트명 "Unica Anne"으로 음악 활동도 병행.</span>
+            <span data-lang="es" data-lang-class>También activa como artista musical "Unica Anne".</span>
+          </p>
+          <p class="pblock-body">
+            <span data-lang="ja" data-lang-class>表現者としての視点と感性が、Web制作にも活きています。<strong>「見せ方」「伝え方」</strong>にこだわるのは、作り手としての本能かもしれません。</span>
+            <span data-lang="en" data-lang-class>An artist's sensibility flows into every project. My obsession with <strong>how things look and how they communicate</strong> is second nature as a creator.</span>
+            <span data-lang="ko" data-lang-class>표현자로서의 시각과 감성이 웹 제작에도 살아납니다. <strong>"보여주는 방식", "전달하는 방식"</strong>에 집착하는 건, 만드는 사람으로서의 본능인지도 모릅니다.</span>
+            <span data-lang="es" data-lang-class>La sensibilidad artística impregna cada proyecto. Mi obsesión con <strong>cómo se ve y cómo comunica</strong> es instinto natural como creadora.</span>
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WORKS -->
+<section id="works">
+  <div style="max-width:1200px;margin:0 auto;">
+    <p class="s-label">WORKS</p>
+    <h2 class="s-title"><span data-lang="ja" data-lang-class>制作実績</span><span data-lang="en" data-lang-class>Selected Work</span><span data-lang="ko" data-lang-class>제작 실적</span><span data-lang="es" data-lang-class>Trabajos</span></h2>
+    <div class="works-grid fade-in">
+      <div class="wcard wc1"><span class="wcard-icon">🎵</span><div class="wcard-inner"><div class="wcard-info"><div class="wcard-cat">MUSICIAN / ARTIST</div><div class="wcard-name"><span data-lang="ja" data-lang-class>音楽アーティスト個人HP</span><span data-lang="en" data-lang-class>Musician personal site</span><span data-lang="ko" data-lang-class>음악 아티스트 홈페이지</span><span data-lang="es" data-lang-class>Web artista músico</span></div><div class="wcard-desc"><span data-lang="ja" data-lang-class>ライブ情報・楽曲試聴・グッズ購入を一体化</span><span data-lang="en" data-lang-class>Live info, music player &amp; merch in one</span><span data-lang="ko" data-lang-class>공연 정보·음악 감상·굿즈 구매 일체화</span><span data-lang="es" data-lang-class>Conciertos, música y merch en uno</span></div></div></div></div>
+      <div class="wcard wc2"><span class="wcard-icon">💆</span><div class="wcard-inner"><div class="wcard-info"><div class="wcard-cat">PERSONAL SALON</div><div class="wcard-name"><span data-lang="ja" data-lang-class>個人サロン 予約サイト</span><span data-lang="en" data-lang-class>Private salon booking site</span><span data-lang="ko" data-lang-class>개인 살롱 예약 사이트</span><span data-lang="es" data-lang-class>Web salón con reservas</span></div><div class="wcard-desc"><span data-lang="ja" data-lang-class>24時間オンライン予約・決済システム付き</span><span data-lang="en" data-lang-class>24/7 online booking with payment</span><span data-lang="ko" data-lang-class>24시간 온라인 예약·결제 시스템 포함</span><span data-lang="es" data-lang-class>Reservas 24/7 con pago online</span></div></div></div></div>
+      <div class="wcard wc3"><span class="wcard-icon">🎨</span><div class="wcard-inner"><div class="wcard-info"><div class="wcard-cat">VISUAL ARTIST</div><div class="wcard-name"><span data-lang="ja" data-lang-class>イラストレーター ポートフォリオ</span><span data-lang="en" data-lang-class>Illustrator portfolio</span><span data-lang="ko" data-lang-class>일러스트레이터 포트폴리오</span><span data-lang="es" data-lang-class>Portfolio ilustrador/a</span></div><div class="wcard-desc"><span data-lang="ja" data-lang-class>作品ギャラリー・委託販売ページ連携</span><span data-lang="en" data-lang-class>Gallery + commission sales page</span><span data-lang="ko" data-lang-class>작품 갤러리·위탁 판매 페이지 연동</span><span data-lang="es" data-lang-class>Galería + página de encargos</span></div></div></div></div>
+      <div class="wcard wc4"><span class="wcard-icon">📚</span><div class="wcard-inner"><div class="wcard-info"><div class="wcard-cat">YOGA / DANCE STUDIO</div><div class="wcard-name"><span data-lang="ja" data-lang-class>ヨガ教室 レッスン予約</span><span data-lang="en" data-lang-class>Yoga studio booking</span><span data-lang="ko" data-lang-class>요가 교실 레슨 예약</span><span data-lang="es" data-lang-class>Reservas estudio yoga</span></div><div class="wcard-desc"><span data-lang="ja" data-lang-class>クラス一覧・定員管理・月謝決済付き</span><span data-lang="en" data-lang-class>Class listing, capacity &amp; monthly billing</span><span data-lang="ko" data-lang-class>클래스 목록·정원 관리·수강료 결제</span><span data-lang="es" data-lang-class>Clases, aforo y pago mensual</span></div></div></div></div>
+      <div class="wcard wc5"><span class="wcard-icon">🫶</span><div class="wcard-inner"><div class="wcard-info"><div class="wcard-cat">COUNSELING / COACH</div><div class="wcard-name"><span data-lang="ja" data-lang-class>カウンセラー 予約LP</span><span data-lang="en" data-lang-class>Counselor booking LP</span><span data-lang="ko" data-lang-class>카운슬러 예약 LP</span><span data-lang="es" data-lang-class>LP consulta y reservas</span></div><div class="wcard-desc"><span data-lang="ja" data-lang-class>Zoom面談予約・事前問診フォーム付き</span><span data-lang="en" data-lang-class>Zoom booking + pre-session form</span><span data-lang="ko" data-lang-class>Zoom 면담 예약·사전 문진 폼 포함</span><span data-lang="es" data-lang-class>Reserva Zoom + formulario previo</span></div></div></div></div>
+      <div class="wcard wc6"><span class="wcard-icon">🎉</span><div class="wcard-inner"><div class="wcard-info"><div class="wcard-cat">SMALL EVENT</div><div class="wcard-name"><span data-lang="ja" data-lang-class>小規模イベント チケット販売</span><span data-lang="en" data-lang-class>Small event ticketing</span><span data-lang="ko" data-lang-class>소규모 이벤트 티켓 판매</span><span data-lang="es" data-lang-class>Venta de entradas evento</span></div><div class="wcard-desc"><span data-lang="ja" data-lang-class>チケット決済・入場管理QRコード発行</span><span data-lang="en" data-lang-class>Ticket payment + QR entry management</span><span data-lang="ko" data-lang-class>티켓 결제·입장 관리 QR코드 발행</span><span data-lang="es" data-lang-class>Pago de entradas + QR de acceso</span></div></div></div></div>
+    </div>
+    <p class="works-note"><span data-lang="ja" data-lang-class>掲載はイメージです。実績はお問い合わせ時にご紹介します。</span><span data-lang="en" data-lang-class>Shown for reference. Real portfolio shared on request.</span><span data-lang="ko" data-lang-class>이미지는 예시입니다. 실적은 문의 시 소개합니다.</span><span data-lang="es" data-lang-class>Imágenes de referencia. Portfolio real disponible al contactar.</span></p>
+  </div>
+</section>
+
+<!-- PRICE -->
+<section id="price">
+  <div class="price-wrap fade-in">
+    <p class="s-label">PRICE</p>
+    <h2 class="s-title"><span data-lang="ja" data-lang-class>料金プラン</span><span data-lang="en" data-lang-class>Pricing</span><span data-lang="ko" data-lang-class>요금 플랜</span><span data-lang="es" data-lang-class>Precios</span></h2>
+    <div class="price-grid">
+      <div class="pcard">
+        <p class="p-limited"><span data-lang="ja" data-lang-class>期間限定価格</span><span data-lang="en" data-lang-class>Limited time</span><span data-lang="ko" data-lang-class>기간 한정</span><span data-lang="es" data-lang-class>Oferta temporal</span></p>
+        <p class="p-tag">PLAN 01</p>
+        <h3 class="p-name"><span data-lang="ja" data-lang-class>個人HP / 企業HP</span><span data-lang="en" data-lang-class>Personal / Business</span><span data-lang="ko" data-lang-class>개인 / 기업 홈페이지</span><span data-lang="es" data-lang-class>Web personal / empresarial</span></h3>
+        <p class="p-old">¥50,000〜</p>
+        <p class="p-num">¥20,000<span>〜</span></p>
+        <ul class="p-list">
+          <li><span data-lang="ja" data-lang-class>ページ数：〜5ページ</span><span data-lang="en" data-lang-class>Up to 5 pages</span><span data-lang="ko" data-lang-class>페이지 수: 최대 5페이지</span><span data-lang="es" data-lang-class>Hasta 5 páginas</span></li>
+          <li><span data-lang="ja" data-lang-class>スマホ対応・SEO基本設定</span><span data-lang="en" data-lang-class>Mobile &amp; basic SEO</span><span data-lang="ko" data-lang-class>모바일 대응·SEO 기본 설정</span><span data-lang="es" data-lang-class>Móvil y SEO básico</span></li>
+          <li><span data-lang="ja" data-lang-class>Googleアナリティクス設置</span><span data-lang="en" data-lang-class>Google Analytics setup</span><span data-lang="ko" data-lang-class>Google Analytics 설치</span><span data-lang="es" data-lang-class>Google Analytics</span></li>
+          <li><span data-lang="ja" data-lang-class>問い合わせフォーム</span><span data-lang="en" data-lang-class>Contact form</span><span data-lang="ko" data-lang-class>문의 폼</span><span data-lang="es" data-lang-class>Formulario de contacto</span></li>
+          <li><span data-lang="ja" data-lang-class>SNSリンク連携</span><span data-lang="en" data-lang-class>Social media links</span><span data-lang="ko" data-lang-class>SNS 링크 연동</span><span data-lang="es" data-lang-class>Links redes sociales</span></li>
+          <li><span data-lang="ja" data-lang-class>納品後レクチャー付き</span><span data-lang="en" data-lang-class>Post-delivery walkthrough</span><span data-lang="ko" data-lang-class>납품 후 안내 포함</span><span data-lang="es" data-lang-class>Guía post-entrega</span></li>
+        </ul>
+        <a href="#contact" class="p-btn"><span data-lang="ja" data-lang-class>LINEで相談する</span><span data-lang="en" data-lang-class>Chat on LINE</span><span data-lang="ko" data-lang-class>LINE으로 상담</span><span data-lang="es" data-lang-class>Contactar por LINE</span></a>
+      </div>
+      <div class="pcard featured">
+        <p class="p-limited"><span data-lang="ja" data-lang-class>期間限定価格</span><span data-lang="en" data-lang-class>Limited time</span><span data-lang="ko" data-lang-class>기간 한정</span><span data-lang="es" data-lang-class>Oferta temporal</span></p>
+        <p class="p-tag">PLAN 02</p>
+        <h3 class="p-name"><span data-lang="ja" data-lang-class>決済・予約システム付き</span><span data-lang="en" data-lang-class>With Booking + Payment</span><span data-lang="ko" data-lang-class>결제·예약 시스템 포함</span><span data-lang="es" data-lang-class>Con reservas y pagos</span></h3>
+        <p class="p-old">¥80,000〜</p>
+        <p class="p-num">¥30,000<span>〜</span></p>
+        <ul class="p-list">
+          <li><span data-lang="ja" data-lang-class>PLAN 01の全内容</span><span data-lang="en" data-lang-class>Everything in PLAN 01</span><span data-lang="ko" data-lang-class>PLAN 01 전체 내용</span><span data-lang="es" data-lang-class>Todo de PLAN 01</span></li>
+          <li><span data-lang="ja" data-lang-class>オンライン予約カレンダー</span><span data-lang="en" data-lang-class>Online booking calendar</span><span data-lang="ko" data-lang-class>온라인 예약 캘린더</span><span data-lang="es" data-lang-class>Calendario de reservas</span></li>
+          <li><span data-lang="ja" data-lang-class>Stripe / Square 決済連携</span><span data-lang="en" data-lang-class>Stripe / Square payment</span><span data-lang="ko" data-lang-class>Stripe / Square 결제 연동</span><span data-lang="es" data-lang-class>Pago Stripe / Square</span></li>
+          <li><span data-lang="ja" data-lang-class>予約確認メール自動送信</span><span data-lang="en" data-lang-class>Auto confirmation emails</span><span data-lang="ko" data-lang-class>예약 확인 메일 자동 발송</span><span data-lang="es" data-lang-class>Emails de confirmación automáticos</span></li>
+          <li><span data-lang="ja" data-lang-class>管理ダッシュボード付き</span><span data-lang="en" data-lang-class>Admin dashboard</span><span data-lang="ko" data-lang-class>관리 대시보드 포함</span><span data-lang="es" data-lang-class>Panel de administración</span></li>
+          <li><span data-lang="ja" data-lang-class>Googleカレンダー同期</span><span data-lang="en" data-lang-class>Google Calendar sync</span><span data-lang="ko" data-lang-class>Google 캘린더 동기화</span><span data-lang="es" data-lang-class>Sincronización Google Calendar</span></li>
+        </ul>
+        <a href="#contact" class="p-btn"><span data-lang="ja" data-lang-class>LINEで相談する</span><span data-lang="en" data-lang-class>Chat on LINE</span><span data-lang="ko" data-lang-class>LINE으로 상담</span><span data-lang="es" data-lang-class>Contactar por LINE</span></a>
+      </div>
+      <div class="pcard">
+        <p class="p-tag">PLAN 03</p>
+        <h3 class="p-name"><span data-lang="ja" data-lang-class>カスタム・ご相談</span><span data-lang="en" data-lang-class>Custom / Inquiry</span><span data-lang="ko" data-lang-class>커스텀·상담</span><span data-lang="es" data-lang-class>Personalizado</span></h3>
+        <p class="p-old">&nbsp;</p>
+        <p class="p-num" style="font-size:1.65rem;"><span data-lang="ja" data-lang-class>要相談</span><span data-lang="en" data-lang-class>Quote</span><span data-lang="ko" data-lang-class>상담 후</span><span data-lang="es" data-lang-class>A consultar</span><span></span></p>
+        <ul class="p-list">
+          <li><span data-lang="ja" data-lang-class>EC・多機能ショップ</span><span data-lang="en" data-lang-class>E-commerce / full shop</span><span data-lang="ko" data-lang-class>EC·다기능 쇼핑몰</span><span data-lang="es" data-lang-class>Tienda online</span></li>
+          <li><span data-lang="ja" data-lang-class>会員制サイト</span><span data-lang="en" data-lang-class>Membership site</span><span data-lang="ko" data-lang-class>회원제 사이트</span><span data-lang="es" data-lang-class>Sitio de membresía</span></li>
+          <li><span data-lang="ja" data-lang-class>多言語対応（日英）</span><span data-lang="en" data-lang-class>Multilingual (JP/EN)</span><span data-lang="ko" data-lang-class>다국어 대응</span><span data-lang="es" data-lang-class>Multiidioma</span></li>
+          <li><span data-lang="ja" data-lang-class>既存サイトのリニューアル</span><span data-lang="en" data-lang-class>Site redesign</span><span data-lang="ko" data-lang-class>기존 사이트 리뉴얼</span><span data-lang="es" data-lang-class>Rediseño de web existente</span></li>
+          <li><span data-lang="ja" data-lang-class>継続保守・更新代行</span><span data-lang="en" data-lang-class>Ongoing maintenance</span><span data-lang="ko" data-lang-class>지속 유지보수·업데이트 대행</span><span data-lang="es" data-lang-class>Mantenimiento continuo</span></li>
+        </ul>
+        <a href="#contact" class="p-btn"><span data-lang="ja" data-lang-class>LINEで相談する</span><span data-lang="en" data-lang-class>Chat on LINE</span><span data-lang="ko" data-lang-class>LINE으로 상담</span><span data-lang="es" data-lang-class>Contactar por LINE</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOW -->
+<section id="flow">
+  <div style="max-width:1100px;margin:0 auto;">
+    <p class="s-label">FLOW</p>
+    <h2 class="s-title"><span data-lang="ja" data-lang-class>ご依頼の流れ</span><span data-lang="en" data-lang-class>How it works</span><span data-lang="ko" data-lang-class>의뢰 흐름</span><span data-lang="es" data-lang-class>Cómo funciona</span></h2>
+    <div class="flow-list fade-in">
+      <div class="flow-item">
+        <span class="flow-num">STEP 01</span>
+        <div>
+          <div class="flow-title"><span data-lang="ja" data-lang-class>LINEで気軽にご連絡</span><span data-lang="en" data-lang-class>Drop a LINE message</span><span data-lang="ko" data-lang-class>LINE으로 편하게 연락</span><span data-lang="es" data-lang-class>Escríbeme por LINE</span></div>
+          <div class="flow-body"><span data-lang="ja" data-lang-class>ざっくりしたイメージでOK。「HPを作りたい」から始めましょう。</span><span data-lang="en" data-lang-class>A rough idea is fine. Just say "I want a website" and we go from there.</span><span data-lang="ko" data-lang-class>대략적인 이미지로 OK. "홈페이지를 만들고 싶다"부터 시작합시다.</span><span data-lang="es" data-lang-class>Con una idea aproximada basta. "Quiero una web" ya es suficiente para empezar.</span></div>
+        </div>
+      </div>
+      <div class="flow-item">
+        <span class="flow-num">STEP 02</span>
+        <div>
+          <div class="flow-title"><span data-lang="ja" data-lang-class>ヒアリング（30〜60分）</span><span data-lang="en" data-lang-class>Brief (30–60 min)</span><span data-lang="ko" data-lang-class>히어링 (30〜60분)</span><span data-lang="es" data-lang-class>Briefing (30–60 min)</span></div>
+          <div class="flow-body"><span data-lang="ja" data-lang-class>HPの目的・ターゲット・目指す役割を丁寧にお聞きします。</span><span data-lang="en" data-lang-class>We talk through purpose, audience, and goals for your site.</span><span data-lang="ko" data-lang-class>홈페이지의 목적·타겟·역할을 꼼꼼히 여쭤봅니다.</span><span data-lang="es" data-lang-class>Hablamos de objetivos, audiencia y el rol de tu web.</span></div>
+        </div>
+      </div>
+      <div class="flow-item">
+        <span class="flow-num">STEP 03</span>
+        <div>
+          <div class="flow-title"><span data-lang="ja" data-lang-class>お見積り・ご提案</span><span data-lang="en" data-lang-class>Quote + proposal</span><span data-lang="ko" data-lang-class>견적·제안</span><span data-lang="es" data-lang-class>Presupuesto y propuesta</span></div>
+          <div class="flow-body"><span data-lang="ja" data-lang-class>最適なプランと費用・納期をご提案。納得いただいてからご契約。</span><span data-lang="en" data-lang-class>I'll suggest the best plan, cost, and timeline. No contract until you're happy.</span><span data-lang="ko" data-lang-class>최적 플랜과 비용·납기를 제안합니다. 납득 후 계약.</span><span data-lang="es" data-lang-class>Propongo el mejor plan, coste y plazo. Sin contrato hasta que estés conforme.</span></div>
+        </div>
+      </div>
+      <div class="flow-item">
+        <span class="flow-num">STEP 04</span>
+        <div>
+          <div class="flow-title">
+            <span data-lang="ja" data-lang-class>制作スタート</span><span data-lang="en" data-lang-class>Build starts</span><span data-lang="ko" data-lang-class>제작 시작</span><span data-lang="es" data-lang-class>Empieza la construcción</span>
+            <span class="flow-pill"><span data-lang="ja" data-lang-class>最短1〜2日</span><span data-lang="en" data-lang-class>1–2 days</span><span data-lang="ko" data-lang-class>최단 1〜2일</span><span data-lang="es" data-lang-class>1–2 días</span></span>
+          </div>
+          <div class="flow-body"><span data-lang="ja" data-lang-class>デザイン案をLINEでご確認いただきながら進めます。</span><span data-lang="en" data-lang-class>Design drafts shared over LINE—you approve as we go.</span><span data-lang="ko" data-lang-class>LINE으로 디자인 안을 확인하면서 진행합니다.</span><span data-lang="es" data-lang-class>Comparto borradores por LINE—tú vas aprobando.</span></div>
+        </div>
+      </div>
+      <div class="flow-item">
+        <span class="flow-num">STEP 05</span>
+        <div>
+          <div class="flow-title"><span data-lang="ja" data-lang-class>納品・レクチャー</span><span data-lang="en" data-lang-class>Delivery + walkthrough</span><span data-lang="ko" data-lang-class>납품·안내</span><span data-lang="es" data-lang-class>Entrega + guía</span></div>
+          <div class="flow-body"><span data-lang="ja" data-lang-class>完成後は更新方法を丁寧にご説明。納品後もLINEでいつでもどうぞ。</span><span data-lang="en" data-lang-class>I walk you through how to update your site. LINE support continues after.</span><span data-lang="ko" data-lang-class>완성 후 업데이트 방법을 안내합니다. 납품 후에도 LINE으로 언제든지.</span><span data-lang="es" data-lang-class>Te explico cómo actualizar tu web. Soporte por LINE continúa después.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-bg-text">Hello.</div>
+  <div class="contact-inner fade-in">
+    <p class="s-label">CONTACT</p>
+    <h2 class="s-title">
+      <span data-lang="ja" data-lang-class>まずはLINEで<br>気軽にご相談を</span>
+      <span data-lang="en" data-lang-class>Let's talk<br>on LINE</span>
+      <span data-lang="ko" data-lang-class>먼저 LINE으로<br>편하게 상담을</span>
+      <span data-lang="es" data-lang-class>Hablemos<br>por LINE</span>
+    </h2>
+    <p class="contact-sub">
+      <span data-lang="ja" data-lang-class>「HPって何から始めればいい？」「予算が心配…」<br>どんな小さな疑問でも、お気軽にメッセージください。<br>通常24時間以内にお返事します。</span>
+      <span data-lang="en" data-lang-class>"Where do I even start?" "I'm worried about budget…"<br>Any question is welcome—just drop me a message.<br>I usually reply within 24 hours.</span>
+      <span data-lang="ko" data-lang-class>"홈페이지는 어디서부터 시작하면 될까요?" "예산이 걱정돼요…"<br>어떤 작은 질문이라도 편하게 메시지 주세요.<br>보통 24시간 이내에 답장드립니다.</span>
+      <span data-lang="es" data-lang-class>"¿Por dónde empiezo?" "Me preocupa el presupuesto…"<br>Cualquier pregunta es bienvenida—solo escríbeme.<br>Suelo responder en 24 horas.</span>
+    </p>
+    <!-- ▼ 自身のLINEアカウントURLに変更してください -->
+    <a href="https://lin.ee/XXXXXXX" class="line-btn" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.145 2 11.243c0 4.018 2.524 7.456 6.174 8.933l-.39 1.434c-.036.134.015.277.131.359a.336.336 0 0 0 .37.011l1.681-1.002c.67.117 1.357.178 2.034.178 5.523 0 10-4.145 10-9.913C22 6.145 17.523 2 12 2zm-3.08 12.875H7.052V9.344h1.868v5.531zm3.71 0h-1.815v-3.578l-1.78 3.578H9.21V9.344h1.815v3.506l1.755-3.506h1.85v5.531zm4.456-4.022h-1.813v.849h1.813v1.513h-1.813v.849h1.813v1.511h-3.327V9.344h3.327v1.509z"/></svg>
+      <span data-lang="ja" data-lang-class>LINEで無料相談する</span>
+      <span data-lang="en" data-lang-class>Free chat on LINE</span>
+      <span data-lang="ko" data-lang-class>LINE으로 무료 상담</span>
+      <span data-lang="es" data-lang-class>Consulta gratis por LINE</span>
+    </a>
+    <p class="contact-note">
+      <span data-lang="ja" data-lang-class>ボタンをタップするとLINEが開きます</span>
+      <span data-lang="en" data-lang-class>Tap the button to open LINE</span>
+      <span data-lang="ko" data-lang-class>버튼을 누르면 LINE이 열립니다</span>
+      <span data-lang="es" data-lang-class>Toca el botón para abrir LINE</span>
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-colors"><span class="fc1"></span><span class="fc2"></span><span class="fc3"></span></div>
+  <span>© 2025 WEB STUDIO JS PROJECT</span>
+  <span>Yamaguchi, Japan</span>
+</footer>
+
+<script>
+// ── LANGUAGE SWITCHER ──────────────────────────────────────────
+const LANGS = ['ja','en','ko','es'];
+let currentLang = 'ja';
+
+function setLang(lang) {
+  currentLang = lang;
+
+  // Update html lang attribute
+  document.documentElement.lang = lang;
+
+  // Update button states
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.target === lang);
+  });
+
+  // Show/hide [data-lang] elements
+  // Block-level elements
+  document.querySelectorAll('[data-lang]').forEach(el => {
+    if (el.dataset.lang === lang) {
+      el.classList.add('lang-active');
+    } else {
+      el.classList.remove('lang-active');
+    }
+  });
+
+  // Update page title
+  const titles = {
+    ja: 'WEB STUDIO JS PROJECT — オーダーメイドWebサイト制作',
+    en: 'WEB STUDIO JS PROJECT — Bespoke Website Design',
+    ko: 'WEB STUDIO JS PROJECT — 맞춤형 웹사이트 제작',
+    es: 'WEB STUDIO JS PROJECT — Diseño Web a Medida'
+  };
+  document.title = titles[lang];
+}
+
+// Handle [data-lang-class] inline spans (campaign banner uses different attr)
+// Re-use same data-lang for all inline; CSS handles display:inline vs display:block
+// Init
+setLang('ja');
+
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => setLang(btn.dataset.target));
+});
+
+// ── NAV SCROLL ────────────────────────────────────────────────
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+
+// ── FADE IN ───────────────────────────────────────────────────
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+
+// ── SMOOTH SCROLL ─────────────────────────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+  });
+});
+</script>
+</body>
+</html>
