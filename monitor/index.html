@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>先着3名｜Web制作モニター募集（実績掲載OKで割引）</title>
+  <meta name="description" content="先着3名限定。実績掲載OKの方にモニター価格でWebサイト制作。ヒアリングはGoogleフォームで完結、見積も自動。最短で提案書まで出します。" />
+  <style>
+    :root{
+      --bg:#0b0e14; --panel:#101624; --text:#e9eef8; --muted:#a8b3c7;
+      --accent:#7c5cff; --accent2:#27d3a2; --line:#1d2a44;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+      --max: 1020px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
+      background: radial-gradient(1200px 800px at 20% 0%, rgba(124,92,255,.35), transparent 55%),
+                  radial-gradient(900px 700px at 80% 10%, rgba(39,211,162,.22), transparent 50%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.65;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:24px}
+    header{position:sticky; top:0; backdrop-filter: blur(10px); background: rgba(11,14,20,.6); border-bottom:1px solid rgba(29,42,68,.6); z-index:10}
+    .nav{display:flex; align-items:center; justify-content:space-between; gap:16px}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.02em}
+    .badge{font-size:12px; color: #0b0e14; background: linear-gradient(135deg, var(--accent), var(--accent2)); padding:6px 10px; border-radius:999px; font-weight:700}
+    .cta{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:12px 16px; border-radius:999px; font-weight:800; text-decoration:none;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: var(--shadow);
+      border:0;
+    }
+    .cta.secondary{
+      background: transparent; border:1px solid rgba(124,92,255,.5); color:var(--text); box-shadow:none;
+    }
+    .hero{padding:42px 0 24px}
+    .hero-grid{display:grid; grid-template-columns: 1.15fr .85fr; gap:20px}
+    @media (max-width: 920px){ .hero-grid{grid-template-columns:1fr} }
+    .h1{font-size:44px; line-height:1.1; margin:0 0 12px; letter-spacing:-.02em}
+    @media (max-width: 520px){ .h1{font-size:34px} }
+    .lead{color:var(--muted); font-size:16px; margin:0 0 18px}
+    .panel{
+      background: linear-gradient(180deg, rgba(16,22,36,.92), rgba(16,22,36,.72));
+      border: 1px solid rgba(29,42,68,.85);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:18px;
+    }
+    .kpis{display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; margin-top:16px}
+    @media (max-width: 640px){ .kpis{grid-template-columns:1fr} }
+    .kpi{padding:14px; border-radius:14px; background: rgba(11,14,20,.35); border:1px solid rgba(29,42,68,.7)}
+    .kpi b{display:block; font-size:18px}
+    .kpi span{color:var(--muted); font-size:12px}
+    .section{padding:22px 0}
+    .section h2{margin:0 0 10px; font-size:26px}
+    .section p{margin:0 0 12px; color:var(--muted)}
+    .grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+    @media (max-width: 860px){ .grid2{grid-template-columns:1fr} }
+    .list{margin:0; padding:0 0 0 18px; color:var(--muted)}
+    .pill{display:inline-flex; align-items:center; gap:8px; padding:8px 10px; border-radius:999px; background: rgba(124,92,255,.15); border:1px solid rgba(124,92,255,.35); color:var(--text); font-weight:700; font-size:12px}
+    .price{
+      font-size:28px; font-weight:900; letter-spacing:-.02em; margin:6px 0 10px;
+    }
+    .note{font-size:12px; color:var(--muted)}
+    .steps{counter-reset:step; display:grid; gap:10px; margin:0; padding:0; list-style:none}
+    .steps li{
+      counter-increment:step;
+      padding:14px; border-radius:14px; background: rgba(11,14,20,.35); border:1px solid rgba(29,42,68,.7)
+    }
+    .steps li b::before{
+      content: "STEP " counter(step) "  ";
+      color: var(--accent2);
+    }
+    details{border:1px solid rgba(29,42,68,.7); border-radius:14px; padding:12px 14px; background: rgba(11,14,20,.28)}
+    details+details{margin-top:10px}
+    summary{cursor:pointer; font-weight:800}
+    summary::marker{color:var(--accent)}
+    footer{padding:28px 0 60px; color:var(--muted); font-size:12px}
+    .cta-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
+    .callout{border-left:4px solid var(--accent2); padding-left:12px; margin-top:10px}
+    .divider{height:1px; background: rgba(29,42,68,.8); margin:12px 0}
+    .smallcaps{font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted)}
+    .danger{color:#ffd1d1}
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <span class="badge">Monitor</span>
+      <span>Web制作モニター募集</span>
+    </div>
+    <a class="cta" href="#apply">モニターに応募する</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <div class="hero-grid">
+      <div>
+        <div class="pill">先着3名限定 / 実績掲載OKで割引</div>
+        <h1 class="h1">自動化フローで<br>“早い・わかりやすい”Web制作<br>モニター募集</h1>
+        <p class="lead">
+          ヒアリングはGoogleフォームで完結 → 回答は自動で見積・提案に反映。<br>
+          小規模サイトを「必要十分＋壊れにくい」構成で作ります。
+        </p>
+
+        <div class="cta-row">
+          <a class="cta" href="#apply">先着3名に応募する</a>
+          <a class="cta secondary" href="#spec">対応範囲を見る</a>
+        </div>
+
+        <div class="kpis">
+          <div class="kpi">
+            <b>先着3名のみ</b>
+            <span>モニター価格は枠終了で終了</span>
+          </div>
+          <div class="kpi">
+            <b>見積が明快</b>
+            <span>機能ごとの積み上げ式</span>
+          </div>
+          <div class="kpi">
+            <b>運用コスト0円設計</b>
+            <span>GitHub Pages + GAS想定</span>
+          </div>
+        </div>
+      </div>
+
+      <aside class="panel">
+        <div class="smallcaps">Monitor Offer</div>
+        <div class="price">モニター割引：-5,000円</div>
+        <p class="note">
+          ※実績掲載OK（サイトURL・キャプチャ）にご協力いただける方が対象です。<br>
+          ※特急対応（+10,000円）も選択可能（枠・状況により不可の場合あり）。
+        </p>
+        <div class="divider"></div>
+        <b>こんな方におすすめ</b>
+        <ul class="list">
+          <li>小さく始めたい個人事業主 / 店舗</li>
+          <li>予算を抑えつつ最低限の信頼感は欲しい</li>
+          <li>予約・LINE通知など必要機能を整理して作りたい</li>
+        </ul>
+        <div class="callout">
+          <b>対応スタイル</b><br>
+          まずは“必要十分”で公開 → 反応を見て拡張、が最短で成功しやすいです。
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" id="spec">
+    <h2>対応範囲（モニターでも手抜きしない範囲）</h2>
+    <p>小規模Web制作の“よくある内訳”をテンプレ化して、必要な機能だけを選んで積み上げます。</p>
+
+    <div class="grid2">
+      <div class="panel">
+        <b>基本（含まれるもの）</b>
+        <ul class="list">
+          <li>ディレクション（要件整理 / 構成提案）</li>
+          <li>初期設定（GitHub Pages想定）</li>
+          <li>基本デザイン調整（テンプレベースで整える）</li>
+        </ul>
+        <div class="divider"></div>
+        <b>オプション（必要な人だけ）</b>
+        <ul class="list">
+          <li>ページ追加</li>
+          <li>問い合わせフォーム（GAS）</li>
+          <li>LINE通知 / メール通知</li>
+          <li>予約機能（DB/管理 + カレンダー/時間枠）</li>
+          <li>ライティング（ページ単位）</li>
+          <li>公開・ドメイン・SSL設定</li>
+        </ul>
+      </div>
+
+      <div class="panel">
+        <b>モニター条件</b>
+        <ul class="list">
+          <li>制作実績として掲載OK（サイトURL/キャプチャ）</li>
+          <li>修正回数：原則 2回まで（軽微修正は柔軟に対応）</li>
+          <li>素材提出（ロゴ/写真/文章）のご協力</li>
+        </ul>
+        <div class="divider"></div>
+        <b class="danger">対応できないこと（事故防止）</b>
+        <ul class="list">
+          <li>複雑なEC決済（Shopify等は別提案）</li>
+          <li>会員ログイン/多権限管理など大型機能</li>
+          <li>大規模なSEO記事量産（別プラン）</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="flow">
+    <h2>制作の流れ（最短で迷わない）</h2>
+    <p>ヒアリング→見積→提案→制作を「自動化＋テンプレ」でスムーズに進めます。</p>
+    <ol class="steps">
+      <li><b>フォーム回答</b><br><span class="note">要件ヒアリングをGoogleフォームで回答（5〜10分）</span></li>
+      <li><b>自動見積・提案</b><br><span class="note">回答内容から見積と提案のたたき台を自動生成</span></li>
+      <li><b>すり合わせ（15〜30分）</b><br><span class="note">ズレが出やすい点だけ確認して確定</span></li>
+      <li><b>制作→確認→公開</b><br><span class="note">公開後は「改善の余地」が一番価値になります</span></li>
+    </ol>
+  </section>
+
+  <section class="section" id="apply">
+    <h2>応募（先着3名）</h2>
+    <p>下記フォームからご応募ください。送信後、内容確認のうえご連絡します。</p>
+
+    <div class="panel">
+      <b>応募フォーム</b>
+      <p class="note">▼ここにGoogleフォームのURLを差し替え（または埋め込み）してください。</p>
+
+      <!-- 1) リンク導線（おすすめ：最初はこれが早い） -->
+      <div class="cta-row">
+        <a class="cta" href="YOUR_GOOGLE_FORM_URL" target="_blank" rel="noopener">Googleフォームで応募する</a>
+        <a class="cta secondary" href="#faq">よくある質問を見る</a>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- 2) 埋め込み（必要ならON） -->
+      <!--
+      <iframe
+        src="YOUR_GOOGLE_FORM_EMBED_URL"
+        width="100%"
+        height="760"
+        frameborder="0"
+        marginheight="0"
+        marginwidth="0"
+        style="border:1px solid rgba(29,42,68,.7); border-radius:14px;"
+      >読み込んでいます…</iframe>
+      -->
+      <p class="note">※枠が埋まり次第、通常価格に切り替わります。</p>
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <h2>よくある質問</h2>
+
+    <details>
+      <summary>モニター価格の適用条件は？</summary>
+      <p class="note">制作実績として掲載OK（サイトURL/キャプチャ）にご協力いただける方が対象です。公開後に相談したい場合もOKです（割引適用は要相談）。</p>
+    </details>
+
+    <details>
+      <summary>特急対応（+10,000円）とは？</summary>
+      <p class="note">通常より制作優先度を上げて進行します。スケジュール状況によりお受けできない場合があります。</p>
+    </details>
+
+    <details>
+      <summary>どれくらいの納期になりますか？</summary>
+      <p class="note">要件（ページ数/予約/通知/ライティング）で変動します。フォーム回答から目安を自動算出し、提案時にすり合わせます。</p>
+    </details>
+
+    <details>
+      <summary>修正回数は本当に2回まで？</summary>
+      <p class="note">原則2回（構成・文章・デザイン大枠）。軽微な文言修正などは柔軟に対応します。無限修正を避けるためのルールです。</p>
+    </details>
+
+    <details>
+      <summary>素材（写真/文章）がない場合は？</summary>
+      <p class="note">写真はフリー素材の提案も可能です。文章は「ライティング（ページ単位）」で対応できます。</p>
+    </details>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <div class="panel">
+    <b>注意事項（トラブル防止）</b>
+    <ul class="list">
+      <li>内容により、モニター枠でもお断りする場合があります（要件が大きい/納期が極端に短い等）。</li>
+      <li>実績掲載の範囲（URL/キャプチャ/掲載タイミング）は事前に確認します。</li>
+      <li>価格はヒアリング内容により変動します（テンプレ積み上げ方式）。</li>
+    </ul>
+    <div class="divider"></div>
+    <span class="note">© Web Studio JS PROJECT（仮） / Monitor Landing Page</span>
+  </div>
+</footer>
+
+</body>
+</html>
