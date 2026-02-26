@@ -4,6 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>WEB STUDIO JS PROJECT — オーダーメイドWebサイト制作</title>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SDDRNML9C5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SDDRNML9C5');
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
@@ -15,7 +25,7 @@
   --rust:      #B84C2A;
   --sage:      #4A6858;
   --sky:       #3A6080;
-  --yamaguchi: #2A7A5A;  /* campaign green */
+  --yamaguchi: #2A7A5A;
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -28,7 +38,6 @@ body {
   overflow-x: hidden;
 }
 
-/* grid overlay */
 body::after {
   content: '';
   position: fixed; inset: 0;
@@ -60,9 +69,7 @@ body::after {
 }
 .lang-btn:first-child { border-left: none; }
 .lang-btn:hover { color: rgba(244,241,236,0.85); }
-.lang-btn.active {
-  color: var(--off-white);
-}
+.lang-btn.active { color: var(--off-white); }
 .lang-btn.active::after {
   content: '';
   position: absolute; bottom: 0; left: 0.9rem; right: 0.9rem;
@@ -100,9 +107,9 @@ nav.scrolled { border-bottom-color: var(--line); }
 }
 .nav-links a:hover { color: var(--ink); }
 
-/* ── YAMAGUCHI CAMPAIGN BANNER ── */
+/* ── CAMPAIGN BANNER ── */
 .campaign-banner {
-  margin-top: 36px; /* below lang-bar */
+  margin-top: 36px;
   padding: 0 3rem;
   background: var(--yamaguchi);
   display: flex; align-items: center; justify-content: space-between;
@@ -211,18 +218,16 @@ nav.scrolled { border-bottom-color: var(--line); }
 .hero-svc-price { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--rust); letter-spacing: 0.04em; }
 .hero-svc-note { font-size: 0.66rem; color: var(--mid); margin-top: 0.18rem; font-weight: 300; }
 
-/* Yamaguchi special row */
-.hero-svc.yamaguchi-svc {
-  background: rgba(42,122,90,0.06);
+.hero-svc.monitor-svc {
+  background: rgba(184,76,42,0.06);
   border-radius: 1px;
   padding: 0.85rem 0.6rem;
   margin: 0 -0.6rem;
-  border-bottom-color: rgba(42,122,90,0.2);
+  border-bottom-color: rgba(184,76,42,0.2);
 }
-.hero-svc.yamaguchi-svc .hero-svc-price { color: var(--yamaguchi); }
-.yamaguchi-tag {
+.monitor-tag {
   display: inline-flex;
-  background: var(--yamaguchi); color: #fff;
+  background: var(--rust); color: #fff;
   font-family: 'DM Mono', monospace;
   font-size: 0.48rem; letter-spacing: 0.12em;
   padding: 0.14rem 0.4rem; margin-left: 0.4rem;
@@ -288,7 +293,7 @@ section { padding: 7rem 3rem; position: relative; }
 .feat-title { font-size: 0.88rem; font-weight: 700; margin-bottom: 0.35rem; }
 .feat-body { font-size: 0.78rem; color: var(--mid); line-height: 1.85; }
 
-/* ── YAMAGUCHI CAMPAIGN SECTION ── */
+/* ── CAMPAIGN SECTION ── */
 #campaign {
   background: var(--yamaguchi);
   color: #fff;
@@ -333,6 +338,13 @@ section { padding: 7rem 3rem; position: relative; }
 .cc-list li { font-size: 0.8rem; color: rgba(255,255,255,0.75); display: flex; gap: 0.5rem; }
 .cc-list li::before { content: '✓'; color: rgba(255,255,255,0.9); flex-shrink: 0; }
 .cc-note { margin-top: 1.2rem; font-family: 'DM Mono', monospace; font-size: 0.56rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.45); line-height: 1.6; }
+.cc-lp-btn {
+  display: block; margin-top: 1.8rem; text-align: center;
+  background: #fff; color: var(--yamaguchi);
+  font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.16em;
+  padding: 0.9rem; text-decoration: none; font-weight: 700; transition: all 0.22s;
+}
+.cc-lp-btn:hover { background: var(--off-white); transform: translateY(-2px); }
 
 /* ── WORKS ── */
 #works { background: var(--ink); color: var(--off-white); border-bottom: 1px solid #2A2820; }
@@ -359,7 +371,30 @@ section { padding: 7rem 3rem; position: relative; }
 /* ── PRICE ── */
 #price { border-bottom: 1px solid var(--line); }
 .price-wrap { max-width: 1100px; margin: 0 auto; }
-.price-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--line); margin-top: 3rem; }
+
+/* Monitor alert banner */
+.monitor-alert {
+  display: flex; align-items: center; gap: 1.5rem;
+  background: var(--ink); color: var(--off-white);
+  padding: 1.2rem 2rem; margin-top: 2.5rem;
+  border-left: 4px solid var(--rust);
+}
+.monitor-alert-badge {
+  background: var(--rust); color: #fff;
+  font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.14em;
+  padding: 0.4rem 0.9rem; white-space: nowrap; flex-shrink: 0;
+}
+.monitor-alert-text { font-size: 0.84rem; line-height: 1.7; }
+.monitor-alert-text strong { color: #E8C87A; }
+.monitor-alert-cta {
+  margin-left: auto; flex-shrink: 0;
+  background: var(--rust); color: #fff;
+  font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.14em;
+  padding: 0.6rem 1.3rem; text-decoration: none; transition: all 0.2s; white-space: nowrap;
+}
+.monitor-alert-cta:hover { background: #a03d1e; transform: translateY(-1px); }
+
+.price-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--line); margin-top: 2rem; }
 .pcard { background: var(--off-white); padding: 2.4rem; position: relative; transition: background 0.25s; }
 .pcard:hover { background: #fff; }
 .pcard.featured { background: var(--ink); color: var(--off-white); }
@@ -370,7 +405,19 @@ section { padding: 7rem 3rem; position: relative; }
 .pcard:nth-child(3)::before { background: var(--sage); }
 .p-tag { font-family: 'DM Mono', monospace; font-size: 0.55rem; letter-spacing: 0.28em; color: var(--mid); margin-bottom: 0.6rem; }
 .pcard.featured .p-tag { color: rgba(244,241,236,0.4); }
-.p-limited { display: inline-block; margin-bottom: 0.8rem; background: var(--rust); color: #fff; font-family: 'DM Mono', monospace; font-size: 0.54rem; letter-spacing: 0.12em; padding: 0.2rem 0.65rem; }
+.p-limited {
+  display: inline-block; margin-bottom: 0.8rem;
+  background: var(--rust); color: #fff;
+  font-family: 'DM Mono', monospace; font-size: 0.54rem; letter-spacing: 0.12em;
+  padding: 0.2rem 0.65rem;
+}
+.p-monitor-badge {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  margin-bottom: 0.8rem;
+  background: #E8C87A; color: var(--ink);
+  font-family: 'DM Mono', monospace; font-size: 0.54rem; letter-spacing: 0.12em;
+  padding: 0.28rem 0.75rem; font-weight: 700;
+}
 .p-name { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 300; margin-bottom: 1.3rem; }
 .p-old { font-size: 0.68rem; color: var(--mid); text-decoration: line-through; }
 .pcard.featured .p-old { color: rgba(244,241,236,0.35); }
@@ -386,6 +433,25 @@ section { padding: 7rem 3rem; position: relative; }
 .p-btn:hover { background: var(--ink); color: var(--off-white); border-color: var(--ink); }
 .pcard.featured .p-btn { border-color: rgba(244,241,236,0.25); color: var(--off-white); }
 .pcard.featured .p-btn:hover { background: #E8C87A; color: var(--ink); border-color: #E8C87A; }
+.p-lp-link { display: block; text-align: center; margin-top: 0.7rem; font-family: 'DM Mono', monospace; font-size: 0.56rem; letter-spacing: 0.12em; color: var(--mid); text-decoration: none; }
+.p-lp-link:hover { color: var(--rust); }
+.pcard.featured .p-lp-link { color: rgba(244,241,236,0.35); }
+.pcard.featured .p-lp-link:hover { color: #E8C87A; }
+.price-lp-note {
+  margin-top: 2rem; padding: 1.4rem 2rem;
+  border: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+  background: #fff;
+}
+.price-lp-note-text { font-size: 0.82rem; line-height: 1.8; color: var(--mid); }
+.price-lp-note-text strong { color: var(--ink); }
+.price-lp-btn {
+  flex-shrink: 0;
+  background: var(--ink); color: var(--off-white);
+  font-family: 'DM Mono', monospace; font-size: 0.64rem; letter-spacing: 0.14em;
+  padding: 0.75rem 1.6rem; text-decoration: none; transition: all 0.22s;
+}
+.price-lp-btn:hover { background: var(--rust); transform: translateY(-1px); }
 
 /* ── FLOW ── */
 #flow { background: var(--ink); color: var(--off-white); border-bottom: 1px solid #2A2820; }
@@ -420,16 +486,13 @@ footer { padding: 1.6rem 3rem; display: flex; justify-content: space-between; al
 .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-/* ── i18n: hide all but active lang ── */
+/* ── i18n ── */
 [data-lang] { display: none; }
 [data-lang].lang-active { display: block; }
-/* inline elements */
 span[data-lang], a[data-lang] { display: none; }
 span[data-lang].lang-active, a[data-lang].lang-active { display: inline; }
-/* flex containers */
 .hero-tag[data-lang], .hero-tag { display: flex; }
 .hero-tag[data-lang]:not(.lang-active) { display: none; }
-
 
 /* ── PROFILE ── */
 #profile { border-bottom: 1px solid var(--line); }
@@ -521,11 +584,82 @@ span[data-lang].lang-active, a[data-lang].lang-active { display: inline; }
   .campaign-banner { padding: 0.8rem 1.5rem; }
   footer { flex-direction: column; gap: 0.8rem; text-align: center; }
   .lang-bar { padding: 0 1.5rem; }
+  .monitor-alert { flex-wrap: wrap; }
+  .monitor-alert-cta { margin-left: 0; }
+  .price-lp-note { flex-direction: column; align-items: flex-start; }
 }
 @media (max-width: 600px) {
   .works-grid { grid-template-columns: 1fr; }
   .nav-links { display: none; }
   .lang-btn { padding: 0 0.6rem; font-size: 0.54rem; }
+}
+
+/* ── QR MODAL ── */
+.qr-overlay {
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(22,20,16,0.72);
+  backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.28s ease;
+}
+.qr-overlay.open {
+  opacity: 1; pointer-events: all;
+}
+.qr-modal {
+  background: var(--off-white);
+  padding: 2.8rem 3rem 2.4rem;
+  max-width: 340px; width: 90%;
+  position: relative;
+  transform: translateY(16px) scale(0.97);
+  transition: transform 0.3s cubic-bezier(.22,.68,0,1.2);
+  text-align: center;
+}
+.qr-overlay.open .qr-modal {
+  transform: translateY(0) scale(1);
+}
+.qr-close {
+  position: absolute; top: 1rem; right: 1.2rem;
+  background: none; border: none; cursor: pointer;
+  font-size: 1.2rem; color: var(--mid); line-height: 1;
+  transition: color 0.18s;
+}
+.qr-close:hover { color: var(--ink); }
+.qr-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.56rem; letter-spacing: 0.28em; color: var(--mid);
+  margin-bottom: 1.4rem;
+}
+.qr-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem; font-weight: 300; margin-bottom: 1.6rem;
+  line-height: 1.3;
+}
+.qr-img-wrap {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 200px; height: 200px;
+  border: 1px solid var(--line);
+  background: #fff;
+  margin: 0 auto 1.4rem;
+}
+.qr-img-wrap canvas { display: block; }
+.qr-sub {
+  font-size: 0.76rem; color: var(--mid); line-height: 1.8; margin-bottom: 1.6rem;
+}
+.qr-direct-btn {
+  display: flex; align-items: center; justify-content: center; gap: 0.7rem;
+  background: #06C755; color: #fff;
+  font-size: 0.82rem; font-weight: 700; text-decoration: none;
+  padding: 0.85rem 1.4rem; border-radius: 2px;
+  transition: background 0.2s, transform 0.2s;
+  letter-spacing: 0.02em;
+}
+.qr-direct-btn:hover { background: #05B04C; transform: translateY(-1px); }
+.qr-direct-btn svg { width: 18px; height: 18px; fill: #fff; flex-shrink: 0; }
+.qr-note {
+  margin-top: 1rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem; letter-spacing: 0.1em; color: var(--mid);
 }
 </style>
 </head>
@@ -542,27 +676,27 @@ span[data-lang].lang-active, a[data-lang].lang-active { display: inline; }
 <!-- CAMPAIGN BANNER -->
 <div class="campaign-banner">
   <div class="cb-left">
-    <span class="cb-flag" data-lang="ja" data-lang-class>🌿 山口県応援キャンペーン</span>
-    <span class="cb-flag" data-lang="en" data-lang-class>🌿 Yamaguchi Local Campaign</span>
-    <span class="cb-flag" data-lang="ko" data-lang-class>🌿 야마구치 응원 캠페인</span>
-    <span class="cb-flag" data-lang="es" data-lang-class>🌿 Campaña Local Yamaguchi</span>
+    <span class="cb-flag" data-lang="ja" data-lang-class>🎯 モニター募集中（先着3名）</span>
+    <span class="cb-flag" data-lang="en" data-lang-class>🎯 Monitor Recruitment — First 3 only</span>
+    <span class="cb-flag" data-lang="ko" data-lang-class>🎯 모니터 모집 중 (선착순 3명)</span>
+    <span class="cb-flag" data-lang="es" data-lang-class>🎯 Monitores — Primeros 3 únicamente</span>
     <div class="cb-text">
-      <span data-lang="ja" data-lang-class>山口県内の方は、HPを<strong>¥20,000</strong>で制作します</span>
-      <span data-lang="en" data-lang-class>Based in Yamaguchi? Your website for <strong>¥20,000</strong></span>
-      <span data-lang="ko" data-lang-class>야마구치 거주자에게는 <strong>¥20,000</strong>으로 제작</span>
-      <span data-lang="es" data-lang-class>¿Vives en Yamaguchi? Tu web por <strong>¥20,000</strong></span>
+      <span data-lang="ja" data-lang-class>モニター価格で制作、<strong>実績掲載OKで割引あり</strong></span>
+      <span data-lang="en" data-lang-class>Monitor pricing — <strong>discount for portfolio use</strong></span>
+      <span data-lang="ko" data-lang-class>모니터 가격으로 제작, <strong>실적 게재 OK로 할인</strong></span>
+      <span data-lang="es" data-lang-class>Precio monitor — <strong>descuento si usamos como portfolio</strong></span>
       <br>
-      <span data-lang="ja" data-lang-class><span>（予約・決済システム付きは¥30,000）— 地域応援限定価格</span></span>
-      <span data-lang="en" data-lang-class><span>(With booking/payment system: ¥30,000) — Local support pricing</span></span>
-      <span data-lang="ko" data-lang-class><span>(예약·결제 시스템 포함 ¥30,000) — 지역 응원 한정 가격</span></span>
-      <span data-lang="es" data-lang-class><span>(Con sistema de reservas/pagos: ¥30,000) — Precio de apoyo local</span></span>
+      <span data-lang="ja" data-lang-class><span>個人ページ＋LINE通知 ¥26,000〜 / 予約付き ¥39,000〜</span></span>
+      <span data-lang="en" data-lang-class><span>Personal page + LINE notice ¥26,000〜 / With booking ¥39,000〜</span></span>
+      <span data-lang="ko" data-lang-class><span>개인 페이지+LINE 알림 ¥26,000〜 / 예약 포함 ¥39,000〜</span></span>
+      <span data-lang="es" data-lang-class><span>Página personal + notif. LINE ¥26,000〜 / Con reservas ¥39,000〜</span></span>
     </div>
   </div>
-  <a href="#campaign" class="cb-cta">
-    <span data-lang="ja" data-lang-class>詳細を見る →</span>
-    <span data-lang="en" data-lang-class>Learn more →</span>
-    <span data-lang="ko" data-lang-class>자세히 보기 →</span>
-    <span data-lang="es" data-lang-class>Ver más →</span>
+  <a href="https://jsproject.jp/monitor/" class="cb-cta" target="_blank" rel="noopener">
+    <span data-lang="ja" data-lang-class>モニターLPを見る →</span>
+    <span data-lang="en" data-lang-class>See monitor page →</span>
+    <span data-lang="ko" data-lang-class>모니터 페이지 보기 →</span>
+    <span data-lang="es" data-lang-class>Ver página monitor →</span>
   </a>
 </div>
 
@@ -623,34 +757,34 @@ span[data-lang].lang-active, a[data-lang].lang-active { display: inline; }
     </h1>
   </div>
 
-  <!-- Right panel -->
+  <!-- Right panel — Services updated to LP pricing -->
   <div class="hero-aside">
     <p class="hero-aside-label">SERVICES</p>
     <div class="hero-services">
       <div class="hero-svc">
         <div>
           <div class="hero-svc-name">
-            <span data-lang="ja" data-lang-class>個人HP / 企業HP</span>
-            <span data-lang="en" data-lang-class>Personal / Business site</span>
-            <span data-lang="ko" data-lang-class>개인 / 기업 홈페이지</span>
-            <span data-lang="es" data-lang-class>Web personal / empresarial</span>
+            <span data-lang="ja" data-lang-class>個人ページ + LINE自動通知</span>
+            <span data-lang="en" data-lang-class>Personal page + LINE notice</span>
+            <span data-lang="ko" data-lang-class>개인 페이지 + LINE 자동 알림</span>
+            <span data-lang="es" data-lang-class>Página personal + notif. LINE</span>
           </div>
           <div class="hero-svc-note">
-            <span data-lang="ja" data-lang-class>アーティスト・個人事業主・中小企業</span>
-            <span data-lang="en" data-lang-class>Artists, freelancers, small businesses</span>
-            <span data-lang="ko" data-lang-class>아티스트, 개인사업주, 중소기업</span>
-            <span data-lang="es" data-lang-class>Artistas, autónomos, pymes</span>
+            <span data-lang="ja" data-lang-class>プロフィール / サービス紹介 / 問い合わせ</span>
+            <span data-lang="en" data-lang-class>Profile / service / contact form</span>
+            <span data-lang="ko" data-lang-class>프로필 / 서비스 소개 / 문의 폼</span>
+            <span data-lang="es" data-lang-class>Perfil / servicios / formulario</span>
           </div>
         </div>
-        <div class="hero-svc-price">¥20,000〜</div>
+        <div class="hero-svc-price">¥26,000〜</div>
       </div>
       <div class="hero-svc">
         <div>
           <div class="hero-svc-name">
-            <span data-lang="ja" data-lang-class>予約・決済システム付き</span>
-            <span data-lang="en" data-lang-class>Booking + Payment system</span>
-            <span data-lang="ko" data-lang-class>예약·결제 시스템 포함</span>
-            <span data-lang="es" data-lang-class>Con reservas y pagos</span>
+            <span data-lang="ja" data-lang-class>予約ページ付き（自動通知あり）</span>
+            <span data-lang="en" data-lang-class>Booking page + auto notifications</span>
+            <span data-lang="ko" data-lang-class>예약 페이지 포함 (자동 알림)</span>
+            <span data-lang="es" data-lang-class>Con reservas + notificaciones auto</span>
           </div>
           <div class="hero-svc-note">
             <span data-lang="ja" data-lang-class>サロン・教室・カウンセリングに</span>
@@ -659,38 +793,45 @@ span[data-lang].lang-active, a[data-lang].lang-active { display: inline; }
             <span data-lang="es" data-lang-class>Salones, estudios, consultoría</span>
           </div>
         </div>
-        <div class="hero-svc-price">¥30,000〜</div>
+        <div class="hero-svc-price">¥39,000〜</div>
       </div>
-      <div class="hero-svc yamaguchi-svc">
+      <div class="hero-svc monitor-svc">
         <div>
           <div class="hero-svc-name">
-            <span data-lang="ja" data-lang-class>山口県応援価格 <span class="yamaguchi-tag">限定</span></span>
-            <span data-lang="en" data-lang-class>Yamaguchi Local Price <span class="yamaguchi-tag">LIMITED</span></span>
-            <span data-lang="ko" data-lang-class>야마구치 응원 가격 <span class="yamaguchi-tag">한정</span></span>
-            <span data-lang="es" data-lang-class>Precio Yamaguchi <span class="yamaguchi-tag">LIMITADO</span></span>
+            <span data-lang="ja" data-lang-class>モニター募集中 <span class="monitor-tag">先着3名</span></span>
+            <span data-lang="en" data-lang-class>Monitor Offer <span class="monitor-tag">FIRST 3</span></span>
+            <span data-lang="ko" data-lang-class>모니터 모집 중 <span class="monitor-tag">선착순 3명</span></span>
+            <span data-lang="es" data-lang-class>Oferta Monitor <span class="monitor-tag">PRIMEROS 3</span></span>
           </div>
-          <div class="hero-svc-note" style="color:var(--yamaguchi);">
-            <span data-lang="ja" data-lang-class>山口県内の方のみ適用</span>
-            <span data-lang="en" data-lang-class>Yamaguchi residents only</span>
-            <span data-lang="ko" data-lang-class>야마구치현 거주자만 적용</span>
-            <span data-lang="es" data-lang-class>Solo residentes de Yamaguchi</span>
+          <div class="hero-svc-note">
+            <span data-lang="ja" data-lang-class>実績掲載OKで割引 — フォーム5分で概算見積</span>
+            <span data-lang="en" data-lang-class>Discount for portfolio use — 5-min form for quote</span>
+            <span data-lang="ko" data-lang-class>실적 게재 OK로 할인 — 폼 5분으로 견적</span>
+            <span data-lang="es" data-lang-class>Descuento si usamos como portfolio — presupuesto en 5 min</span>
           </div>
         </div>
-        <div class="hero-svc-price" style="color:var(--yamaguchi);">¥20,000〜</div>
+        <div class="hero-svc-price" style="color:var(--rust);">
+          <a href="https://jsproject.jp/monitor/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">
+            <span data-lang="ja" data-lang-class>詳細 →</span>
+            <span data-lang="en" data-lang-class>Details →</span>
+            <span data-lang="ko" data-lang-class>상세 →</span>
+            <span data-lang="es" data-lang-class>Ver →</span>
+          </a>
+        </div>
       </div>
     </div>
     <div class="hero-badge-row">
       <span class="h-badge">
-        <span data-lang="ja" data-lang-class>期間限定</span>
-        <span data-lang="en" data-lang-class>Limited time</span>
-        <span data-lang="ko" data-lang-class>기간 한정</span>
-        <span data-lang="es" data-lang-class>Tiempo limitado</span>
+        <span data-lang="ja" data-lang-class>先着3名限定</span>
+        <span data-lang="en" data-lang-class>First 3 only</span>
+        <span data-lang="ko" data-lang-class>선착순 3명</span>
+        <span data-lang="es" data-lang-class>Solo primeros 3</span>
       </span>
       <span class="h-badge h-badge-ghost">
-        <span data-lang="ja" data-lang-class>最短1〜2日</span>
-        <span data-lang="en" data-lang-class>1–2 day delivery</span>
-        <span data-lang="ko" data-lang-class>최단 1〜2일 납품</span>
-        <span data-lang="es" data-lang-class>1–2 días entrega</span>
+        <span data-lang="ja" data-lang-class>5分で概算見積</span>
+        <span data-lang="en" data-lang-class>5-min estimate</span>
+        <span data-lang="ko" data-lang-class>5분 견적</span>
+        <span data-lang="es" data-lang-class>Presupuesto en 5 min</span>
       </span>
     </div>
   </div>
@@ -715,8 +856,8 @@ span[data-lang].lang-active, a[data-lang].lang-active { display: inline; }
 <!-- MARQUEE -->
 <div class="marquee-wrap">
   <div class="marquee-track">
-    <span>個人HP</span><span class="dot"> · </span><span>Artist Page</span><span class="dot"> · </span><span>예약 시스템</span><span class="dot"> · </span><span>Reservas online</span><span class="dot"> · </span><span>決済連携</span><span class="dot"> · </span><span>Booking System</span><span class="dot"> · </span><span>최단 1〜2일</span><span class="dot"> · </span><span>山口県応援</span><span class="dot"> · </span><span>Yamaguchi Local</span><span class="dot"> · </span>
-    <span>個人HP</span><span class="dot"> · </span><span>Artist Page</span><span class="dot"> · </span><span>예약 시스템</span><span class="dot"> · </span><span>Reservas online</span><span class="dot"> · </span><span>決済連携</span><span class="dot"> · </span><span>Booking System</span><span class="dot"> · </span><span>最短1〜2日</span><span class="dot"> · </span><span>山口県応援</span><span class="dot"> · </span><span>Yamaguchi Local</span><span class="dot"> · </span>
+    <span>モニター先着3名</span><span class="dot"> · </span><span>個人ページ</span><span class="dot"> · </span><span>LINE自動通知</span><span class="dot"> · </span><span>予約システム</span><span class="dot"> · </span><span>Monitor Offer</span><span class="dot"> · </span><span>¥26,000〜</span><span class="dot"> · </span><span>5分で概算見積</span><span class="dot"> · </span><span>先着3名限定</span><span class="dot"> · </span>
+    <span>モニター先着3名</span><span class="dot"> · </span><span>個人ページ</span><span class="dot"> · </span><span>LINE自動通知</span><span class="dot"> · </span><span>予約システム</span><span class="dot"> · </span><span>Monitor Offer</span><span class="dot"> · </span><span>¥26,000〜</span><span class="dot"> · </span><span>5分で概算見積</span><span class="dot"> · </span><span>先着3名限定</span><span class="dot"> · </span>
   </div>
 </div>
 
@@ -769,7 +910,7 @@ span[data-lang].lang-active, a[data-lang].lang-active { display: inline; }
   </div>
 </section>
 
-<!-- YAMAGUCHI CAMPAIGN -->
+<!-- YAMAGUCHI CAMPAIGN — updated to LP content -->
 <section id="campaign">
   <div class="campaign-inner">
     <div class="campaign-left">
@@ -780,58 +921,80 @@ span[data-lang].lang-active, a[data-lang].lang-active { display: inline; }
         <span data-lang="es" data-lang-class>Campaña Local Yamaguchi</span>
       </p>
       <h2 class="s-title">
-        <span data-lang="ja" data-lang-class>山口県内の方へ、<br>地域応援価格で<br>お作りします。</span>
-        <span data-lang="en" data-lang-class>Supporting local<br>businesses in<br>Yamaguchi.</span>
-        <span data-lang="ko" data-lang-class>야마구치현 분들께,<br>지역 응원 가격으로<br>제작합니다.</span>
-        <span data-lang="es" data-lang-class>Apoyando negocios<br>locales en<br>Yamaguchi.</span>
+        <span data-lang="ja" data-lang-class>やさしく、わかりやすく。<br>必要十分な<br>Webサイトを。</span>
+        <span data-lang="en" data-lang-class>Simple, clear,<br>just what<br>you need.</span>
+        <span data-lang="ko" data-lang-class>쉽고, 알기 쉽게.<br>필요충분한<br>웹사이트를.</span>
+        <span data-lang="es" data-lang-class>Sencillo, claro,<br>todo lo que<br>necesitas.</span>
       </h2>
       <p class="campaign-tagline">
-        <span data-lang="ja" data-lang-class>地元・山口県の個人事業主やアーティスト、小さなお店を応援したい。<br>そんな想いから、<strong>山口県内の方限定で特別価格</strong>をご用意しました。<br>県外の方も気軽にご相談ください。</span>
-        <span data-lang="en" data-lang-class>I want to support local freelancers, artists, and small shops in Yamaguchi.<br>That's why I offer a <strong>special rate exclusively for Yamaguchi residents.</strong><br>Outside Yamaguchi? Feel free to reach out too.</span>
-        <span data-lang="ko" data-lang-class>고향 야마구치현의 개인사업주·아티스트·소규모 가게를 응원하고 싶습니다.<br>그런 마음으로 <strong>야마구치현 거주자 한정 특별 가격</strong>을 준비했습니다.<br>현 외 분들도 편하게 상담해 주세요.</span>
-        <span data-lang="es" data-lang-class>Quiero apoyar a los autónomos, artistas y pequeños negocios locales de Yamaguchi.<br>Por eso ofrezco una <strong>tarifa especial exclusiva para residentes de Yamaguchi.</strong><br>¿Fuera de Yamaguchi? Escríbeme también.</span>
+        <span data-lang="ja" data-lang-class>まずは「だいたいの金額がわかる」と安心できますよね。<br><strong>フォーム回答（約5分）で、概算見積もりとおすすめプランを自動でお返しします。</strong><br>モニター枠（先着3名）が埋まり次第、通常価格へ切り替えます。</span>
+        <span data-lang="en" data-lang-class>It helps to know roughly what it'll cost before committing.<br><strong>Fill in the form (5 min) and get an automatic estimate + recommended plan.</strong><br>Monitor slots (first 3) switch to standard pricing when full.</span>
+        <span data-lang="ko" data-lang-class>먼저 '대략적인 금액'을 알면 안심할 수 있죠.<br><strong>폼 입력(약 5분)으로 견적과 추천 플랜을 자동으로 받아보세요.</strong><br>모니터 자리(선착순 3명)가 차면 정가로 전환됩니다.</span>
+        <span data-lang="es" data-lang-class>Ayuda saber el coste aproximado antes de comprometerse.<br><strong>Completa el formulario (5 min) y recibe un presupuesto automático + plan recomendado.</strong><br>Las plazas monitor (primeros 3) pasan a precio estándar al completarse.</span>
       </p>
-      <a href="#contact" class="campaign-cta">
-        <span data-lang="ja" data-lang-class>LINEで相談する →</span>
-        <span data-lang="en" data-lang-class>Chat on LINE →</span>
-        <span data-lang="ko" data-lang-class>LINE으로 상담하기 →</span>
-        <span data-lang="es" data-lang-class>Chatear en LINE →</span>
+      <a href="https://jsproject.jp/monitor/" class="campaign-cta" target="_blank" rel="noopener">
+        <span data-lang="ja" data-lang-class>モニターLPを見る →</span>
+        <span data-lang="en" data-lang-class>See monitor page →</span>
+        <span data-lang="ko" data-lang-class>모니터 페이지 보기 →</span>
+        <span data-lang="es" data-lang-class>Ver página monitor →</span>
       </a>
     </div>
     <div class="campaign-card">
-      <p class="cc-tag">YAMAGUCHI SPECIAL PRICE</p>
+      <p class="cc-tag">MONITOR SPECIAL PRICE</p>
       <p class="cc-title">
-        <span data-lang="ja" data-lang-class>🌿 山口県応援キャンペーン</span>
-        <span data-lang="en" data-lang-class>🌿 Yamaguchi Local Campaign</span>
-        <span data-lang="ko" data-lang-class>🌿 야마구치 응원 캠페인</span>
-        <span data-lang="es" data-lang-class>🌿 Campaña Local Yamaguchi</span>
+        <span data-lang="ja" data-lang-class>🎯 モニター募集（先着3名）</span>
+        <span data-lang="en" data-lang-class>🎯 Monitor Recruitment — First 3</span>
+        <span data-lang="ko" data-lang-class>🎯 모니터 모집 (선착순 3명)</span>
+        <span data-lang="es" data-lang-class>🎯 Monitores — Primeros 3</span>
       </p>
-      <div class="cc-price-row">
-        <span class="cc-old">¥50,000〜</span>
-        <span class="cc-new">¥20,000<small>〜</small></span>
+
+      <div style="margin: 1.2rem 0 0.4rem;">
+        <div style="font-family:'DM Mono',monospace;font-size:0.56rem;letter-spacing:0.18em;color:rgba(255,255,255,0.5);margin-bottom:0.3rem;">POPULAR</div>
+        <div style="font-size:0.86rem;font-weight:700;color:#fff;margin-bottom:0.2rem;">
+          <span data-lang="ja" data-lang-class>個人ページ + LINE自動通知</span>
+          <span data-lang="en" data-lang-class>Personal page + LINE notice</span>
+          <span data-lang="ko" data-lang-class>개인 페이지 + LINE 자동 알림</span>
+          <span data-lang="es" data-lang-class>Página personal + notif. LINE</span>
+        </div>
+        <div class="cc-new" style="font-size:2.2rem;">¥26,000<small>〜</small></div>
       </div>
-      <ul class="cc-list">
-        <li><span data-lang="ja" data-lang-class>個人HP・企業HP（〜5ページ）</span><span data-lang="en" data-lang-class>Personal / business site (up to 5 pages)</span><span data-lang="ko" data-lang-class>개인·기업 홈페이지 (최대 5페이지)</span><span data-lang="es" data-lang-class>Web personal / empresarial (hasta 5 páginas)</span></li>
-        <li><span data-lang="ja" data-lang-class>予約・決済システム付きは¥30,000〜</span><span data-lang="en" data-lang-class>With booking/payment system from ¥30,000</span><span data-lang="ko" data-lang-class>예약·결제 시스템 포함 ¥30,000〜</span><span data-lang="es" data-lang-class>Con sistema de reservas/pagos desde ¥30,000</span></li>
-        <li><span data-lang="ja" data-lang-class>スマホ対応・SEO・アナリティクス込み</span><span data-lang="en" data-lang-class>Mobile, SEO &amp; Analytics included</span><span data-lang="ko" data-lang-class>모바일·SEO·Analytics 포함</span><span data-lang="es" data-lang-class>Móvil, SEO y Analytics incluidos</span></li>
-        <li><span data-lang="ja" data-lang-class>納品後レクチャー &amp; LINEサポート</span><span data-lang="en" data-lang-class>Post-delivery walkthrough &amp; LINE support</span><span data-lang="ko" data-lang-class>납품 후 안내 &amp; LINE 지원</span><span data-lang="es" data-lang-class>Guía post-entrega &amp; soporte LINE</span></li>
+
+      <div style="margin: 0.8rem 0 0.4rem; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 0.8rem;">
+        <div style="font-family:'DM Mono',monospace;font-size:0.56rem;letter-spacing:0.18em;color:rgba(255,255,255,0.5);margin-bottom:0.3rem;">BOOKING</div>
+        <div style="font-size:0.86rem;font-weight:700;color:#fff;margin-bottom:0.2rem;">
+          <span data-lang="ja" data-lang-class>予約ページ付き（自動通知あり）</span>
+          <span data-lang="en" data-lang-class>Booking page + auto notifications</span>
+          <span data-lang="ko" data-lang-class>예약 페이지 포함 (자동 알림)</span>
+          <span data-lang="es" data-lang-class>Con reservas + notificaciones auto</span>
+        </div>
+        <div class="cc-new" style="font-size:2.2rem;">¥39,000<small>〜</small></div>
+      </div>
+
+      <ul class="cc-list" style="margin-top:1.2rem;">
+        <li><span data-lang="ja" data-lang-class>制作実績として掲載OK（URL or キャプチャ）</span><span data-lang="en" data-lang-class>Portfolio use OK (URL or screenshot)</span><span data-lang="ko" data-lang-class>제작 실적으로 게재 OK (URL 또는 캡처)</span><span data-lang="es" data-lang-class>Uso como portfolio OK (URL o captura)</span></li>
+        <li><span data-lang="ja" data-lang-class>フォーム回答（約5分）で概算見積を自動返送</span><span data-lang="en" data-lang-class>Fill form (5 min) → auto estimate sent</span><span data-lang="ko" data-lang-class>폼 입력(약 5분)으로 견적 자동 발송</span><span data-lang="es" data-lang-class>Formulario (5 min) → presupuesto automático</span></li>
+        <li><span data-lang="ja" data-lang-class>スマホ対応・SEO・公開後レクチャー込み</span><span data-lang="en" data-lang-class>Mobile, SEO &amp; post-launch walkthrough included</span><span data-lang="ko" data-lang-class>모바일·SEO·공개 후 안내 포함</span><span data-lang="es" data-lang-class>Móvil, SEO y guía post-lanzamiento incluidos</span></li>
+        <li><span data-lang="ja" data-lang-class>修正は原則2回まで（軽微な調整は柔軟に）</span><span data-lang="en" data-lang-class>Up to 2 revisions (minor tweaks flexible)</span><span data-lang="ko" data-lang-class>수정은 원칙 2회 (경미한 조정은 유연하게)</span><span data-lang="es" data-lang-class>Hasta 2 revisiones (ajustes menores flexibles)</span></li>
       </ul>
       <p class="cc-note">
-        <span data-lang="ja" data-lang-class>※ 山口県内に在住・在勤・在学の方が対象です。<br>※ 期間限定のキャンペーン価格です。</span>
-        <span data-lang="en" data-lang-class>※ Available to those living, working or studying in Yamaguchi.<br>※ Limited-time campaign pricing.</span>
-        <span data-lang="ko" data-lang-class>※ 야마구치현 거주·재직·재학 중인 분이 대상입니다.<br>※ 기간 한정 캠페인 가격입니다.</span>
-        <span data-lang="es" data-lang-class>※ Disponible para residentes, trabajadores o estudiantes en Yamaguchi.<br>※ Precio de campaña por tiempo limitado.</span>
+        <span data-lang="ja" data-lang-class>※ モニター枠が埋まり次第、通常価格へ切り替わります。<br>※ 特急対応（+¥10,000）はスケジュール状況によります。</span>
+        <span data-lang="en" data-lang-class>※ Monitor slots switch to standard pricing when full.<br>※ Express delivery (+¥10,000) subject to availability.</span>
+        <span data-lang="ko" data-lang-class>※ 모니터 자리가 차면 정가로 전환됩니다.<br>※ 특급 대응(+¥10,000)은 스케줄에 따라 다릅니다.</span>
+        <span data-lang="es" data-lang-class>※ Las plazas monitor pasan a precio estándar al completarse.<br>※ Entrega express (+¥10,000) según disponibilidad.</span>
       </p>
+      <a href="https://jsproject.jp/monitor/" class="cc-lp-btn" target="_blank" rel="noopener">
+        <span data-lang="ja" data-lang-class>モニターLPで応募する →</span>
+        <span data-lang="en" data-lang-class>Apply on monitor page →</span>
+        <span data-lang="ko" data-lang-class>모니터 페이지에서 응모 →</span>
+        <span data-lang="es" data-lang-class>Aplicar en página monitor →</span>
+      </a>
     </div>
   </div>
 </section>
 
-
 <!-- PROFILE -->
 <section id="profile">
   <div class="profile-grid fade-in">
-
-    <!-- LEFT: sticky card -->
     <div class="profile-left">
       <div class="profile-avatar">👤</div>
       <h2 class="profile-name">
@@ -859,7 +1022,6 @@ span[data-lang].lang-active, a[data-lang].lang-active { display: inline; }
       </div>
     </div>
 
-    <!-- RIGHT: story -->
     <div class="profile-right">
       <p class="s-label">PROFILE</p>
 
@@ -952,92 +1114,158 @@ span[data-lang].lang-active, a[data-lang].lang-active { display: inline; }
       <a href="https://jsproject0701-jpg.github.io/artist_hp/" target="_blank" rel="noopener" class="wcard wc1">
         <span class="wcard-icon">🎵</span>
         <div class="wcard-inner">
-        <div class="wcard-info">
+          <div class="wcard-info">
             <div class="wcard-cat">MUSICIAN / ARTIST</div>
-              <div class="wcard-name">
-                <span data-lang="ja" data-lang-class>ピアニスト個人HP（Sample）</span>
-                <span data-lang="en" data-lang-class>Pianist personal site (Sample)</span>
-                <span data-lang="ko" data-lang-class>피아니스트 개인 홈페이지 (Sample)</span>
-                <span data-lang="es" data-lang-class>Web pianista (Sample)</span>
-              </div>
-              <div class="wcard-desc">
-                <span data-lang="ja" data-lang-class>演奏活動・プロフィール・出演依頼導線を設計</span>
-                <span data-lang="en" data-lang-class>Performance, profile & booking flow</span>
-                <span data-lang="ko" data-lang-class>연주 활동·프로필·섭외 동선 설계</span>
-                <span data-lang="es" data-lang-class>Actuaciones, perfil y contacto</span>
-              </div>
+            <div class="wcard-name">
+              <span data-lang="ja" data-lang-class>ピアニスト個人HP（Sample）</span>
+              <span data-lang="en" data-lang-class>Pianist personal site (Sample)</span>
+              <span data-lang="ko" data-lang-class>피아니스트 개인 홈페이지 (Sample)</span>
+              <span data-lang="es" data-lang-class>Web pianista (Sample)</span>
+            </div>
+            <div class="wcard-desc">
+              <span data-lang="ja" data-lang-class>演奏活動・プロフィール・出演依頼導線を設計</span>
+              <span data-lang="en" data-lang-class>Performance, profile &amp; booking flow</span>
+              <span data-lang="ko" data-lang-class>연주 활동·프로필·섭외 동선 설계</span>
+              <span data-lang="es" data-lang-class>Actuaciones, perfil y contacto</span>
             </div>
           </div>
-    </a>
+        </div>
+      </a>
       <a href="https://jsproject0701-jpg.github.io/calendar-reservation-system/" target="_blank" rel="noopener" class="wcard wc2">
-        <span class="wcard-icon">🎵</span>
+        <span class="wcard-icon">📅</span>
         <div class="wcard-inner">
-        <div class="wcard-info">
+          <div class="wcard-info">
             <div class="wcard-cat">RESERVATION SYSTEM</div>
-              <div class="wcard-name">
-                <span data-lang="ja" data-lang-class>路上ライブ枠のカレンダー予約システム（Sample）</span>
-                <span data-lang="en" data-lang-class>Reservation system (Sample)</span>
-                <span data-lang="ko" data-lang-class>온라인 예약 시스템 (Sample)</span>
-                <span data-lang="es" data-lang-class>sistema de gestión de reservas (Sample)</span>
-              </div>
-              <div class="wcard-desc">
-                <span data-lang="ja" data-lang-class>アーティスト登録（ユーザ登録）後に予約をする動線を設計、管理画面も設定</span>
-                <span data-lang="en" data-lang-class>Design a user flow that enables reservations after artist (user) registration, and set up the admin dashboard.</span>
-                <span data-lang="ko" data-lang-class>아티스트 등록(사용자 등록) 이후 예약이 이루어지도록 사용자 흐름을 설계하고, 관리자 화면도 구축합니다</span>
-                <span data-lang="es" data-lang-class>Diseñar el flujo de usuario para que se puedan realizar reservas después del registro de artistas (usuarios) y configurar el panel de administración</span>
-              </div>
+            <div class="wcard-name">
+              <span data-lang="ja" data-lang-class>路上ライブ枠のカレンダー予約システム（Sample）</span>
+              <span data-lang="en" data-lang-class>Reservation system (Sample)</span>
+              <span data-lang="ko" data-lang-class>온라인 예약 시스템 (Sample)</span>
+              <span data-lang="es" data-lang-class>Sistema de gestión de reservas (Sample)</span>
+            </div>
+            <div class="wcard-desc">
+              <span data-lang="ja" data-lang-class>アーティスト登録後に予約をする動線を設計、管理画面も設定</span>
+              <span data-lang="en" data-lang-class>User flow for bookings after artist registration, with admin dashboard.</span>
+              <span data-lang="ko" data-lang-class>아티스트 등록 후 예약 흐름 설계, 관리자 화면 구축</span>
+              <span data-lang="es" data-lang-class>Flujo de reservas tras registro de artistas y panel de administración</span>
             </div>
           </div>
-    </a>
-      
+        </div>
+      </a>
     </div>
     <p class="works-note"><span data-lang="ja" data-lang-class>掲載はイメージです。実績はお問い合わせ時にご紹介します。</span><span data-lang="en" data-lang-class>Shown for reference. Real portfolio shared on request.</span><span data-lang="ko" data-lang-class>이미지는 예시입니다. 실적은 문의 시 소개합니다.</span><span data-lang="es" data-lang-class>Imágenes de referencia. Portfolio real disponible al contactar.</span></p>
   </div>
 </section>
 
-<!-- PRICE -->
+<!-- PRICE — updated to LP pricing -->
 <section id="price">
   <div class="price-wrap fade-in">
     <p class="s-label">PRICE</p>
     <h2 class="s-title"><span data-lang="ja" data-lang-class>料金プラン</span><span data-lang="en" data-lang-class>Pricing</span><span data-lang="ko" data-lang-class>요금 플랜</span><span data-lang="es" data-lang-class>Precios</span></h2>
-    <div class="price-grid">
-      <div class="pcard">
-        <p class="p-limited"><span data-lang="ja" data-lang-class>期間限定価格</span><span data-lang="en" data-lang-class>Limited time</span><span data-lang="ko" data-lang-class>기간 한정</span><span data-lang="es" data-lang-class>Oferta temporal</span></p>
-        <p class="p-tag">PLAN 01</p>
-        <h3 class="p-name"><span data-lang="ja" data-lang-class>個人HP / 企業HP</span><span data-lang="en" data-lang-class>Personal / Business</span><span data-lang="ko" data-lang-class>개인 / 기업 홈페이지</span><span data-lang="es" data-lang-class>Web personal / empresarial</span></h3>
-        <p class="p-old">¥50,000〜</p>
-        <p class="p-num">¥20,000<span>〜</span></p>
-        <ul class="p-list">
-          <li><span data-lang="ja" data-lang-class>ページ数：〜5ページ</span><span data-lang="en" data-lang-class>Up to 5 pages</span><span data-lang="ko" data-lang-class>페이지 수: 최대 5페이지</span><span data-lang="es" data-lang-class>Hasta 5 páginas</span></li>
-          <li><span data-lang="ja" data-lang-class>スマホ対応・SEO基本設定</span><span data-lang="en" data-lang-class>Mobile &amp; basic SEO</span><span data-lang="ko" data-lang-class>모바일 대응·SEO 기본 설정</span><span data-lang="es" data-lang-class>Móvil y SEO básico</span></li>
-          <li><span data-lang="ja" data-lang-class>Googleアナリティクス設置</span><span data-lang="en" data-lang-class>Google Analytics setup</span><span data-lang="ko" data-lang-class>Google Analytics 설치</span><span data-lang="es" data-lang-class>Google Analytics</span></li>
-          <li><span data-lang="ja" data-lang-class>問い合わせフォーム</span><span data-lang="en" data-lang-class>Contact form</span><span data-lang="ko" data-lang-class>문의 폼</span><span data-lang="es" data-lang-class>Formulario de contacto</span></li>
-          <li><span data-lang="ja" data-lang-class>SNSリンク連携</span><span data-lang="en" data-lang-class>Social media links</span><span data-lang="ko" data-lang-class>SNS 링크 연동</span><span data-lang="es" data-lang-class>Links redes sociales</span></li>
-          <li><span data-lang="ja" data-lang-class>納品後レクチャー付き</span><span data-lang="en" data-lang-class>Post-delivery walkthrough</span><span data-lang="ko" data-lang-class>납품 후 안내 포함</span><span data-lang="es" data-lang-class>Guía post-entrega</span></li>
-        </ul>
-        <a href="#contact" class="p-btn"><span data-lang="ja" data-lang-class>LINEで相談する</span><span data-lang="en" data-lang-class>Chat on LINE</span><span data-lang="ko" data-lang-class>LINE으로 상담</span><span data-lang="es" data-lang-class>Contactar por LINE</span></a>
+
+    <!-- Monitor alert -->
+    <div class="monitor-alert">
+      <span class="monitor-alert-badge">
+        <span data-lang="ja" data-lang-class>🎯 モニター先着3名</span>
+        <span data-lang="en" data-lang-class>🎯 Monitor — First 3</span>
+        <span data-lang="ko" data-lang-class>🎯 모니터 선착순 3명</span>
+        <span data-lang="es" data-lang-class>🎯 Monitor — Primeros 3</span>
+      </span>
+      <div class="monitor-alert-text">
+        <span data-lang="ja" data-lang-class><strong>現在キャンペーン中！</strong> 実績掲載OKで割引、フォーム（5分）で概算見積を自動返送。モニター枠が埋まり次第、通常価格へ切り替わります。</span>
+        <span data-lang="en" data-lang-class><strong>Now on campaign!</strong> Discount for portfolio use. Fill the 5-min form for an automatic estimate. Slots switch to standard pricing when full.</span>
+        <span data-lang="ko" data-lang-class><strong>현재 캠페인 중!</strong> 실적 게재 OK로 할인, 폼(5분)으로 견적 자동 발송. 자리가 차면 정가로 전환됩니다.</span>
+        <span data-lang="es" data-lang-class><strong>¡Campaña activa!</strong> Descuento si usamos como portfolio. Rellena el formulario (5 min) para presupuesto automático. Cambia a precio estándar al completarse.</span>
       </div>
+      <a href="https://jsproject.jp/monitor/" class="monitor-alert-cta" target="_blank" rel="noopener">
+        <span data-lang="ja" data-lang-class>LPを見る →</span>
+        <span data-lang="en" data-lang-class>See LP →</span>
+        <span data-lang="ko" data-lang-class>LP 보기 →</span>
+        <span data-lang="es" data-lang-class>Ver LP →</span>
+      </a>
+    </div>
+
+    <div class="price-grid">
+      <!-- PLAN 01 -->
+      <div class="pcard">
+        <div class="p-monitor-badge">🎯 <span data-lang="ja" data-lang-class>モニター価格</span><span data-lang="en" data-lang-class>Monitor price</span><span data-lang="ko" data-lang-class>모니터 가격</span><span data-lang="es" data-lang-class>Precio monitor</span></div>
+        <p class="p-tag">PLAN 01 — POPULAR</p>
+        <h3 class="p-name">
+          <span data-lang="ja" data-lang-class>個人ページ +<br>LINE自動通知</span>
+          <span data-lang="en" data-lang-class>Personal page +<br>LINE notice</span>
+          <span data-lang="ko" data-lang-class>개인 페이지 +<br>LINE 자동 알림</span>
+          <span data-lang="es" data-lang-class>Página personal +<br>notif. LINE</span>
+        </h3>
+        <p class="p-num">¥26,000<span>〜</span></p>
+        <ul class="p-list">
+          <li><span data-lang="ja" data-lang-class>プロフィール / サービス紹介 / お問い合わせ</span><span data-lang="en" data-lang-class>Profile / service intro / contact</span><span data-lang="ko" data-lang-class>프로필 / 서비스 소개 / 문의</span><span data-lang="es" data-lang-class>Perfil / servicios / contacto</span></li>
+          <li><span data-lang="ja" data-lang-class>LINE自動通知つきフォーム</span><span data-lang="en" data-lang-class>LINE auto-notification form</span><span data-lang="ko" data-lang-class>LINE 자동 알림 폼</span><span data-lang="es" data-lang-class>Formulario con notif. LINE auto</span></li>
+          <li><span data-lang="ja" data-lang-class>スマホ対応・SEO基本設定</span><span data-lang="en" data-lang-class>Mobile &amp; basic SEO</span><span data-lang="ko" data-lang-class>모바일 대응·SEO 기본</span><span data-lang="es" data-lang-class>Móvil y SEO básico</span></li>
+          <li><span data-lang="ja" data-lang-class>Googleアナリティクス設置</span><span data-lang="en" data-lang-class>Google Analytics setup</span><span data-lang="ko" data-lang-class>Google Analytics 설치</span><span data-lang="es" data-lang-class>Google Analytics</span></li>
+          <li><span data-lang="ja" data-lang-class>公開後レクチャー付き</span><span data-lang="en" data-lang-class>Post-launch walkthrough</span><span data-lang="ko" data-lang-class>공개 후 안내 포함</span><span data-lang="es" data-lang-class>Guía post-lanzamiento</span></li>
+        </ul>
+        <a href="https://jsproject.jp/monitor/" class="p-btn" target="_blank" rel="noopener">
+          <span data-lang="ja" data-lang-class>モニターLPで応募する</span>
+          <span data-lang="en" data-lang-class>Apply on monitor page</span>
+          <span data-lang="ko" data-lang-class>모니터 페이지에서 응모</span>
+          <span data-lang="es" data-lang-class>Aplicar en página monitor</span>
+        </a>
+        <a href="#contact" class="p-lp-link">
+          <span data-lang="ja" data-lang-class>またはLINEで相談する</span>
+          <span data-lang="en" data-lang-class>Or chat on LINE</span>
+          <span data-lang="ko" data-lang-class>또는 LINE으로 상담</span>
+          <span data-lang="es" data-lang-class>O contactar por LINE</span>
+        </a>
+      </div>
+
+      <!-- PLAN 02 featured -->
       <div class="pcard featured">
-        <p class="p-limited"><span data-lang="ja" data-lang-class>期間限定価格</span><span data-lang="en" data-lang-class>Limited time</span><span data-lang="ko" data-lang-class>기간 한정</span><span data-lang="es" data-lang-class>Oferta temporal</span></p>
-        <p class="p-tag">PLAN 02</p>
-        <h3 class="p-name"><span data-lang="ja" data-lang-class>決済・予約システム付き</span><span data-lang="en" data-lang-class>With Booking + Payment</span><span data-lang="ko" data-lang-class>결제·예약 시스템 포함</span><span data-lang="es" data-lang-class>Con reservas y pagos</span></h3>
-        <p class="p-old">¥80,000〜</p>
-        <p class="p-num">¥30,000<span>〜</span></p>
+        <div class="p-monitor-badge" style="background:#E8C87A;color:var(--ink);">🎯 <span data-lang="ja" data-lang-class>モニター価格</span><span data-lang="en" data-lang-class>Monitor price</span><span data-lang="ko" data-lang-class>모니터 가격</span><span data-lang="es" data-lang-class>Precio monitor</span></div>
+        <p class="p-tag">PLAN 02 — BOOKING</p>
+        <h3 class="p-name">
+          <span data-lang="ja" data-lang-class>予約ページ付き<br>（自動通知あり）</span>
+          <span data-lang="en" data-lang-class>Booking page<br>+ auto notifications</span>
+          <span data-lang="ko" data-lang-class>예약 페이지 포함<br>(자동 알림)</span>
+          <span data-lang="es" data-lang-class>Con reservas<br>+ notif. automáticas</span>
+        </h3>
+        <p class="p-num">¥39,000<span>〜</span></p>
         <ul class="p-list">
           <li><span data-lang="ja" data-lang-class>PLAN 01の全内容</span><span data-lang="en" data-lang-class>Everything in PLAN 01</span><span data-lang="ko" data-lang-class>PLAN 01 전체 내용</span><span data-lang="es" data-lang-class>Todo de PLAN 01</span></li>
-          <li><span data-lang="ja" data-lang-class>オンライン予約カレンダー</span><span data-lang="en" data-lang-class>Online booking calendar</span><span data-lang="ko" data-lang-class>온라인 예약 캘린더</span><span data-lang="es" data-lang-class>Calendario de reservas</span></li>
-          <li><span data-lang="ja" data-lang-class>Stripe / Square 決済連携</span><span data-lang="en" data-lang-class>Stripe / Square payment</span><span data-lang="ko" data-lang-class>Stripe / Square 결제 연동</span><span data-lang="es" data-lang-class>Pago Stripe / Square</span></li>
-          <li><span data-lang="ja" data-lang-class>予約確認メール自動送信</span><span data-lang="en" data-lang-class>Auto confirmation emails</span><span data-lang="ko" data-lang-class>예약 확인 메일 자동 발송</span><span data-lang="es" data-lang-class>Emails de confirmación automáticos</span></li>
-          <li><span data-lang="ja" data-lang-class>管理ダッシュボード付き</span><span data-lang="en" data-lang-class>Admin dashboard</span><span data-lang="ko" data-lang-class>관리 대시보드 포함</span><span data-lang="es" data-lang-class>Panel de administración</span></li>
-          <li><span data-lang="ja" data-lang-class>Googleカレンダー同期</span><span data-lang="en" data-lang-class>Google Calendar sync</span><span data-lang="ko" data-lang-class>Google 캘린더 동기화</span><span data-lang="es" data-lang-class>Sincronización Google Calendar</span></li>
+          <li><span data-lang="ja" data-lang-class>予約カレンダー / 時間枠</span><span data-lang="en" data-lang-class>Booking calendar / time slots</span><span data-lang="ko" data-lang-class>예약 캘린더 / 시간 단위</span><span data-lang="es" data-lang-class>Calendario de reservas / franjas</span></li>
+          <li><span data-lang="ja" data-lang-class>LINE / メール自動通知</span><span data-lang="en" data-lang-class>LINE / email auto notifications</span><span data-lang="ko" data-lang-class>LINE / 메일 자동 알림</span><span data-lang="es" data-lang-class>Notificaciones LINE / email auto</span></li>
+          <li><span data-lang="ja" data-lang-class>サロン・教室・カウンセリングなどに</span><span data-lang="en" data-lang-class>Salons, studios, counseling etc.</span><span data-lang="ko" data-lang-class>살롱·교실·카운슬링 등에</span><span data-lang="es" data-lang-class>Salones, estudios, consultoría etc.</span></li>
+          <li><span data-lang="ja" data-lang-class>「問い合わせ→予約」まで一括整備</span><span data-lang="en" data-lang-class>Full "inquiry → booking" flow</span><span data-lang="ko" data-lang-class>"문의→예약" 전체 흐름 구축</span><span data-lang="es" data-lang-class>Flujo completo "consulta → reserva"</span></li>
         </ul>
-        <a href="#contact" class="p-btn"><span data-lang="ja" data-lang-class>LINEで相談する</span><span data-lang="en" data-lang-class>Chat on LINE</span><span data-lang="ko" data-lang-class>LINE으로 상담</span><span data-lang="es" data-lang-class>Contactar por LINE</span></a>
+        <a href="https://jsproject.jp/monitor/" class="p-btn" target="_blank" rel="noopener">
+          <span data-lang="ja" data-lang-class>モニターLPで応募する</span>
+          <span data-lang="en" data-lang-class>Apply on monitor page</span>
+          <span data-lang="ko" data-lang-class>모니터 페이지에서 응모</span>
+          <span data-lang="es" data-lang-class>Aplicar en página monitor</span>
+        </a>
+        <a href="#contact" class="p-lp-link">
+          <span data-lang="ja" data-lang-class>またはLINEで相談する</span>
+          <span data-lang="en" data-lang-class>Or chat on LINE</span>
+          <span data-lang="ko" data-lang-class>또는 LINE으로 상담</span>
+          <span data-lang="es" data-lang-class>O contactar por LINE</span>
+        </a>
       </div>
+
+      <!-- PLAN 03 -->
       <div class="pcard">
         <p class="p-tag">PLAN 03</p>
-        <h3 class="p-name"><span data-lang="ja" data-lang-class>カスタム・ご相談</span><span data-lang="en" data-lang-class>Custom / Inquiry</span><span data-lang="ko" data-lang-class>커스텀·상담</span><span data-lang="es" data-lang-class>Personalizado</span></h3>
+        <h3 class="p-name">
+          <span data-lang="ja" data-lang-class>カスタム・ご相談</span>
+          <span data-lang="en" data-lang-class>Custom / Inquiry</span>
+          <span data-lang="ko" data-lang-class>커스텀·상담</span>
+          <span data-lang="es" data-lang-class>Personalizado</span>
+        </h3>
         <p class="p-old">&nbsp;</p>
-        <p class="p-num" style="font-size:1.65rem;"><span data-lang="ja" data-lang-class>要相談</span><span data-lang="en" data-lang-class>Quote</span><span data-lang="ko" data-lang-class>상담 후</span><span data-lang="es" data-lang-class>A consultar</span><span></span></p>
+        <p class="p-num" style="font-size:1.65rem;">
+          <span data-lang="ja" data-lang-class>要相談</span>
+          <span data-lang="en" data-lang-class>Quote</span>
+          <span data-lang="ko" data-lang-class>상담 후</span>
+          <span data-lang="es" data-lang-class>A consultar</span>
+          <span></span>
+        </p>
         <ul class="p-list">
           <li><span data-lang="ja" data-lang-class>EC・多機能ショップ</span><span data-lang="en" data-lang-class>E-commerce / full shop</span><span data-lang="ko" data-lang-class>EC·다기능 쇼핑몰</span><span data-lang="es" data-lang-class>Tienda online</span></li>
           <li><span data-lang="ja" data-lang-class>会員制サイト</span><span data-lang="en" data-lang-class>Membership site</span><span data-lang="ko" data-lang-class>회원제 사이트</span><span data-lang="es" data-lang-class>Sitio de membresía</span></li>
@@ -1045,9 +1273,31 @@ span[data-lang].lang-active, a[data-lang].lang-active { display: inline; }
           <li><span data-lang="ja" data-lang-class>既存サイトのリニューアル</span><span data-lang="en" data-lang-class>Site redesign</span><span data-lang="ko" data-lang-class>기존 사이트 리뉴얼</span><span data-lang="es" data-lang-class>Rediseño de web existente</span></li>
           <li><span data-lang="ja" data-lang-class>継続保守・更新代行</span><span data-lang="en" data-lang-class>Ongoing maintenance</span><span data-lang="ko" data-lang-class>지속 유지보수·업데이트 대행</span><span data-lang="es" data-lang-class>Mantenimiento continuo</span></li>
         </ul>
-        <a href="#contact" class="p-btn"><span data-lang="ja" data-lang-class>LINEで相談する</span><span data-lang="en" data-lang-class>Chat on LINE</span><span data-lang="ko" data-lang-class>LINE으로 상담</span><span data-lang="es" data-lang-class>Contactar por LINE</span></a>
+        <a href="#contact" class="p-btn">
+          <span data-lang="ja" data-lang-class>LINEで相談する</span>
+          <span data-lang="en" data-lang-class>Chat on LINE</span>
+          <span data-lang="ko" data-lang-class>LINE으로 상담</span>
+          <span data-lang="es" data-lang-class>Contactar por LINE</span>
+        </a>
       </div>
     </div>
+
+    <!-- LP link note -->
+    <div class="price-lp-note">
+      <div class="price-lp-note-text">
+        <span data-lang="ja" data-lang-class><strong>フォーム（約5分）で概算見積を自動取得できます。</strong><br>モニターLPでは料金の目安・制作の流れ・よくある質問をまとめています。</span>
+        <span data-lang="en" data-lang-class><strong>Get an automatic estimate by filling the form (5 min).</strong><br>The monitor LP covers pricing, process, and FAQs.</span>
+        <span data-lang="ko" data-lang-class><strong>폼(약 5분)으로 견적을 자동으로 받을 수 있습니다.</strong><br>모니터 LP에서 요금 목안·제작 흐름·FAQ를 확인할 수 있습니다.</span>
+        <span data-lang="es" data-lang-class><strong>Consigue un presupuesto automático con el formulario (5 min).</strong><br>La LP monitor cubre precios, proceso y preguntas frecuentes.</span>
+      </div>
+      <a href="https://jsproject.jp/monitor/" class="price-lp-btn" target="_blank" rel="noopener">
+        <span data-lang="ja" data-lang-class>モニターLPを見る →</span>
+        <span data-lang="en" data-lang-class>See monitor LP →</span>
+        <span data-lang="ko" data-lang-class>모니터 LP 보기 →</span>
+        <span data-lang="es" data-lang-class>Ver monitor LP →</span>
+      </a>
+    </div>
+
   </div>
 </section>
 
@@ -1060,22 +1310,22 @@ span[data-lang].lang-active, a[data-lang].lang-active { display: inline; }
       <div class="flow-item">
         <span class="flow-num">STEP 01</span>
         <div>
-          <div class="flow-title"><span data-lang="ja" data-lang-class>LINEで気軽にご連絡</span><span data-lang="en" data-lang-class>Drop a LINE message</span><span data-lang="ko" data-lang-class>LINE으로 편하게 연락</span><span data-lang="es" data-lang-class>Escríbeme por LINE</span></div>
-          <div class="flow-body"><span data-lang="ja" data-lang-class>ざっくりしたイメージでOK。「HPを作りたい」から始めましょう。</span><span data-lang="en" data-lang-class>A rough idea is fine. Just say "I want a website" and we go from there.</span><span data-lang="ko" data-lang-class>대략적인 이미지로 OK. "홈페이지를 만들고 싶다"부터 시작합시다.</span><span data-lang="es" data-lang-class>Con una idea aproximada basta. "Quiero una web" ya es suficiente para empezar.</span></div>
+          <div class="flow-title"><span data-lang="ja" data-lang-class>フォーム回答（約5分）</span><span data-lang="en" data-lang-class>Fill the form (5 min)</span><span data-lang="ko" data-lang-class>폼 입력 (약 5분)</span><span data-lang="es" data-lang-class>Rellena el formulario (5 min)</span></div>
+          <div class="flow-body"><span data-lang="ja" data-lang-class>目的・ページ数・予約/通知の有無を入力するだけ。LINEでの相談でも大歓迎。</span><span data-lang="en" data-lang-class>Enter purpose, page count, booking/notification needs. LINE chat also welcome.</span><span data-lang="ko" data-lang-class>목적·페이지 수·예약/알림 유무를 입력하면 됩니다. LINE 상담도 환영.</span><span data-lang="es" data-lang-class>Indica objetivo, páginas, reservas/notificaciones. También por LINE.</span></div>
         </div>
       </div>
       <div class="flow-item">
         <span class="flow-num">STEP 02</span>
         <div>
-          <div class="flow-title"><span data-lang="ja" data-lang-class>ヒアリング（30〜60分）</span><span data-lang="en" data-lang-class>Brief (30–60 min)</span><span data-lang="ko" data-lang-class>히어링 (30〜60분)</span><span data-lang="es" data-lang-class>Briefing (30–60 min)</span></div>
-          <div class="flow-body"><span data-lang="ja" data-lang-class>HPの目的・ターゲット・目指す役割を丁寧にお聞きします。</span><span data-lang="en" data-lang-class>We talk through purpose, audience, and goals for your site.</span><span data-lang="ko" data-lang-class>홈페이지의 목적·타겟·역할을 꼼꼼히 여쭤봅니다.</span><span data-lang="es" data-lang-class>Hablamos de objetivos, audiencia y el rol de tu web.</span></div>
+          <div class="flow-title"><span data-lang="ja" data-lang-class>概算見積 + ご提案</span><span data-lang="en" data-lang-class>Estimate + proposal</span><span data-lang="ko" data-lang-class>견적 + 제안</span><span data-lang="es" data-lang-class>Presupuesto + propuesta</span></div>
+          <div class="flow-body"><span data-lang="ja" data-lang-class>内容に合わせた金額とおすすめプランを自動でお返しします。</span><span data-lang="en" data-lang-class>An automatic estimate and recommended plan based on your needs.</span><span data-lang="ko" data-lang-class>내용에 맞는 금액과 추천 플랜을 자동으로 발송합니다.</span><span data-lang="es" data-lang-class>Presupuesto automático y plan recomendado según tus necesidades.</span></div>
         </div>
       </div>
       <div class="flow-item">
         <span class="flow-num">STEP 03</span>
         <div>
-          <div class="flow-title"><span data-lang="ja" data-lang-class>お見積り・ご提案</span><span data-lang="en" data-lang-class>Quote + proposal</span><span data-lang="ko" data-lang-class>견적·제안</span><span data-lang="es" data-lang-class>Presupuesto y propuesta</span></div>
-          <div class="flow-body"><span data-lang="ja" data-lang-class>最適なプランと費用・納期をご提案。納得いただいてからご契約。</span><span data-lang="en" data-lang-class>I'll suggest the best plan, cost, and timeline. No contract until you're happy.</span><span data-lang="ko" data-lang-class>최적 플랜과 비용·납기를 제안합니다. 납득 후 계약.</span><span data-lang="es" data-lang-class>Propongo el mejor plan, coste y plazo. Sin contrato hasta que estés conforme.</span></div>
+          <div class="flow-title"><span data-lang="ja" data-lang-class>すり合わせ（15〜30分）</span><span data-lang="en" data-lang-class>Alignment (15–30 min)</span><span data-lang="ko" data-lang-class>조율 (15〜30분)</span><span data-lang="es" data-lang-class>Alineación (15–30 min)</span></div>
+          <div class="flow-body"><span data-lang="ja" data-lang-class>迷いが出やすいところだけ確認して、内容を確定します。</span><span data-lang="en" data-lang-class>We clarify only the points that tend to cause confusion, then confirm.</span><span data-lang="ko" data-lang-class>헷갈리기 쉬운 부분만 확인하고 내용을 확정합니다.</span><span data-lang="es" data-lang-class>Solo clarificamos los puntos confusos y confirmamos.</span></div>
         </div>
       </div>
       <div class="flow-item">
@@ -1091,8 +1341,8 @@ span[data-lang].lang-active, a[data-lang].lang-active { display: inline; }
       <div class="flow-item">
         <span class="flow-num">STEP 05</span>
         <div>
-          <div class="flow-title"><span data-lang="ja" data-lang-class>納品・レクチャー</span><span data-lang="en" data-lang-class>Delivery + walkthrough</span><span data-lang="ko" data-lang-class>납품·안내</span><span data-lang="es" data-lang-class>Entrega + guía</span></div>
-          <div class="flow-body"><span data-lang="ja" data-lang-class>完成後は更新方法を丁寧にご説明。納品後もLINEでいつでもどうぞ。</span><span data-lang="en" data-lang-class>I walk you through how to update your site. LINE support continues after.</span><span data-lang="ko" data-lang-class>완성 후 업데이트 방법을 안내합니다. 납품 후에도 LINE으로 언제든지.</span><span data-lang="es" data-lang-class>Te explico cómo actualizar tu web. Soporte por LINE continúa después.</span></div>
+          <div class="flow-title"><span data-lang="ja" data-lang-class>公開・レクチャー</span><span data-lang="en" data-lang-class>Launch + walkthrough</span><span data-lang="ko" data-lang-class>공개·안내</span><span data-lang="es" data-lang-class>Lanzamiento + guía</span></div>
+          <div class="flow-body"><span data-lang="ja" data-lang-class>公開後は更新方法をレクチャー。LINEでのサポートも続きます。</span><span data-lang="en" data-lang-class>I walk you through updates after launch. LINE support continues.</span><span data-lang="ko" data-lang-class>공개 후 업데이트 방법을 안내합니다. LINE 지원도 계속됩니다.</span><span data-lang="es" data-lang-class>Te explico las actualizaciones tras el lanzamiento. Soporte LINE continúa.</span></div>
         </div>
       </div>
     </div>
@@ -1116,22 +1366,57 @@ span[data-lang].lang-active, a[data-lang].lang-active { display: inline; }
       <span data-lang="ko" data-lang-class>"홈페이지는 어디서부터 시작하면 될까요?" "예산이 걱정돼요…"<br>어떤 작은 질문이라도 편하게 메시지 주세요.<br>보통 24시간 이내에 답장드립니다.</span>
       <span data-lang="es" data-lang-class>"¿Por dónde empiezo?" "Me preocupa el presupuesto…"<br>Cualquier pregunta es bienvenida—solo escríbeme.<br>Suelo responder en 24 horas.</span>
     </p>
-    <!-- ▼ 自身のLINEアカウントURLに変更してください -->
-    <a href="https://lin.ee/XXXXXXX" class="line-btn" target="_blank" rel="noopener">
+    <button onclick="openQR()" class="line-btn">
       <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.145 2 11.243c0 4.018 2.524 7.456 6.174 8.933l-.39 1.434c-.036.134.015.277.131.359a.336.336 0 0 0 .37.011l1.681-1.002c.67.117 1.357.178 2.034.178 5.523 0 10-4.145 10-9.913C22 6.145 17.523 2 12 2zm-3.08 12.875H7.052V9.344h1.868v5.531zm3.71 0h-1.815v-3.578l-1.78 3.578H9.21V9.344h1.815v3.506l1.755-3.506h1.85v5.531zm4.456-4.022h-1.813v.849h1.813v1.513h-1.813v.849h1.813v1.511h-3.327V9.344h3.327v1.509z"/></svg>
       <span data-lang="ja" data-lang-class>LINEで無料相談する</span>
       <span data-lang="en" data-lang-class>Free chat on LINE</span>
       <span data-lang="ko" data-lang-class>LINE으로 무료 상담</span>
       <span data-lang="es" data-lang-class>Consulta gratis por LINE</span>
-    </a>
+    </button>
     <p class="contact-note">
-      <span data-lang="ja" data-lang-class>ボタンをタップするとLINEが開きます</span>
-      <span data-lang="en" data-lang-class>Tap the button to open LINE</span>
-      <span data-lang="ko" data-lang-class>버튼을 누르면 LINE이 열립니다</span>
-      <span data-lang="es" data-lang-class>Toca el botón para abrir LINE</span>
+      <span data-lang="ja" data-lang-class>ボタンをタップするとQRコードが表示されます</span>
+      <span data-lang="en" data-lang-class>Tap the button to show the LINE QR code</span>
+      <span data-lang="ko" data-lang-class>버튼을 누르면 QR 코드가 표시됩니다</span>
+      <span data-lang="es" data-lang-class>Toca el botón para mostrar el código QR de LINE</span>
     </p>
   </div>
 </section>
+
+<!-- QR MODAL -->
+<div class="qr-overlay" id="qrOverlay" role="dialog" aria-modal="true" aria-label="LINE QRコード">
+  <div class="qr-modal" id="qrModal">
+    <button class="qr-close" id="qrClose" aria-label="閉じる">✕</button>
+    <p class="qr-label">CONTACT VIA LINE</p>
+    <h2 class="qr-title">
+      <span data-lang="ja" data-lang-class>QRコードを読み取って<br>友だち追加</span>
+      <span data-lang="en" data-lang-class>Scan QR code<br>to add on LINE</span>
+      <span data-lang="ko" data-lang-class>QR 코드를 스캔해서<br>친구 추가</span>
+      <span data-lang="es" data-lang-class>Escanea el QR<br>para agregar en LINE</span>
+    </h2>
+    <div class="qr-img-wrap">
+      <canvas id="qrCanvas"></canvas>
+    </div>
+    <p class="qr-sub">
+      <span data-lang="ja" data-lang-class>カメラでQRコードを読み取るか、<br>下のボタンからLINEを開いてください。</span>
+      <span data-lang="en" data-lang-class>Scan with your camera, or tap<br>the button below to open LINE.</span>
+      <span data-lang="ko" data-lang-class>카메라로 QR 코드를 스캔하거나<br>아래 버튼으로 LINE을 열어주세요.</span>
+      <span data-lang="es" data-lang-class>Escanea con la cámara o pulsa<br>el botón para abrir LINE.</span>
+    </p>
+    <a href="https://lin.ee/XXXXXXX" class="qr-direct-btn" target="_blank" rel="noopener" id="qrDirectBtn">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.145 2 11.243c0 4.018 2.524 7.456 6.174 8.933l-.39 1.434c-.036.134.015.277.131.359a.336.336 0 0 0 .37.011l1.681-1.002c.67.117 1.357.178 2.034.178 5.523 0 10-4.145 10-9.913C22 6.145 17.523 2 12 2zm-3.08 12.875H7.052V9.344h1.868v5.531zm3.71 0h-1.815v-3.578l-1.78 3.578H9.21V9.344h1.815v3.506l1.755-3.506h1.85v5.531zm4.456-4.022h-1.813v.849h1.813v1.513h-1.813v.849h1.813v1.511h-3.327V9.344h3.327v1.509z"/></svg>
+      <span data-lang="ja" data-lang-class>LINEアプリで開く</span>
+      <span data-lang="en" data-lang-class>Open in LINE app</span>
+      <span data-lang="ko" data-lang-class>LINE 앱으로 열기</span>
+      <span data-lang="es" data-lang-class>Abrir en app LINE</span>
+    </a>
+    <p class="qr-note">
+      <span data-lang="ja" data-lang-class>通常24時間以内にお返事します</span>
+      <span data-lang="en" data-lang-class>Usually replies within 24 hours</span>
+      <span data-lang="ko" data-lang-class>보통 24시간 이내에 답장드립니다</span>
+      <span data-lang="es" data-lang-class>Respondo normalmente en 24 horas</span>
+    </p>
+  </div>
+</div>
 
 <!-- FOOTER -->
 <footer>
@@ -1140,33 +1425,25 @@ span[data-lang].lang-active, a[data-lang].lang-active { display: inline; }
   <span>Yamaguchi, Japan</span>
 </footer>
 
+<!-- QR Code library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
 <script>
-// ── LANGUAGE SWITCHER ──────────────────────────────────────────
 const LANGS = ['ja','en','ko','es'];
 let currentLang = 'ja';
 
+// ── LINE URL（ここを実際のURLに変更）──
+const LINE_URL = 'https://lin.ee/XXXXXXX';
+
 function setLang(lang) {
   currentLang = lang;
-
-  // Update html lang attribute
   document.documentElement.lang = lang;
-
-  // Update button states
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.target === lang);
   });
-
-  // Show/hide [data-lang] elements
-  // Block-level elements
   document.querySelectorAll('[data-lang]').forEach(el => {
-    if (el.dataset.lang === lang) {
-      el.classList.add('lang-active');
-    } else {
-      el.classList.remove('lang-active');
-    }
+    el.classList.toggle('lang-active', el.dataset.lang === lang);
   });
-
-  // Update page title
   const titles = {
     ja: 'WEB STUDIO JS PROJECT — オーダーメイドWebサイト制作',
     en: 'WEB STUDIO JS PROJECT — Bespoke Website Design',
@@ -1176,11 +1453,7 @@ function setLang(lang) {
   document.title = titles[lang];
 }
 
-// Handle [data-lang-class] inline spans (campaign banner uses different attr)
-// Re-use same data-lang for all inline; CSS handles display:inline vs display:block
-// Init
 setLang('ja');
-
 document.querySelectorAll('.lang-btn').forEach(btn => {
   btn.addEventListener('click', () => setLang(btn.dataset.target));
 });
@@ -1201,6 +1474,46 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     const t = document.querySelector(a.getAttribute('href'));
     if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
   });
+});
+
+// ── QR MODAL ──────────────────────────────────────────────────
+let qrGenerated = false;
+
+function openQR() {
+  const overlay = document.getElementById('qrOverlay');
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  // QR生成（初回のみ）
+  if (!qrGenerated) {
+    const canvas = document.getElementById('qrCanvas');
+    QRCode.toCanvas(canvas, LINE_URL, {
+      width: 180,
+      margin: 1,
+      color: { dark: '#161410', light: '#ffffff' }
+    }, function(err) {
+      if (err) console.error('QR error:', err);
+    });
+    qrGenerated = true;
+  }
+
+  // GA イベント
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'open_line_qr', { event_category: 'contact', event_label: 'qr_modal' });
+  }
+}
+
+function closeQR() {
+  document.getElementById('qrOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('qrClose').addEventListener('click', closeQR);
+document.getElementById('qrOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closeQR();
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeQR();
 });
 </script>
 </body>
