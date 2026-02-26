@@ -152,24 +152,37 @@ nav.scrolled { border-bottom-color: var(--line); }
   min-height: 100vh;
   padding: 11rem 3rem 5rem;
   display: grid;
-  grid-template-rows: 1fr auto;
+  grid-template-columns: 1fr 38%;
+  grid-template-rows: auto auto;
+  column-gap: 4rem;
   position: relative;
   border-bottom: 1px solid var(--line);
 }
+.hero > div:first-of-type {
+  grid-column: 1;
+  grid-row: 1;
+  min-width: 0;
+}
+.hero-bottom {
+  grid-column: 1;
+  grid-row: 2;
+}
+.hero-aside {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  position: sticky;
+  top: 8rem;
+  align-self: start;
+  /* override absolute positioning */
+  position: sticky;
+  right: auto;
+  top: 8rem;
+  width: auto;
+  transform: none;
+  opacity: 0; animation: up 0.8s ease 0.65s forwards;
+}
 
-.hero-rule {
-  position: absolute; top: 6rem; right: 0;
-  width: 42%; height: calc(100% - 6rem);
-  border-left: 1px solid var(--line); pointer-events: none;
-}
-.hero-rule::before {
-  content: ''; position: absolute; top: 18%; left: -1px; right: 0;
-  height: 1px; background: var(--line);
-}
-.hero-rule::after {
-  content: ''; position: absolute; top: 60%; left: -1px; right: 0;
-  height: 1px; background: var(--line);
-}
+.hero-rule { display: none; }
 
 .hero-tag {
   font-family: 'DM Mono', monospace;
@@ -183,10 +196,11 @@ nav.scrolled { border-bottom-color: var(--line); }
 
 .hero-h1 {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(3.4rem, 7vw, 6.5rem);
+  font-size: clamp(2.8rem, 5.5vw, 6.5rem);
   font-weight: 300; line-height: 1.05;
-  letter-spacing: -0.02em; max-width: 720px;
+  letter-spacing: -0.02em;
   opacity: 0; animation: up 0.8s ease 0.35s forwards;
+  word-break: keep-all;
 }
 .hero-h1 em { font-style: italic; color: var(--rust); }
 
@@ -199,20 +213,14 @@ nav.scrolled { border-bottom-color: var(--line); }
   opacity: 0; animation: up 0.7s ease 0.55s forwards;
 }
 
-.hero-aside {
-  position: absolute; right: 3rem; top: 50%;
-  transform: translateY(-50%);
-  width: 34%;
-  opacity: 0; animation: up 0.8s ease 0.65s forwards;
-}
 .hero-aside-label {
   font-family: 'DM Mono', monospace;
   font-size: 0.56rem; letter-spacing: 0.28em; color: var(--mid); margin-bottom: 1.2rem;
 }
-.hero-services { display: flex; flex-direction: column; border-top: 1px solid var(--line); }
+.hero-services { display: flex; flex-direction: column; }
 .hero-svc {
   display: flex; justify-content: space-between; align-items: baseline;
-  padding: 0.85rem 0; border-bottom: 1px solid var(--line); font-size: 0.8rem;
+  padding: 0.85rem 0; font-size: 0.8rem;
 }
 .hero-svc-name { font-weight: 700; }
 .hero-svc-price { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--rust); letter-spacing: 0.04em; }
@@ -246,6 +254,7 @@ nav.scrolled { border-bottom-color: var(--line); }
   display: flex; align-items: flex-end; justify-content: space-between;
   padding-top: 4rem;
   opacity: 0; animation: up 0.7s ease 0.8s forwards;
+  align-self: end;
 }
 .hero-copy { font-size: 0.86rem; line-height: 2.1; color: var(--mid); font-weight: 300; max-width: 380px; }
 .hero-cta {
@@ -573,9 +582,20 @@ span[data-lang].lang-active, a[data-lang].lang-active { display: inline; }
 @media (max-width: 960px) {
   nav { padding: 1rem 1.5rem; top: 36px; }
   section { padding: 5rem 1.5rem; }
-  .hero { padding: 9rem 1.5rem 4rem; }
-  .hero-rule, .hero-aside { display: none; }
-  .hero-h1 { font-size: clamp(2.6rem, 9vw, 4.2rem); }
+  .hero {
+    padding: 9rem 1.5rem 4rem;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
+  .hero > div:first-of-type { grid-column: 1; grid-row: 1; }
+  .hero-aside {
+    grid-column: 1; grid-row: 2;
+    position: static;
+    width: 100%; margin-top: 3rem;
+    opacity: 1; animation: none;
+  }
+  .hero-bottom { grid-column: 1; grid-row: 3; }
+  .hero-h1 { font-size: clamp(2.6rem, 8vw, 4.5rem); }
   .about-grid, .campaign-inner, .profile-grid { grid-template-columns: 1fr; gap: 3rem; }
   .profile-left { position: static; }
   .works-grid { grid-template-columns: 1fr 1fr; }
@@ -587,6 +607,10 @@ span[data-lang].lang-active, a[data-lang].lang-active { display: inline; }
   .monitor-alert { flex-wrap: wrap; }
   .monitor-alert-cta { margin-left: 0; }
   .price-lp-note { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 1100px) and (min-width: 961px) {
+  .hero { grid-template-columns: 1fr 42%; }
+  .hero-h1 { font-size: clamp(2.4rem, 4vw, 5rem); }
 }
 @media (max-width: 600px) {
   .works-grid { grid-template-columns: 1fr; }
@@ -1402,7 +1426,7 @@ span[data-lang].lang-active, a[data-lang].lang-active { display: inline; }
       <span data-lang="ko" data-lang-class>카메라로 QR 코드를 스캔하거나<br>아래 버튼으로 LINE을 열어주세요.</span>
       <span data-lang="es" data-lang-class>Escanea con la cámara o pulsa<br>el botón para abrir LINE.</span>
     </p>
-    <a href="https://lin.ee/XXXXXXX" class="qr-direct-btn" target="_blank" rel="noopener" id="qrDirectBtn">
+    <a href="https://lin.ee/Uiy7pq6" class="qr-direct-btn" target="_blank" rel="noopener" id="qrDirectBtn">
       <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.145 2 11.243c0 4.018 2.524 7.456 6.174 8.933l-.39 1.434c-.036.134.015.277.131.359a.336.336 0 0 0 .37.011l1.681-1.002c.67.117 1.357.178 2.034.178 5.523 0 10-4.145 10-9.913C22 6.145 17.523 2 12 2zm-3.08 12.875H7.052V9.344h1.868v5.531zm3.71 0h-1.815v-3.578l-1.78 3.578H9.21V9.344h1.815v3.506l1.755-3.506h1.85v5.531zm4.456-4.022h-1.813v.849h1.813v1.513h-1.813v.849h1.813v1.511h-3.327V9.344h3.327v1.509z"/></svg>
       <span data-lang="ja" data-lang-class>LINEアプリで開く</span>
       <span data-lang="en" data-lang-class>Open in LINE app</span>
