@@ -56,7 +56,7 @@ body::before{
 /* Gentle blob */
 .blob{
   position:absolute;border-radius:40% 60% 55% 45%/50% 40% 60% 50%;
-  opacity:.3;filter:blur(2px);pointer-events:none;
+  opacity:.18;filter:blur(2.5px);pointer-events:none;
   animation:blobFloat 12s ease-in-out infinite;
 }
 .blob-gold{background:linear-gradient(135deg,var(--gold-lt),var(--gold),#c8a060)}
@@ -167,15 +167,15 @@ nav.scrolled{border-bottom-color:var(--rule)}
 
 .hero-h1{
   font-family:'Yomogi',cursive;
-  font-size:clamp(2.4rem,4.8vw,5.4rem);font-weight:700;line-height:1.15;color:var(--navy);
+  font-size:clamp(2.2rem,4.2vw,4.4rem);font-weight:700;line-height:1.25;color:var(--navy);
   opacity:0;animation:up .8s ease .35s forwards;
 }
 .hero-h1 em{font-style:normal;color:var(--rose);position:relative;}
 
 .hero-tagline{
   font-family:'Zen Kurenaido',cursive;
-  font-size:clamp(1rem,1.6vw,1.25rem);
-  color:var(--sage);margin-top:1.4rem;line-height:1.7;
+  font-size:clamp(.95rem,1.4vw,1.1rem);
+  color:var(--mid);margin-top:1.2rem;line-height:1.7;
   opacity:0;animation:up .7s ease .5s forwards;
 }
 
@@ -192,14 +192,14 @@ nav.scrolled{border-bottom-color:var(--rule)}
 
 .btn-primary{
   background:var(--navy);color:var(--cream);
-  padding:.9rem 2.2rem;font-family:'DM Mono',monospace;
+  padding:.85rem 2rem;font-family:'DM Mono',monospace;
   font-size:.64rem;letter-spacing:.14em;
   text-decoration:none;border-radius:2px;transition:all .28s;text-transform:uppercase;
 }
 .btn-primary:hover{background:var(--navy-lt);transform:translateY(-2px);box-shadow:0 10px 28px rgba(28,42,94,.2)}
 .btn-sage{
   border:1px solid var(--sage);color:var(--sage);
-  padding:.9rem 2.2rem;font-family:'DM Mono',monospace;
+  padding:.85rem 2rem;font-family:'DM Mono',monospace;
   font-size:.64rem;letter-spacing:.14em;
   text-decoration:none;border-radius:2px;transition:all .25s;text-transform:uppercase;
 }
@@ -264,8 +264,8 @@ nav.scrolled{border-bottom-color:var(--rule)}
 .bdg-sage{border:1px solid var(--sage);color:var(--sage)}
 
 .blob-h1{width:85px;height:70px;top:8%;right:3%;animation-delay:0s}
-.blob-h2{width:55px;height:48px;bottom:18%;right:-3%;animation-delay:-5s}
-.blob-h3{width:100px;height:18px;bottom:6%;left:25%;border-radius:50%;animation-delay:-8s}
+.blob-h2{width:40px;height:35px;bottom:18%;right:-1%;animation-delay:-5s}
+.blob-h3{width:70px;height:14px;bottom:6%;left:25%;border-radius:50%;animation-delay:-8s}
 
 /* ── MARQUEE ── */
 .mq{overflow:hidden;background:var(--navy);padding:.68rem 0;position:relative;z-index:1}
@@ -308,9 +308,9 @@ nav.scrolled{border-bottom-color:var(--rule)}
   color:var(--sage);text-transform:uppercase;margin-bottom:1.2rem;
 }
 .vision-q-text{
-  font-family:'Zen Kurenaido',cursive;
-  font-size:clamp(1.4rem,2.5vw,2rem);
-  color:var(--navy);line-height:1.7;margin-bottom:1.4rem;
+  font-family:'Yomogi',cursive;
+  font-size:clamp(2rem,3.8vw,4rem);
+  color:var(--navy);line-height:1.35;margin-bottom:1.6rem;
 }
 .vision-q-sub{
   font-size:.85rem;color:var(--mid);line-height:2.1;
