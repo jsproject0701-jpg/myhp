@@ -624,6 +624,49 @@ footer{
   .nav-links{display:none}
   .lang-btn{padding:0 .6rem;font-size:.5rem}
 }
+  .service-select{
+  padding:4rem 3rem;
+  background:var(--cream);
+}
+
+.service-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:2rem;
+  max-width:900px;
+  margin:0 auto;
+}
+
+.service-card{
+  display:block;
+  padding:2rem;
+  border:1px solid var(--rule);
+  text-decoration:none;
+  color:var(--navy);
+  transition:.3s;
+  background:#fff;
+}
+
+.service-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+.service-card h3{
+  font-size:1.4rem;
+  margin-bottom:.5rem;
+}
+
+.service-card p{
+  font-size:.8rem;
+  color:var(--mid);
+  margin-bottom:1rem;
+}
+
+.service-card.ai{
+  background:linear-gradient(135deg,#1c2a5e,#2d3f7a);
+  color:#fff;
+}
 </style>
 </head>
 <body>
@@ -683,454 +726,136 @@ footer{
 
 <!-- HERO -->
 <section class="hero">
-  <!-- decorative blobs -->
-  <div class="blob blob-hero-1"></div>
-  <div class="blob blob-hero-2"></div>
-  <div class="blob blob-hero-3"></div>
 
   <div class="hero-left">
-    <!-- JA eyebrow -->
-    <div class="hero-eyebrow" data-lang="ja">WEB CREATOR <span style="color:var(--mid)">/ YAMAGUCHI</span></div>
-    <div class="hero-eyebrow" data-lang="en">WEB CREATOR <span style="color:var(--mid)">/ YAMAGUCHI</span></div>
-    <div class="hero-eyebrow" data-lang="ko">웹 크리에이터 <span style="color:var(--mid)">/ 야마구치</span></div>
-    <div class="hero-eyebrow" data-lang="es">WEB CREATOR <span style="color:var(--mid)">/ YAMAGUCHI</span></div>
+
+    <div class="hero-eyebrow">WEB × AI / YAMAGUCHI</div>
 
     <h1 class="hero-h1">
-      <span data-lang="ja">
-        <span class="soft-copy">個人が、自分を<br><em>表現できる地域へ。</em></span>
+      <span class="soft-copy">
+        個人と企業の可能性を、<br>
+        <em>WebとAIで拡張する。</em>
       </span>
-      <span data-lang="en">Where local voices<br><em>find their place online.</em></span>
-      <span data-lang="ko">개인이, 자신을<br><em>표현할 수 있는 지역으로.</em></span>
-      <span data-lang="es">Donde las voces locales<br><em>encuentran su lugar.</em></span>
     </h1>
 
     <p class="hero-desc">
-      <span data-lang="ja">個人事業主・アーティスト・中小企業のための、あなただけの一点もの制作。テンプレートなし。ヒアリングから丁寧に、早く・安く・確実に。</span>
-      <span data-lang="en">Bespoke websites for freelancers, artists, and small businesses. No templates. Fast, affordable, and built around you.</span>
-      <span data-lang="ko">개인사업주·아티스트·중소기업을 위한 세상에 하나뿐인 홈페이지 제작. 템플릿 없음. 빠르고·저렴하게·확실하게.</span>
-      <span data-lang="es">Sitios web únicos para autónomos, artistas y pequeñas empresas. Sin plantillas. Rápido, asequible y hecho para ti.</span>
+      Webで「集客」、AIで「効率化」。<br>
+      売上と時間、両方を伸ばすための設計を行います。
     </p>
 
     <div class="hero-btns">
-      <a href="#contact" class="btn-fill">
-        <span data-lang="ja">無料相談はこちら →</span>
-        <span data-lang="en">Free consultation →</span>
-        <span data-lang="ko">무료 상담하기 →</span>
-        <span data-lang="es">Consulta gratis →</span>
-      </a>
-      <a href="#price" class="btn-ghost">
-        <span data-lang="ja">料金を見る</span>
-        <span data-lang="en">See pricing</span>
-        <span data-lang="ko">요금 보기</span>
-        <span data-lang="es">Ver precios</span>
-      </a>
+      <a href="#contact" class="btn-fill">3分で相談する →</a>
+      <a href="#price" class="btn-ghost">料金を見る</a>
     </div>
-  </div>
 
-  <!-- Services card -->
-  <div class="hero-aside">
-    <div class="h-card">
-      <p class="h-card-label">Services</p>
+    <!-- 🔥 サービス分岐（ここに移動） -->
+    <section class="service-select">
+      <div class="service-grid">
 
-      <div class="svc-row">
-        <div>
-          <div class="svc-name">
-            <span data-lang="ja">個人ページ + LINE自動通知</span>
-            <span data-lang="en">Personal page + LINE notice</span>
-            <span data-lang="ko">개인 페이지 + LINE 자동 알림</span>
-            <span data-lang="es">Página personal + notif. LINE</span>
-          </div>
-          <div class="svc-note">
-            <span data-lang="ja">プロフィール / サービス紹介 / 問い合わせ</span>
-            <span data-lang="en">Profile / service / contact form</span>
-            <span data-lang="ko">프로필 / 서비스 소개 / 문의 폼</span>
-            <span data-lang="es">Perfil / servicios / formulario</span>
-          </div>
-        </div>
-        <div class="svc-price">¥24,000〜</div>
+        <a href="#web" class="service-card">
+          <h3>Web制作</h3>
+          <p>HP制作・予約システム・LINE連携</p>
+          <span>詳しく見る →</span>
+        </a>
+
+        <a href="#ai" class="service-card ai">
+          <h3>AI導入</h3>
+          <p>業務効率化・自動化</p>
+          <span>詳しく見る →</span>
+        </a>
+
       </div>
+    </section>
 
-      <div class="svc-row">
-        <div>
-          <div class="svc-name">
-            <span data-lang="ja">予約ページ付き（自動通知あり）</span>
-            <span data-lang="en">Booking page + auto notifications</span>
-            <span data-lang="ko">예약 페이지 포함 (자동 알림)</span>
-            <span data-lang="es">Con reservas + notificaciones auto</span>
-          </div>
-          <div class="svc-note">
-            <span data-lang="ja">サロン・教室・カウンセリングに</span>
-            <span data-lang="en">Salons, studios, counseling</span>
-            <span data-lang="ko">살롱, 교실, 카운슬링에</span>
-            <span data-lang="es">Salones, estudios, consultoría</span>
-          </div>
-        </div>
-        <div class="svc-price">¥32,000〜</div>
-      </div>
-
-      <div class="monitor-row">
-        <div class="monitor-row-top">
-          <span class="mon-badge">
-            <span data-lang="ja">🎯 モニター先着3名</span>
-            <span data-lang="en">🎯 Monitor — First 3</span>
-            <span data-lang="ko">🎯 모니터 선착순 3명</span>
-            <span data-lang="es">🎯 Monitor — Primeros 3</span>
-          </span>
-          <a href="https://jsproject.jp/monitor/" class="mon-link" target="_blank" rel="noopener">
-            <span data-lang="ja">詳細 →</span>
-            <span data-lang="en">Details →</span>
-            <span data-lang="ko">상세 →</span>
-            <span data-lang="es">Ver →</span>
-          </a>
-        </div>
-        <div class="mon-sub">
-          <span data-lang="ja">実績掲載OKで割引 — フォーム5分で概算見積</span>
-          <span data-lang="en">Discount for portfolio use — 5-min form for quote</span>
-          <span data-lang="ko">실적 게재 OK로 할인 — 폼 5분으로 견적</span>
-          <span data-lang="es">Descuento si usamos como portfolio — presupuesto en 5 min</span>
-        </div>
-      </div>
-
-      <div class="badge-row">
-        <span class="bdg bdg-fill">
-          <span data-lang="ja">先着3名限定</span><span data-lang="en">First 3 only</span>
-          <span data-lang="ko">선착순 3명</span><span data-lang="es">Solo primeros 3</span>
-        </span>
-        <span class="bdg bdg-ghost">
-          <span data-lang="ja">5分で概算見積</span><span data-lang="en">5-min estimate</span>
-          <span data-lang="ko">5분 견적</span><span data-lang="es">Presupuesto en 5 min</span>
-        </span>
-      </div>
-    </div>
   </div>
 </section>
 
-<!-- MARQUEE -->
-<div class="mq">
-  <div class="mq-track">
-    <span class="mq-item">個人が、自分を表現できる地域へ<span class="dot">✦</span></span>
-    <span class="mq-item">Web制作<span class="dot">✦</span></span>
-    <span class="mq-item">最短1〜2日納品<span class="dot">✦</span></span>
-    <span class="mq-item">LINE自動通知<span class="dot">✦</span></span>
-    <span class="mq-item">予約システム<span class="dot">✦</span></span>
-    <span class="mq-item">モニター先着3名<span class="dot">✦</span></span>
-    <span class="mq-item">¥24,000〜<span class="dot">✦</span></span>
-    <span class="mq-item">YAMAGUCHI<span class="dot">✦</span></span>
-    <span class="mq-item">JS PROJECT<span class="dot">✦</span></span>
-    <!-- duplicate for seamless loop -->
-    <span class="mq-item">個人が、自分を表現できる地域へ<span class="dot">✦</span></span>
-    <span class="mq-item">Web制作<span class="dot">✦</span></span>
-    <span class="mq-item">最短1〜2日納品<span class="dot">✦</span></span>
-    <span class="mq-item">LINE自動通知<span class="dot">✦</span></span>
-    <span class="mq-item">予約システム<span class="dot">✦</span></span>
-    <span class="mq-item">モニター先着3名<span class="dot">✦</span></span>
-    <span class="mq-item">¥24,000〜<span class="dot">✦</span></span>
-    <span class="mq-item">YAMAGUCHI<span class="dot">✦</span></span>
-    <span class="mq-item">JS PROJECT<span class="dot">✦</span></span>
-  </div>
-</div>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="about-grid fu">
-    <div class="about-text">
-      <p class="s-label">About</p>
-      <h2 class="s-title">
-        <span data-lang="ja">早く、安く、<br><em>でも妥協しない。</em></span>
-        <span data-lang="en">Fast, affordable,<br><em>no compromises.</em></span>
-        <span data-lang="ko">빠르고, 저렴하게,<br><em>하지만 타협하지 않는다.</em></span>
-        <span data-lang="es">Rápido, asequible,<br><em>sin compromisos.</em></span>
-      </h2>
-      <p>
-        <span data-lang="ja">「なぜそのHPが必要か」「誰に何を伝えるか」——まずそこから一緒に考えます。<strong>テンプレートなし。あなただけの設計。</strong></span>
-        <span data-lang="en">"Why do you need a website?" "Who are you speaking to?"—we start there together. <strong>No templates. Built entirely around you.</strong></span>
-        <span data-lang="ko">"왜 홈페이지가 필요한가?" "누구에게 무엇을 전달하는가?"——함께 생각합니다. <strong>템플릿 없음. 당신만을 위한 설계.</strong></span>
-        <span data-lang="es">"¿Por qué necesitas una web?" "¿A quién le hablas?"—empezamos juntos desde ahí. <strong>Sin plantillas. Diseñado solo para ti.</strong></span>
-      </p>
-      <p>
-        <span data-lang="ja">最新のAIツールと高速フレームワークを駆使することで制作コストを大幅に削減。その分をクオリティとスピードに全振りします。</span>
-        <span data-lang="en">By leveraging cutting-edge AI tools and fast frameworks, production costs drop dramatically—meaning better quality and faster delivery for you.</span>
-        <span data-lang="ko">최신 AI 도구와 고속 프레임워크를 활용해 제작 비용을 대폭 절감. 그만큼 퀄리티와 스피드에 집중합니다.</span>
-        <span data-lang="es">Usando herramientas de IA y frameworks modernos, reducimos costes drásticamente—más calidad y entrega más rápida para ti.</span>
-      </p>
-    </div>
-    <div class="feats">
-      <div class="feat-row"><span class="feat-num">01</span><div>
-        <div class="feat-title"><span data-lang="ja">最短1〜2日納品</span><span data-lang="en">1–2 day delivery</span><span data-lang="ko">최단 1〜2일 납품</span><span data-lang="es">Entrega en 1–2 días</span></div>
-        <div class="feat-body"><span data-lang="ja">ヒアリング後、お急ぎなら最短1〜2日での即納に対応。</span><span data-lang="en">After the brief, urgent projects can be delivered in as little as 1–2 days.</span><span data-lang="ko">히어링 후 급한 경우 최단 1〜2일 내 납품 가능.</span><span data-lang="es">Después del briefing, proyectos urgentes en 1–2 días.</span></div>
-      </div></div>
-      <div class="feat-row"><span class="feat-num">02</span><div>
-        <div class="feat-title"><span data-lang="ja">オンライン / LINEでの相談可</span><span data-lang="en">Online / LINE consultation</span><span data-lang="ko">온라인 / LINE 상담 가능</span><span data-lang="es">Consulta online / por LINE</span></div>
-        <div class="feat-body"><span data-lang="ja">オンラインビデオ通話・LINEどちらでも対応。遠方の方もお気軽にどうぞ。</span><span data-lang="en">Video call or LINE—whichever works for you. Remote clients welcome.</span><span data-lang="ko">화상통화 또는 LINE, 편한 방법으로 상담.</span><span data-lang="es">Videollamada o LINE, lo que prefieras.</span></div>
-      </div></div>
-      <div class="feat-row"><span class="feat-num">03</span><div>
-        <div class="feat-title"><span data-lang="ja">予約・決済システムも込みも可</span><span data-lang="en">Booking &amp; payment system</span><span data-lang="ko">예약·결제 시스템 포함도 가능</span><span data-lang="es">Sistema de reservas y pagos</span></div>
-        <div class="feat-body"><span data-lang="ja">Stripe / Square 決済、カレンダー予約、Googleカレンダー連携など。</span><span data-lang="en">Stripe / Square payments, calendar booking, Google Calendar sync.</span><span data-lang="ko">Stripe / Square 결제, 캘린더 예약, Google 캘린더 연동.</span><span data-lang="es">Pagos Stripe / Square, reservas por calendario, sincronización Google.</span></div>
-      </div></div>
-      <div class="feat-row"><span class="feat-num">04</span><div>
-        <div class="feat-title"><span data-lang="ja">スマホ対応 &amp; SEO対策</span><span data-lang="en">Mobile-ready &amp; SEO</span><span data-lang="ko">모바일 대응 &amp; SEO</span><span data-lang="es">Móvil y SEO</span></div>
-        <div class="feat-body"><span data-lang="ja">全ページスマホ最適化済み。SEO基本設定・Googleアナリティクス設置もセット。</span><span data-lang="en">All pages mobile-optimized. Basic SEO &amp; Google Analytics included.</span><span data-lang="ko">전 페이지 모바일 최적화. SEO 기본 설정·Google Analytics 설치 포함.</span><span data-lang="es">Todas las páginas optimizadas para móvil. SEO básico y Google Analytics incluidos.</span></div>
-      </div></div>
-      <div class="feat-row"><span class="feat-num">05</span><div>
-        <div class="feat-title"><span data-lang="ja">納品後のサポートも安心</span><span data-lang="en">Post-delivery support</span><span data-lang="ko">납품 후 지원도 안심</span><span data-lang="es">Soporte post-entrega</span></div>
-        <div class="feat-body"><span data-lang="ja">更新方法を丁寧にレクチャー。「自分で運用できる」HPをお渡しします。</span><span data-lang="en">Full walkthrough of how to update your site—so you own it completely.</span><span data-lang="ko">업데이트 방법을 친절히 안내. '직접 운영할 수 있는' 홈페이지를 전달합니다.</span><span data-lang="es">Te explicamos cómo actualizar tu web—para que la domines tú mismo.</span></div>
-      </div></div>
-    </div>
-  </div>
-</section>
-
-<!-- PROFILE -->
-<section id="profile">
-  <div class="profile-grid fu">
-    <div class="profile-left">
-      <div class="profile-avatar">
-        <img src="images/avator.png" alt="JS PROJECT 代表">
-      </div>
-      <div class="profile-name">
-        <span data-lang="ja">Webクリエイター</span>
-        <span data-lang="en">Web Creator</span>
-        <span data-lang="ko">웹 크리에이터</span>
-        <span data-lang="es">Creadora Web</span>
-      </div>
-      <p class="profile-sub">WEB STUDIO JS PROJECT</p>
-      <div class="ptags">
-        <span class="ptag g">SE / Data Analyst</span>
-        <span class="ptag n">医療系IT</span>
-        <span class="ptag">山口県在住</span>
-        <span class="ptag r">Unica Anne</span>
-      </div>
-      <div class="pm">
-        <p class="pm-lbl">Music Artist</p>
-        <p class="pm-name">Unica Anne</p>
-        <p class="pm-desc">
-          <span data-lang="ja">表現者としての視点を、Web制作に活かしています。</span>
-          <span data-lang="en">Bringing an artist's perspective to every web project.</span>
-          <span data-lang="ko">표현자로서의 시각을 웹 제작에 살립니다.</span>
-          <span data-lang="es">Perspectiva artística aplicada a cada proyecto web.</span>
-        </p>
-      </div>
-    </div>
-
-    <div class="profile-right">
-      <p class="s-label">Profile</p>
-      <div class="pblock">
-        <div class="pblock-ico">💻</div>
-        <div>
-          <p class="pb-lbl">Career</p>
-          <p class="pb-title"><span data-lang="ja">SE → Webマーケティング × データアナリスト</span><span data-lang="en">SE → Web Marketing × Data Analyst</span><span data-lang="ko">SE → 웹마케팅 × 데이터 애널리스트</span><span data-lang="es">SE → Marketing Web × Analista de Datos</span></p>
-          <p class="pb-body"><span data-lang="ja">システムエンジニアとしてキャリアをスタートし、現在は<strong>大手医療系IT企業のWebマーケティング領域</strong>にてデータアナリストとして業務。技術とデータの両面から、<span class="hi">成果につながるWeb設計</span>を強みとしています。</span><span data-lang="en">Started as a systems engineer and now work as a <strong>data analyst in web marketing at a major medical IT company.</strong> My strength is <span class="hi">outcome-driven web design</span> at the intersection of technology and data.</span><span data-lang="ko">시스템 엔지니어로 커리어를 시작해, 현재는 <strong>대형 의료계 IT 기업의 웹마케팅 분야</strong>에서 데이터 애널리스트로 근무 중입니다. 기술과 데이터 양면에서 <span class="hi">성과로 이어지는 웹 설계</span>가 강점입니다.</span><span data-lang="es">Empecé como ingeniera de sistemas y ahora trabajo como <strong>analista de datos en marketing web en una gran empresa IT médica.</strong> Mi punto fuerte es el <span class="hi">diseño web orientado a resultados.</span></span></p>
-        </div>
-      </div>
-      <div class="pblock">
-        <div class="pblock-ico">🌿</div>
-        <div>
-          <p class="pb-lbl">Why Yamaguchi</p>
-          <p class="pb-title"><span data-lang="ja">2025年10月、家族で地元・山口県へ移住。</span><span data-lang="en">Moved back to Yamaguchi with family, October 2025.</span><span data-lang="ko">2025년 10월, 가족과 함께 고향 야마구치현으로 이주.</span><span data-lang="es">Regresé a Yamaguchi con mi familia en octubre de 2025.</span></p>
-          <p class="pb-body"><span data-lang="ja">県外・海外での生活を経て、改めて地域の温かさに触れました。<br>「<span class="hi-g">個人が、自分を表現できる地域へ。</span>」——その想いがこのサービスの出発点です。</span><span data-lang="en">After living away—overseas included—I rediscovered the warmth of this region.<br>"<span class="hi-g">Where local voices find their place online.</span>" That's where this service began.</span><span data-lang="ko">현 외 생활과 해외 생활을 거치며 지역의 따뜻함을 새삼 느꼈습니다.<br>"<span class="hi-g">개인이, 자신을 표현할 수 있는 지역으로.</span>"—그 마음이 이 서비스의 출발점입니다.</span><span data-lang="es">Tras vivir fuera—incluido el extranjero—redescubrí la calidez de esta región.<br>"<span class="hi-g">Donde las voces locales encuentran su lugar.</span>" De ahí nació este servicio.</span></p>
-        </div>
-      </div>
-      <div class="pblock">
-        <div class="pblock-ico">🎵</div>
-        <div>
-          <p class="pb-lbl">Music × Web</p>
-          <p class="pb-title"><span data-lang="ja">アーティスト名「Unica Anne」として音楽活動も。</span><span data-lang="en">Also active as music artist "Unica Anne".</span><span data-lang="ko">아티스트명 "Unica Anne"으로 음악 활동도 병행.</span><span data-lang="es">También activa como artista musical "Unica Anne".</span></p>
-          <p class="pb-body"><span data-lang="ja">表現者としての視点と感性が、Web制作にも活きています。<strong>「見せ方」「伝え方」</strong>にこだわるのは、作り手としての本能かもしれません。</span><span data-lang="en">An artist's sensibility flows into every project. My obsession with <strong>how things look and communicate</strong> is second nature as a creator.</span><span data-lang="ko">표현자로서의 시각과 감성이 웹 제작에도 살아납니다. <strong>"보여주는 방식", "전달하는 방식"</strong>에 집착하는 건 만드는 사람으로서의 본능인지도 모릅니다.</span><span data-lang="es">La sensibilidad artística impregna cada proyecto. Mi obsesión con <strong>cómo se ve y cómo comunica</strong> es instinto natural como creadora.</span></p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WORKS -->
-<section id="works">
+ <section>
   <div style="max-width:900px;margin:0 auto">
-    <p class="s-label">Works</p>
-    <h2 class="s-title"><span data-lang="ja">制作実績</span><span data-lang="en">Selected Work</span><span data-lang="ko">제작 실적</span><span data-lang="es">Trabajos</span></h2>
-    <div class="works-grid fu">
-      <a href="https://jsproject0701-jpg.github.io/artist_hp/" target="_blank" rel="noopener" class="wcard">
-        <span class="wcard-ico">🎵</span>
-        <div class="wcard-in">
-          <div class="wcard-info">
-            <div class="wcard-cat">Musician / Artist</div>
-            <div class="wcard-name"><span data-lang="ja">ピアニスト個人HP（Sample）</span><span data-lang="en">Pianist personal site (Sample)</span><span data-lang="ko">피아니스트 개인 홈페이지 (Sample)</span><span data-lang="es">Web pianista (Sample)</span></div>
-            <div class="wcard-desc"><span data-lang="ja">演奏活動・プロフィール・出演依頼導線を設計</span><span data-lang="en">Performance, profile &amp; booking flow</span><span data-lang="ko">연주 활동·프로필·섭외 동선 설계</span><span data-lang="es">Actuaciones, perfil y contacto</span></div>
-          </div>
-        </div>
-      </a>
-      <a href="https://jsproject0701-jpg.github.io/calendar-reservation-system/" target="_blank" rel="noopener" class="wcard">
-        <span class="wcard-ico">📅</span>
-        <div class="wcard-in">
-          <div class="wcard-info">
-            <div class="wcard-cat">Reservation System</div>
-            <div class="wcard-name"><span data-lang="ja">カレンダー予約システム（Sample）</span><span data-lang="en">Reservation system (Sample)</span><span data-lang="ko">온라인 예약 시스템 (Sample)</span><span data-lang="es">Sistema de reservas (Sample)</span></div>
-            <div class="wcard-desc"><span data-lang="ja">アーティスト登録後に予約する動線・管理画面も設計</span><span data-lang="en">Booking flow after artist registration, with admin dashboard.</span><span data-lang="ko">아티스트 등록 후 예약 흐름 설계, 관리자 화면 구축</span><span data-lang="es">Flujo de reservas y panel de administración</span></div>
-          </div>
-        </div>
-      </a>
-    </div>
-    <p class="works-note"><span data-lang="ja">掲載はイメージです。実績はお問い合わせ時にご紹介します。</span><span data-lang="en">Shown for reference. Real portfolio shared on request.</span><span data-lang="ko">이미지는 예시입니다. 실적은 문의 시 소개합니다.</span><span data-lang="es">Imágenes de referencia. Portfolio real disponible al contactar.</span></p>
+
+    <p class="s-label">For You</p>
+    <h2 class="s-title">こんな方へ</h2>
+
+    <ul style="line-height:2;color:var(--mid)">
+      <li>・HPがなく信用を失っている</li>
+      <li>・問い合わせ対応に時間を取られている</li>
+      <li>・予約や顧客管理がバラバラ</li>
+    </ul>
+
+    <h3 style="margin-top:2rem;color:var(--rose)">放置すると…</h3>
+
+    <ul style="line-height:2;color:var(--mid)">
+      <li>・機会損失が増える</li>
+      <li>・返信遅れで失注</li>
+      <li>・時間が奪われ続ける</li>
+    </ul>
+
   </div>
 </section>
 
-<!-- CAMPAIGN -->
-<section id="campaign">
-  <div class="camp-inner">
-    <div class="camp-left">
-      <p class="s-label"><span data-lang="ja">山口県応援キャンペーン</span><span data-lang="en">Yamaguchi Local Campaign</span><span data-lang="ko">야마구치 응원 캠페인</span><span data-lang="es">Campaña Local Yamaguchi</span></p>
-      <h2 class="s-title">
-        <span data-lang="ja">やさしく、わかりやすく。<br>必要十分な<br><em>Webサイトを。</em></span>
-        <span data-lang="en">Simple, clear,<br>just what<br><em>you need.</em></span>
-        <span data-lang="ko">쉽고, 알기 쉽게.<br>필요충분한<br><em>웹사이트를.</em></span>
-        <span data-lang="es">Sencillo, claro,<br>todo lo que<br><em>necesitas.</em></span>
-      </h2>
-      <p class="camp-tagline">
-        <span data-lang="ja">まずは「だいたいの金額がわかる」と安心できますよね。<br><strong>フォーム回答（約5分）で、概算見積もりとおすすめプランを自動でお返しします。</strong><br>モニター枠（先着3名）が埋まり次第、通常価格へ切り替えます。</span>
-        <span data-lang="en">It helps to know roughly what it'll cost.<br><strong>Fill in the form (5 min) and get an automatic estimate + plan.</strong><br>Monitor slots (first 3) switch to standard pricing when full.</span>
-        <span data-lang="ko">먼저 '대략적인 금액'을 알면 안심할 수 있죠.<br><strong>폼 입력(약 5분)으로 견적과 추천 플랜을 자동으로 받아보세요.</strong><br>모니터 자리(선착순 3명)가 차면 정가로 전환됩니다.</span>
-        <span data-lang="es">Ayuda saber el coste aproximado.<br><strong>Completa el formulario (5 min) y recibe un presupuesto automático + plan.</strong><br>Las plazas monitor pasan a precio estándar al completarse.</span>
-      </p>
-      <a href="https://jsproject.jp/monitor/" class="camp-cta" target="_blank" rel="noopener">
-        <span data-lang="ja">モニターLPを見る →</span><span data-lang="en">See monitor page →</span>
-        <span data-lang="ko">모니터 페이지 보기 →</span><span data-lang="es">Ver página monitor →</span>
-      </a>
-    </div>
-    <div class="cc">
-      <p class="cc-tag">Monitor Special Price</p>
-      <p class="cc-head"><span data-lang="ja">🎯 個人ページ + LINE自動通知</span><span data-lang="en">🎯 Personal page + LINE notice</span><span data-lang="ko">🎯 개인 페이지 + LINE 자동 알림</span><span data-lang="es">🎯 Página personal + notif. LINE</span></p>
-      <p class="cc-price">¥24,000<small>〜</small></p>
-      <div class="cc-div"></div>
-      <p class="cc-head"><span data-lang="ja">予約ページ付き（自動通知あり）</span><span data-lang="en">Booking page + auto notifications</span><span data-lang="ko">예약 페이지 포함 (자동 알림)</span><span data-lang="es">Con reservas + notificaciones auto</span></p>
-      <p class="cc-price" style="font-size:1.25rem">¥32,000<small>〜</small></p>
-      <ul class="cc-list">
-        <li><span data-lang="ja">実績掲載OKで割引（URL or キャプチャ）</span><span data-lang="en">Portfolio use OK (URL or screenshot)</span><span data-lang="ko">실적 게재 OK로 할인</span><span data-lang="es">Portfolio OK → descuento</span></li>
-        <li><span data-lang="ja">フォーム5分で概算見積を自動返送</span><span data-lang="en">5-min form → auto estimate sent</span><span data-lang="ko">폼 5분으로 견적 자동 발송</span><span data-lang="es">Formulario 5 min → presupuesto auto</span></li>
-        <li><span data-lang="ja">スマホ対応・SEO・公開後レクチャー込み</span><span data-lang="en">Mobile, SEO &amp; post-launch walkthrough</span><span data-lang="ko">모바일·SEO·공개 후 안내 포함</span><span data-lang="es">Móvil, SEO y guía post-lanzamiento</span></li>
-        <li><span data-lang="ja">修正は原則2回まで（軽微な調整は柔軟に）</span><span data-lang="en">Up to 2 revisions (minor tweaks flexible)</span><span data-lang="ko">수정은 원칙 2회 (경미한 조정은 유연)</span><span data-lang="es">Hasta 2 revisiones (ajustes flexibles)</span></li>
-      </ul>
-      <p class="cc-note"><span data-lang="ja">※ モニター枠が埋まり次第、通常価格へ切り替わります。</span><span data-lang="en">※ Monitor slots switch to standard pricing when full.</span><span data-lang="ko">※ 모니터 자리가 차면 정가로 전환됩니다.</span><span data-lang="es">※ Las plazas monitor pasan a precio estándar al completarse.</span></p>
-      <a href="https://jsproject.jp/monitor/" class="cc-btn" target="_blank" rel="noopener">
-        <span data-lang="ja">モニターLPで応募する →</span><span data-lang="en">Apply on monitor page →</span>
-        <span data-lang="ko">모니터 페이지에서 응모 →</span><span data-lang="es">Aplicar en página monitor →</span>
-      </a>
-    </div>
-  </div>
-</section>
+<section id="ai">
+  <div style="max-width:900px;margin:0 auto">
 
-<!-- PRICE -->
-<section id="price">
-  <div class="price-wrap fu">
-    <p class="s-label">Price</p>
-    <h2 class="s-title"><span data-lang="ja">料金プラン</span><span data-lang="en">Pricing</span><span data-lang="ko">요금 플랜</span><span data-lang="es">Precios</span></h2>
+    <p class="s-label">AI Consulting</p>
 
-    <div class="mon-alert">
-      <span class="mon-alert-bdg">
-        <span data-lang="ja">🎯 モニター先着3名</span><span data-lang="en">🎯 Monitor — First 3</span>
-        <span data-lang="ko">🎯 모니터 선착순 3명</span><span data-lang="es">🎯 Monitor — Primeros 3</span>
-      </span>
-      <div class="mon-alert-txt">
-        <span data-lang="ja"><strong>現在キャンペーン中！</strong> 実績掲載OKで割引、フォーム（5分）で概算見積を自動返送。モニター枠が埋まり次第、通常価格へ切り替わります。</span>
-        <span data-lang="en"><strong>Now on campaign!</strong> Discount for portfolio use. Fill the 5-min form for an automatic estimate. Slots switch to standard pricing when full.</span>
-        <span data-lang="ko"><strong>현재 캠페인 중!</strong> 실적 게재 OK로 할인, 폼(5분)으로 견적 자동 발송. 자리가 차면 정가로 전환됩니다.</span>
-        <span data-lang="es"><strong>¡Campaña activa!</strong> Descuento si usamos como portfolio. Rellena el formulario (5 min) para presupuesto automático.</span>
-      </div>
-      <a href="https://jsproject.jp/monitor/" class="mon-alert-cta" target="_blank" rel="noopener">
-        <span data-lang="ja">LPを見る →</span><span data-lang="en">See LP →</span><span data-lang="ko">LP 보기 →</span><span data-lang="es">Ver LP →</span>
-      </a>
-    </div>
+    <h2 class="s-title">
+      業務を、<br><em>AIで自動化する。</em>
+    </h2>
+
+    <p style="line-height:2;color:var(--mid);margin-bottom:2rem;">
+      日々の業務をAIで効率化し、時間とコストを削減します。
+    </p>
 
     <div class="price-grid">
+
       <div class="pcard">
-        <span class="p-tag">Plan 01 · Popular</span>
-        <h3 class="p-name"><span data-lang="ja">個人ページ + LINE自動通知</span><span data-lang="en">Personal page + LINE notice</span><span data-lang="ko">개인 페이지 + LINE 자동 알림</span><span data-lang="es">Página personal + notif. LINE</span></h3>
-        <p class="p-num">¥24,000<span>〜</span></p>
-        <p class="p-desc"><span data-lang="ja">プロフィール / サービス紹介 / お問い合わせ</span><span data-lang="en">Profile / service intro / contact</span><span data-lang="ko">프로필 / 서비스 소개 / 문의</span><span data-lang="es">Perfil / servicios / contacto</span></p>
+        <span class="p-tag">Starter</span>
+        <h3 class="p-name">AI導入サポート</h3>
+        <p class="p-num">¥30,000〜</p>
+
         <ul class="p-list">
-          <li><span data-lang="ja">LINE自動通知つきフォーム</span><span data-lang="en">LINE auto-notification form</span><span data-lang="ko">LINE 자동 알림 폼</span><span data-lang="es">Formulario con notif. LINE</span></li>
-          <li><span data-lang="ja">スマホ対応・SEO基本設定</span><span data-lang="en">Mobile &amp; basic SEO</span><span data-lang="ko">모바일 대응·SEO 기본</span><span data-lang="es">Móvil y SEO básico</span></li>
-          <li><span data-lang="ja">Googleアナリティクス設置</span><span data-lang="en">Google Analytics setup</span><span data-lang="ko">Google Analytics 설치</span><span data-lang="es">Google Analytics</span></li>
-          <li><span data-lang="ja">公開後レクチャー付き</span><span data-lang="en">Post-launch walkthrough</span><span data-lang="ko">공개 후 안내 포함</span><span data-lang="es">Guía post-lanzamiento</span></li>
+          <li>業務ヒアリング</li>
+          <li>AI活用提案</li>
+          <li>導入サポート</li>
         </ul>
-        <a href="https://jsproject.jp/monitor/" class="p-btn" target="_blank" rel="noopener"><span data-lang="ja">モニターLPで応募する</span><span data-lang="en">Apply on monitor page</span><span data-lang="ko">모니터 페이지에서 응모</span><span data-lang="es">Aplicar en página monitor</span></a>
-        <a href="#contact" class="p-sub"><span data-lang="ja">またはLINEで相談する</span><span data-lang="en">Or chat on LINE</span><span data-lang="ko">또는 LINE으로 상담</span><span data-lang="es">O contactar por LINE</span></a>
       </div>
 
       <div class="pcard feat">
-        <span class="p-tag">Plan 02 · Booking</span>
-        <h3 class="p-name"><span data-lang="ja">予約ページ付き（自動通知あり）</span><span data-lang="en">Booking page + auto notifications</span><span data-lang="ko">예약 페이지 포함 (자동 알림)</span><span data-lang="es">Con reservas + notif. automáticas</span></h3>
-        <p class="p-num">¥32,000<span>〜</span></p>
-        <p class="p-desc"><span data-lang="ja">サロン・教室・カウンセリングなどに</span><span data-lang="en">Salons, studios, counseling etc.</span><span data-lang="ko">살롱·교실·카운슬링 등에</span><span data-lang="es">Salones, estudios, consultoría etc.</span></p>
+        <span class="p-tag">Business</span>
+        <h3 class="p-name">業務自動化構築</h3>
+        <p class="p-num">¥80,000〜</p>
+
         <ul class="p-list">
-          <li><span data-lang="ja">Plan 01の全内容</span><span data-lang="en">Everything in Plan 01</span><span data-lang="ko">Plan 01 전체 내용</span><span data-lang="es">Todo de Plan 01</span></li>
-          <li><span data-lang="ja">予約カレンダー / 時間枠</span><span data-lang="en">Booking calendar / time slots</span><span data-lang="ko">예약 캘린더 / 시간 단위</span><span data-lang="es">Calendario de reservas</span></li>
-          <li><span data-lang="ja">LINE / メール自動通知</span><span data-lang="en">LINE / email auto notifications</span><span data-lang="ko">LINE / 메일 자동 알림</span><span data-lang="es">Notificaciones LINE / email auto</span></li>
-          <li><span data-lang="ja">「問い合わせ→予約」まで一括整備</span><span data-lang="en">Full "inquiry → booking" flow</span><span data-lang="ko">"문의→예약" 전체 흐름 구축</span><span data-lang="es">Flujo completo "consulta → reserva"</span></li>
+          <li>議事録の自動生成</li>
+          <li>LINE返信の自動化</li>
+          <li>予約・顧客管理の自動化</li>
+          <li>営業資料の自動作成</li>
         </ul>
-        <a href="https://jsproject.jp/monitor/" class="p-btn" target="_blank" rel="noopener"><span data-lang="ja">モニターLPで応募する</span><span data-lang="en">Apply on monitor page</span><span data-lang="ko">모니터 페이지에서 응모</span><span data-lang="es">Aplicar en página monitor</span></a>
-        <a href="#contact" class="p-sub"><span data-lang="ja">またはLINEで相談する</span><span data-lang="en">Or chat on LINE</span><span data-lang="ko">또는 LINE으로 상담</span><span data-lang="es">O contactar por LINE</span></a>
       </div>
 
-      <div class="pcard">
-        <span class="p-tag">Plan 03 · Custom</span>
-        <h3 class="p-name"><span data-lang="ja">カスタム・ご相談</span><span data-lang="en">Custom / Inquiry</span><span data-lang="ko">커스텀·상담</span><span data-lang="es">Personalizado</span></h3>
-        <p class="p-num" style="font-size:1.5rem"><span data-lang="ja">要相談</span><span data-lang="en">Quote</span><span data-lang="ko">상담 후</span><span data-lang="es">A consultar</span></p>
-        <p class="p-desc"><span data-lang="ja">EC・会員制・多言語・既存リニューアル・継続保守など</span><span data-lang="en">E-commerce, membership, multilingual, redesign, maintenance</span><span data-lang="ko">EC·회원제·다국어·리뉴얼·유지보수 등</span><span data-lang="es">Tienda online, membresía, multiidioma, rediseño, mantenimiento</span></p>
-        <ul class="p-list">
-          <li><span data-lang="ja">EC・多機能ショップ</span><span data-lang="en">E-commerce / full shop</span><span data-lang="ko">EC·다기능 쇼핑몰</span><span data-lang="es">Tienda online</span></li>
-          <li><span data-lang="ja">会員制サイト</span><span data-lang="en">Membership site</span><span data-lang="ko">회원제 사이트</span><span data-lang="es">Sitio de membresía</span></li>
-          <li><span data-lang="ja">既存サイトのリニューアル</span><span data-lang="en">Site redesign</span><span data-lang="ko">기존 사이트 리뉴얼</span><span data-lang="es">Rediseño</span></li>
-          <li><span data-lang="ja">継続保守・更新代行</span><span data-lang="en">Ongoing maintenance</span><span data-lang="ko">지속 유지보수·업데이트 대행</span><span data-lang="es">Mantenimiento continuo</span></li>
-        </ul>
-        <a href="#contact" class="p-btn"><span data-lang="ja">LINEで相談する</span><span data-lang="en">Chat on LINE</span><span data-lang="ko">LINE으로 상담</span><span data-lang="es">Contactar por LINE</span></a>
-      </div>
     </div>
+
   </div>
 </section>
 
-<!-- FLOW -->
-<section id="flow">
-  <div style="max-width:1100px;margin:0 auto">
-    <p class="s-label">Flow</p>
-    <h2 class="s-title"><span data-lang="ja">ご依頼の流れ</span><span data-lang="en">How it works</span><span data-lang="ko">의뢰 흐름</span><span data-lang="es">Cómo funciona</span></h2>
-    <div class="flow-list fu">
-      <div class="flow-item">
-        <span class="flow-n">Step 01</span>
-        <div>
-          <div class="flow-t"><span data-lang="ja">フォーム回答（約5分）</span><span data-lang="en">Fill the form (5 min)</span><span data-lang="ko">폼 입력 (약 5분)</span><span data-lang="es">Rellena el formulario (5 min)</span></div>
-          <div class="flow-b"><span data-lang="ja">目的・ページ数・予約/通知の有無を入力するだけ。LINEでの相談でも大歓迎。</span><span data-lang="en">Enter purpose, page count, booking/notification needs. LINE chat also welcome.</span><span data-lang="ko">목적·페이지 수·예약/알림 유무를 입력하면 됩니다. LINE 상담도 환영.</span><span data-lang="es">Indica objetivo, páginas, reservas/notificaciones. También por LINE.</span></div>
-        </div>
-      </div>
-      <div class="flow-item">
-        <span class="flow-n">Step 02</span>
-        <div>
-          <div class="flow-t"><span data-lang="ja">概算見積 + ご提案</span><span data-lang="en">Estimate + proposal</span><span data-lang="ko">견적 + 제안</span><span data-lang="es">Presupuesto + propuesta</span></div>
-          <div class="flow-b"><span data-lang="ja">内容に合わせた金額とおすすめプランを自動でお返しします。</span><span data-lang="en">An automatic estimate and recommended plan based on your needs.</span><span data-lang="ko">내용에 맞는 금액과 추천 플랜을 자동으로 발송합니다.</span><span data-lang="es">Presupuesto automático y plan recomendado según tus necesidades.</span></div>
-        </div>
-      </div>
-      <div class="flow-item">
-        <span class="flow-n">Step 03</span>
-        <div>
-          <div class="flow-t"><span data-lang="ja">すり合わせ（15〜30分）</span><span data-lang="en">Alignment (15–30 min)</span><span data-lang="ko">조율 (15〜30분)</span><span data-lang="es">Alineación (15–30 min)</span></div>
-          <div class="flow-b"><span data-lang="ja">迷いが出やすいところだけ確認して、内容を確定します。</span><span data-lang="en">We clarify only the points that tend to cause confusion, then confirm.</span><span data-lang="ko">헷갈리기 쉬운 부분만 확인하고 내용을 확정합니다.</span><span data-lang="es">Solo clarificamos los puntos confusos y confirmamos.</span></div>
-        </div>
-      </div>
-      <div class="flow-item">
-        <span class="flow-n">Step 04</span>
-        <div>
-          <div class="flow-t">
-            <span data-lang="ja">制作スタート</span><span data-lang="en">Build starts</span><span data-lang="ko">제작 시작</span><span data-lang="es">Empieza la construcción</span>
-            <span class="flow-pill"><span data-lang="ja">最短1〜2日</span><span data-lang="en">1–2 days</span><span data-lang="ko">최단 1〜2일</span><span data-lang="es">1–2 días</span></span>
-          </div>
-          <div class="flow-b"><span data-lang="ja">デザイン案をLINEでご確認いただきながら進めます。</span><span data-lang="en">Design drafts shared over LINE—you approve as we go.</span><span data-lang="ko">LINE으로 디자인 안을 확인하면서 진행합니다.</span><span data-lang="es">Comparto borradores por LINE—tú vas aprobando.</span></div>
-        </div>
-      </div>
-      <div class="flow-item">
-        <span class="flow-n">Step 05</span>
-        <div>
-          <div class="flow-t"><span data-lang="ja">公開・レクチャー</span><span data-lang="en">Launch + walkthrough</span><span data-lang="ko">공개·안내</span><span data-lang="es">Lanzamiento + guía</span></div>
-          <div class="flow-b"><span data-lang="ja">公開後は更新方法をレクチャー。LINEでのサポートも続きます。</span><span data-lang="en">I walk you through updates after launch. LINE support continues.</span><span data-lang="ko">공개 후 업데이트 방법을 안내합니다. LINE 지원도 계속됩니다.</span><span data-lang="es">Te explico las actualizaciones tras el lanzamiento. Soporte LINE continúa.</span></div>
-        </div>
-      </div>
+  <section id="proof">
+  <div style="max-width:900px;margin:0 auto">
+
+    <p class="s-label">Results</p>
+    <h2 class="s-title">導入事例</h2>
+
+    <ul style="line-height:2;color:var(--mid)">
+      <li>・予約数 1.8倍（サロン）</li>
+      <li>・問い合わせ対応時間 70%削減</li>
+      <li>・制作後1ヶ月で初案件獲得</li>
+    </ul>
+
+    <div style="margin-top:2rem">
+      <p>・最短1日納品</p>
+      <p>・平均返信6時間以内</p>
+      <p>・継続率90%以上</p>
     </div>
+
   </div>
 </section>
 
